@@ -1,4 +1,5 @@
 import { Card } from './Card';
+import type { CardLabel } from './Card';
 import { Divider } from './Divider';
 
 export interface BlogPost {
@@ -16,6 +17,8 @@ export interface BlogPost {
   imageSrc?: string;
   /** Alt text for the card image */
   imageAlt?: string;
+  /** Tech / category labels shown on the card */
+  labels?: CardLabel[];
 }
 
 export interface BlogPostGridProps {
@@ -32,7 +35,7 @@ export const BlogPostGrid = ({ heading = 'Blog', posts }: BlogPostGridProps) => 
       <h2 className="blog-posts__heading display-5 font-questrial mb-3">
         {heading}
       </h2>
-      <Divider className="mb-4" />
+      <Divider className="mb-5" />
 
       <div className="row g-4">
         {posts.map((post) => (
@@ -40,6 +43,7 @@ export const BlogPostGrid = ({ heading = 'Blog', posts }: BlogPostGridProps) => 
             <Card
               imageSrc={post.imageSrc}
               imageAlt={post.imageAlt ?? post.title}
+              labels={post.labels}
               title={post.title}
               text={`${post.date}  •  ${post.excerpt}`}
               buttonLabel="Read More"

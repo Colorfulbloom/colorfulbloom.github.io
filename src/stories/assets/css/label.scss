@@ -1,0 +1,78 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// Shared base — all label variants extend this
+%label-base {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.25rem 0.75rem;
+  font-family: $font-body;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+// Azure Bolt — dark bg → light border
+.label--azure-bolt {
+  @extend %label-base;
+  background-color: $azure-bolt;
+  color: $quicksilver;
+  border-bottom: 3px solid color.adjust($azure-bolt, $lightness: 25%);
+}
+
+// Deep Azure — dark bg → light border
+.label--deep-azure {
+  @extend %label-base;
+  background-color: $deep-azure;
+  color: $quicksilver;
+  border-bottom: 3px solid color.adjust($deep-azure, $lightness: 25%);
+}
+
+// Obsidian — dark bg → light border
+.label--obsidian {
+  @extend %label-base;
+  background-color: $obsidian;
+  color: $quicksilver;
+  border-bottom: 3px solid color.adjust($obsidian, $lightness: 25%);
+}
+
+// Charcoal — dark bg → light border
+.label--charcoal {
+  @extend %label-base;
+  background-color: $charcoal;
+  color: $quicksilver;
+  border-bottom: 3px solid color.adjust($charcoal, $lightness: 25%);
+}
+
+// Quicksilver — light bg → dark border
+.label--quicksilver {
+  @extend %label-base;
+  background-color: $quicksilver;
+  color: $obsidian;
+  border-bottom: 3px solid $pewter;
+}
+
+// Amber — dark bg → light border
+.label--amber {
+  @extend %label-base;
+  background-color: #D97706;
+  color: #FEF3C7;
+  border-bottom: 3px solid color.adjust(#D97706, $lightness: 25%);
+}
+
+// Emerald — dark bg → light border
+.label--emerald {
+  @extend %label-base;
+  background-color: #059669;
+  color: #D1FAE5;
+  border-bottom: 3px solid color.adjust(#059669, $lightness: 25%);
+}
+
+// Rose — dark bg → light border
+.label--rose {
+  @extend %label-base;
+  background-color: #E11D48;
+  color: #FFE4E6;
+  border-bottom: 3px solid color.adjust(#E11D48, $lightness: 25%);
+}

@@ -1,6 +1,15 @@
 import type { ReactNode } from 'react';
 import type { ButtonProps } from './Button';
 import { Button } from './Button';
+import { Label } from './Label';
+import type { LabelColor } from './Label';
+
+export interface CardLabel {
+  /** Visible text on the label */
+  text: string;
+  /** Colour override — omit to use the auto-mapped tech colour */
+  color?: LabelColor;
+}
 
 export interface CardProps {
   /** Optional icon rendered to the left of the title */
@@ -13,6 +22,8 @@ export interface CardProps {
   imageSrc?: string;
   /** Alt text for the image (defaults to title) */
   imageAlt?: string;
+  /** Tech / category labels rendered above the title */
+  labels?: CardLabel[];
   /** When provided, renders a footer with a Button. The value is the button label. */
   buttonLabel?: string;
   /** Colour variant passed through to the footer Button */
@@ -32,6 +43,7 @@ export const Card = ({
   text,
   imageSrc,
   imageAlt,
+  labels,
   buttonLabel,
   buttonColor = 'azure-bolt',
   buttonHref,
@@ -48,6 +60,13 @@ export const Card = ({
     )}
 
     <div className="card__body">
+      {labels && labels.length > 0 && (
+        <div className="card__labels">
+          {labels.map((lbl) => (
+            <Label key={lbl.text} text={lbl.text} color={lbl.color} />
+          ))}
+        </div>
+      )}
       <div className="card__title-row">
         {icon && <span className="card__icon">{icon}</span>}
         <h3 className="card__title font-questrial">{title}</h3>
