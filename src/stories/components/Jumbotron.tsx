@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from './Button';
 import type { CardProps } from './Card';
 import { Card } from './Card';
+import { Divider } from './Divider';
 
 export interface JumbotronProps {
   /** Main heading text */
@@ -34,6 +35,7 @@ export const Jumbotron = ({
             <h1 className="display-4 font-questrial mb-3 jumbotron__heading">
               {heading}
             </h1>
+            <Divider className="mb-4" />
             {subheading && (
               <p className="lead font-noto text-secondary mb-4">
                 {subheading}
