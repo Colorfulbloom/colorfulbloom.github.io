@@ -5,6 +5,12 @@ import { BlogPostGrid } from '../components/BlogPostGrid';
 import { DrupalIcon } from '../design-specs/DrupalIcon';
 import type { BlogPost } from '../components/BlogPostGrid';
 
+import imgStyling from '../assets/styling.png';
+import imgTheming from '../assets/theming.png';
+import imgDocs from '../assets/docs.png';
+import imgTesting from '../assets/testing.png';
+import imgAssets from '../assets/assets.png';
+
 export interface HomeProps {
   /** Active menu item */
   activeMenuItem?: string;
@@ -17,7 +23,7 @@ const defaultPosts: BlogPost[] = [
     excerpt: 'A deep dive into structuring RESTful APIs for performance and maintainability at scale.',
     date: 'Jan 28, 2026',
     href: '#',
-    imageSrc: 'assets/styling.png',
+    imageSrc: imgStyling,
     imageAlt: 'Styling illustration',
   },
   {
@@ -26,7 +32,7 @@ const defaultPosts: BlogPost[] = [
     excerpt: 'Exploring the latest features in React 19 and how they change the way we build UIs.',
     date: 'Jan 22, 2026',
     href: '#',
-    imageSrc: 'assets/theming.png',
+    imageSrc: imgTheming,
     imageAlt: 'Theming illustration',
   },
   {
@@ -35,7 +41,7 @@ const defaultPosts: BlogPost[] = [
     excerpt: 'How to plan, build, and maintain a contrib module that the community actually uses.',
     date: 'Jan 15, 2026',
     href: '#',
-    imageSrc: 'assets/docs.png',
+    imageSrc: imgDocs,
     imageAlt: 'Docs illustration',
   },
   {
@@ -44,7 +50,7 @@ const defaultPosts: BlogPost[] = [
     excerpt: 'Techniques for rendering large open-world terrains without tanking your frame rate.',
     date: 'Jan 8, 2026',
     href: '#',
-    imageSrc: 'assets/testing.png',
+    imageSrc: imgTesting,
     imageAlt: 'Testing illustration',
   },
   {
@@ -53,7 +59,7 @@ const defaultPosts: BlogPost[] = [
     excerpt: 'A practical guide to containerizing your dev environment and CI/CD pipeline.',
     date: 'Dec 30, 2025',
     href: '#',
-    imageSrc: 'assets/assets.png',
+    imageSrc: imgAssets,
     imageAlt: 'Assets illustration',
   },
 ];

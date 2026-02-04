@@ -1,10 +1,9 @@
 @use 'variables' as *;
 
 .jumbotron {
-  min-height: calc(100vh - 70px);
   display: flex;
   align-items: baseline;
-  padding: 6rem 0 0;
+  padding: 5rem 0;
 
   &__heading {
     background: linear-gradient(135deg, #5aacda, #5aacda 15%, #7ec8e8 35%, #a8dff0 50%, $quicksilver, $ash, $silver, $frost);
