@@ -31,7 +31,7 @@ export const Jumbotron = ({
       <div className="container">
         <div className="row align-items-start align-items-md-stretch">
           <div className={`${leftCol} d-flex flex-column justify-content-center`}>
-            <h1 className="display-4 font-questrial mb-3">
+            <h1 className="display-4 font-questrial mb-3 jumbotron__heading">
               {heading}
             </h1>
             {subheading && (

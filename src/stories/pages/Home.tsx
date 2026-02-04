@@ -1,12 +1,62 @@
 import React from 'react';
 import { Header } from '../layout/Header';
 import { Jumbotron } from '../components/Jumbotron';
+import { BlogPostGrid } from '../components/BlogPostGrid';
 import { DrupalIcon } from '../design-specs/DrupalIcon';
+import type { BlogPost } from '../components/BlogPostGrid';
 
 export interface HomeProps {
   /** Active menu item */
   activeMenuItem?: string;
 }
+
+const defaultPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'Building Scalable APIs with Node.js',
+    excerpt: 'A deep dive into structuring RESTful APIs for performance and maintainability at scale.',
+    date: 'Jan 28, 2026',
+    href: '#',
+    imageSrc: 'assets/styling.png',
+    imageAlt: 'Styling illustration',
+  },
+  {
+    id: '2',
+    title: 'React 19: What\'s New',
+    excerpt: 'Exploring the latest features in React 19 and how they change the way we build UIs.',
+    date: 'Jan 22, 2026',
+    href: '#',
+    imageSrc: 'assets/theming.png',
+    imageAlt: 'Theming illustration',
+  },
+  {
+    id: '3',
+    title: 'Mastering Drupal Contrib Modules',
+    excerpt: 'How to plan, build, and maintain a contrib module that the community actually uses.',
+    date: 'Jan 15, 2026',
+    href: '#',
+    imageSrc: 'assets/docs.png',
+    imageAlt: 'Docs illustration',
+  },
+  {
+    id: '4',
+    title: 'Unity3D Terrain Optimization',
+    excerpt: 'Techniques for rendering large open-world terrains without tanking your frame rate.',
+    date: 'Jan 8, 2026',
+    href: '#',
+    imageSrc: 'assets/testing.png',
+    imageAlt: 'Testing illustration',
+  },
+  {
+    id: '5',
+    title: 'Docker for Front-End Developers',
+    excerpt: 'A practical guide to containerizing your dev environment and CI/CD pipeline.',
+    date: 'Dec 30, 2025',
+    href: '#',
+    imageSrc: 'assets/assets.png',
+    imageAlt: 'Assets illustration',
+  },
+];
 
 export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
   return (
@@ -26,6 +76,8 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
           buttonHref: 'https://www.drupal.org/project/pub_options',
         }}
       />
+
+      <BlogPostGrid posts={defaultPosts} />
     </div>
   );
 };

@@ -10,7 +10,7 @@
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color $transition-fast,
+  transition: background $transition-fast,
               border-bottom-color $transition-fast,
               box-shadow $transition-fast,
               transform $transition-fast;
@@ -27,12 +27,12 @@
 // Azure Bolt — primary CTA
 .btn-azure-bolt {
   @extend %btn-base;
-  background-color: $azure-bolt;
+  background: linear-gradient(135deg, color.adjust($azure-bolt, $lightness: 5%), $azure-bolt, color.adjust($azure-bolt, $lightness: -5%));
   color: $quicksilver;
   border-bottom: 5px solid $deep-azure;
 
   &:hover {
-    background-color: color.adjust($azure-bolt, $lightness: 5%);
+    background: linear-gradient(135deg, color.adjust($azure-bolt, $lightness: 10%), color.adjust($azure-bolt, $lightness: 5%), $azure-bolt);
     border-bottom-color: color.adjust($deep-azure, $lightness: -5%);
     box-shadow: 0 2px 8px rgba(0, 90, 158, 0.35);
   }
@@ -49,12 +49,12 @@
 // Deep Azure
 .btn-deep-azure {
   @extend %btn-base;
-  background-color: $deep-azure;
+  background: linear-gradient(135deg, color.adjust($deep-azure, $lightness: 5%), $deep-azure, color.adjust($deep-azure, $lightness: -8%));
   color: $quicksilver;
   border-bottom: 5px solid color.adjust($deep-azure, $lightness: -12%);
 
   &:hover {
-    background-color: color.adjust($deep-azure, $lightness: 5%);
+    background: linear-gradient(135deg, color.adjust($deep-azure, $lightness: 10%), color.adjust($deep-azure, $lightness: 5%), $deep-azure);
     border-bottom-color: color.adjust($deep-azure, $lightness: -18%);
     box-shadow: 0 2px 8px rgba(0, 90, 158, 0.35);
   }
@@ -71,12 +71,12 @@
 // Obsidian
 .btn-obsidian {
   @extend %btn-base;
-  background-color: $obsidian;
+  background: linear-gradient(135deg, color.adjust($obsidian, $lightness: 6%), $obsidian, color.adjust($obsidian, $lightness: -3%));
   color: $quicksilver;
   border-bottom: 5px solid color.adjust($obsidian, $lightness: -5%);
 
   &:hover {
-    background-color: color.adjust($obsidian, $lightness: 8%);
+    background: linear-gradient(135deg, color.adjust($obsidian, $lightness: 12%), color.adjust($obsidian, $lightness: 6%), $obsidian);
     border-bottom-color: color.adjust($obsidian, $lightness: -8%);
     box-shadow: 0 2px 8px rgba(26, 26, 26, 0.45);
   }
@@ -93,12 +93,12 @@
 // Charcoal
 .btn-charcoal {
   @extend %btn-base;
-  background-color: $charcoal;
+  background: linear-gradient(135deg, color.adjust($charcoal, $lightness: 6%), $charcoal, color.adjust($charcoal, $lightness: -4%));
   color: $quicksilver;
   border-bottom: 5px solid $obsidian;
 
   &:hover {
-    background-color: color.adjust($charcoal, $lightness: 8%);
+    background: linear-gradient(135deg, color.adjust($charcoal, $lightness: 12%), color.adjust($charcoal, $lightness: 6%), $charcoal);
     border-bottom-color: color.adjust($obsidian, $lightness: -5%);
     box-shadow: 0 2px 8px rgba(45, 45, 45, 0.45);
   }

@@ -5,4 +5,11 @@
   display: flex;
   align-items: baseline;
   padding: 6rem 0 0;
+
+  &__heading {
+    background: linear-gradient(135deg, #5aacda, #5aacda 15%, #7ec8e8 35%, #a8dff0 50%, $quicksilver, $ash, $silver, $frost);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
