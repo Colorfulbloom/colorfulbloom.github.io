@@ -1,0 +1,43 @@
+@use 'variables' as *;
+
+.layout {
+  &__box {
+    background-color: $obsidian;
+    color: $quicksilver;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+    font-family: $font-body;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-family: $font-header;
+    }
+  }
+
+  &__header-footer {
+    @extend .layout__box;
+    background-color: $charcoal;
+    min-height: 60px;
+  }
+
+  &__sidebar {
+    @extend .layout__box;
+    background-color: $azure-bolt;
+    min-height: 200px;
+  }
+
+  &__sidebar--alt {
+    @extend .layout__box;
+    background-color: $deep-azure;
+    min-height: 200px;
+  }
+
+  &__content {
+    @extend .layout__box;
+    min-height: 200px;
+  }
+}

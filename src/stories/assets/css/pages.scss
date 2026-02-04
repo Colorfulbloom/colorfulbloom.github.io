@@ -1,0 +1,14 @@
+@use 'variables' as *;
+
+// Home Page
+.page-home {
+  .hero {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+  }
+
+  .min-vh-75 {
+    min-height: 75vh;
+  }
+}

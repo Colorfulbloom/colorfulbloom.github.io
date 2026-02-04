@@ -1,0 +1,112 @@
+@use 'variables' as *;
+
+.header {
+  background-color: $obsidian;
+  padding: 1rem 0;
+
+  &__menu-item {
+    font-family: $font-header;
+    font-size: 1rem;
+    color: $quicksilver;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: color $transition-fast;
+    display: block;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+
+    &--active {
+      color: $azure-bolt;
+    }
+  }
+
+  // Hamburger button - minimal style
+  &__hamburger-button {
+    background: transparent;
+    border: none;
+    color: $quicksilver;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+
+  // Full-screen mobile overlay
+  &__mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $obsidian;
+    z-index: 1000;
+    padding-top: 1rem;
+  }
+
+  &__mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  // Close button in overlay
+  &__close-button {
+    background: transparent;
+    border: none;
+    color: $quicksilver;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    i {
+      font-size: 1.25rem;
+    }
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+
+  &__mobile-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+  }
+
+  &__mobile-menu-item {
+    font-family: $font-header;
+    font-size: 1.125rem;
+    color: $quicksilver;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    transition: color $transition-fast;
+    display: block;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+
+    &--active {
+      color: $azure-bolt;
+    }
+  }
+
+  &__mobile-nav {
+    position: relative;
+    text-align: right;
+  }
+}

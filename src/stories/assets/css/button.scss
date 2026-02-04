@@ -1,0 +1,136 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// Shared base — all variants extend this
+%btn-base {
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 4rem;
+  font-family: $font-body;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color $transition-fast,
+              border-bottom-color $transition-fast,
+              box-shadow $transition-fast,
+              transform $transition-fast;
+
+  &:active {
+    transform: translateY(5px);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+// Azure Bolt — primary CTA
+.btn-azure-bolt {
+  @extend %btn-base;
+  background-color: $azure-bolt;
+  color: $quicksilver;
+  border-bottom: 5px solid $deep-azure;
+
+  &:hover {
+    background-color: color.adjust($azure-bolt, $lightness: 5%);
+    border-bottom-color: color.adjust($deep-azure, $lightness: -5%);
+    box-shadow: 0 2px 8px rgba(0, 90, 158, 0.35);
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(0, 90, 158, 0.3);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(0, 112, 189, 0.4);
+  }
+}
+
+// Deep Azure
+.btn-deep-azure {
+  @extend %btn-base;
+  background-color: $deep-azure;
+  color: $quicksilver;
+  border-bottom: 5px solid color.adjust($deep-azure, $lightness: -12%);
+
+  &:hover {
+    background-color: color.adjust($deep-azure, $lightness: 5%);
+    border-bottom-color: color.adjust($deep-azure, $lightness: -18%);
+    box-shadow: 0 2px 8px rgba(0, 90, 158, 0.35);
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(0, 90, 158, 0.3);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(0, 90, 158, 0.4);
+  }
+}
+
+// Obsidian
+.btn-obsidian {
+  @extend %btn-base;
+  background-color: $obsidian;
+  color: $quicksilver;
+  border-bottom: 5px solid color.adjust($obsidian, $lightness: -5%);
+
+  &:hover {
+    background-color: color.adjust($obsidian, $lightness: 8%);
+    border-bottom-color: color.adjust($obsidian, $lightness: -8%);
+    box-shadow: 0 2px 8px rgba(26, 26, 26, 0.45);
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(26, 26, 26, 0.4);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(26, 26, 26, 0.4);
+  }
+}
+
+// Charcoal
+.btn-charcoal {
+  @extend %btn-base;
+  background-color: $charcoal;
+  color: $quicksilver;
+  border-bottom: 5px solid $obsidian;
+
+  &:hover {
+    background-color: color.adjust($charcoal, $lightness: 8%);
+    border-bottom-color: color.adjust($obsidian, $lightness: -5%);
+    box-shadow: 0 2px 8px rgba(45, 45, 45, 0.45);
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(45, 45, 45, 0.4);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.4);
+  }
+}
+
+// Quicksilver
+.btn-quicksilver {
+  @extend %btn-base;
+  background-color: $quicksilver;
+  color: $obsidian;
+  border-bottom: 5px solid $pewter;
+
+  &:hover {
+    background-color: color.adjust($quicksilver, $lightness: -5%);
+    border-bottom-color: color.adjust($pewter, $lightness: -8%);
+    box-shadow: 0 2px 8px rgba(142, 142, 142, 0.35);
+    color: $obsidian;
+  }
+
+  &:active {
+    box-shadow: 0 1px 3px rgba(45, 45, 45, 0.2);
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 3px rgba(45, 45, 45, 0.3);
+  }
+}

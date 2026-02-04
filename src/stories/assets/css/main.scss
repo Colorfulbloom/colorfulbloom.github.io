@@ -1,0 +1,32 @@
+// 1. Include our custom variables first
+@use 'variables' as *;
+
+// 2. Include Bootstrap's Sass (optional - uncomment if you want to customize Bootstrap)
+// @import 'bootstrap/scss/bootstrap';
+
+// 3. Import all component styles
+@use 'header';
+@use 'layout';
+@use 'container';
+@use 'row';
+@use 'button';
+@use 'card';
+@use 'jumbotron';
+@use 'pages';
+
+// 4. Utility classes
+.font-questrial {
+  font-family: $font-header;
+}
+
+.font-noto {
+  font-family: $font-body;
+}
+
+.font-jetbrains {
+  font-family: $font-code;
+}
+
+.text-secondary {
+  color: $pewter !important;
+}

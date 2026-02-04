@@ -1,0 +1,8 @@
+@use 'variables' as *;
+
+.jumbotron {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: baseline;
+  padding: 6rem 0 0;
+}

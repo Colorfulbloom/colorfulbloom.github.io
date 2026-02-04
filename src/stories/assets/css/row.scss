@@ -1,0 +1,12 @@
+@use 'variables' as *;
+
+.row-demo {
+  &__column {
+    background-color: $obsidian;
+    color: $quicksilver;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 4px;
+    font-family: $font-body;
+  }
+}

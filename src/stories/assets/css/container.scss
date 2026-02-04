@@ -1,0 +1,17 @@
+@use 'variables' as *;
+
+.container-demo {
+  &__box {
+    background-color: $obsidian;
+    color: $quicksilver;
+    padding: 2rem;
+    border-radius: 4px;
+    text-align: center;
+    font-family: $font-body;
+  }
+
+  &__title {
+    font-family: $font-header;
+    margin-bottom: 0.5rem;
+  }
+}
