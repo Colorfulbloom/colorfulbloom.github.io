@@ -83,7 +83,7 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
         }}
       />
 
-      <BlogPostGrid posts={defaultPosts} />
+      <BlogPostGrid heading="My Sweet Blog Posts" posts={defaultPosts} />
     </div>
   );
 };

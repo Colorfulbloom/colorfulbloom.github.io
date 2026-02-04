@@ -5,9 +5,12 @@
 
   // ── Section heading ─────────────────────────
   &__heading {
-    color: $quicksilver;
-    text-align: center;
-    margin-bottom: 2.5rem;
+    text-align: left;
+    margin-bottom: 3.5rem;
+    background: linear-gradient(135deg, #5aacda, #5aacda 15%, #7ec8e8 35%, #a8dff0 50%, $quicksilver, $ash, $silver, $frost);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   // ── Card overrides ───────────────────────────
