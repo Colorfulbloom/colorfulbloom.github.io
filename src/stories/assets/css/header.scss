@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'variables' as *;
 
 .header {
@@ -7,14 +8,24 @@
   &__menu-item {
     font-family: $font-header;
     font-size: 1rem;
+    font-weight: 600;
     color: $quicksilver;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    transition: color $transition-fast;
+    border-radius: 10px;
+    border-bottom: 5px solid transparent;
+    transition: color $transition-fast,
+                transform $transition-fast,
+                background $transition-fast,
+                border-bottom-color $transition-fast;
     display: block;
 
     &:hover {
-      color: $azure-bolt;
+      color: $quicksilver;
+      font-weight: 700;
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, color.adjust($azure-bolt, $lightness: 5%), $azure-bolt, color.adjust($azure-bolt, $lightness: -5%));
+      border-bottom-color: $deep-azure;
     }
 
     &--active {
@@ -90,14 +101,24 @@
   &__mobile-menu-item {
     font-family: $font-header;
     font-size: 1.125rem;
+    font-weight: 600;
     color: $quicksilver;
     text-decoration: none;
     padding: 0.75rem 1rem;
-    transition: color $transition-fast;
+    border-radius: 10px;
+    border-bottom: 5px solid transparent;
+    transition: color $transition-fast,
+                transform $transition-fast,
+                background $transition-fast,
+                border-bottom-color $transition-fast;
     display: block;
 
     &:hover {
-      color: $azure-bolt;
+      color: $quicksilver;
+      font-weight: 700;
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, color.adjust($azure-bolt, $lightness: 5%), $azure-bolt, color.adjust($azure-bolt, $lightness: -5%));
+      border-bottom-color: $deep-azure;
     }
 
     &--active {
