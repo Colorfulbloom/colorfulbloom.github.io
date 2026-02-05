@@ -2,6 +2,9 @@
 
 // Home Page
 .page-home {
+  background-color: $obsidian;
+  min-height: 100vh;
+
   .hero {
     min-height: calc(100vh - 70px);
     display: flex;

@@ -11,7 +11,7 @@ export interface HeaderProps {
 }
 
 export const Header = ({
-  menuItems = ['Home', 'About', 'Services', 'Portfolio', 'Contact'],
+  menuItems = ['Home', 'Blog', 'Portfolio', 'Contact'],
   activeItem = 'Home',
   forceMobile = false,
 }: HeaderProps) => {
