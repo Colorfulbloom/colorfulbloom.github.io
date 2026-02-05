@@ -16,9 +16,15 @@
     border-bottom: 5px solid transparent;
     transition: color $transition-fast,
                 transform $transition-fast,
-                background $transition-fast,
-                border-bottom-color $transition-fast;
+                background $transition-fast;
     display: block;
+    opacity: 0;
+    animation: header-item-fade-in 0.4s ease forwards;
+    animation-delay: 0.2s;
+
+    &:nth-child(2) { animation-delay: 0.3s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+    &:nth-child(4) { animation-delay: 0.5s; }
 
     &:hover {
       color: $quicksilver;
@@ -109,8 +115,7 @@
     border-bottom: 5px solid transparent;
     transition: color $transition-fast,
                 transform $transition-fast,
-                background $transition-fast,
-                border-bottom-color $transition-fast;
+                background $transition-fast;
     display: block;
 
     &:hover {
@@ -130,4 +135,9 @@
     position: relative;
     text-align: right;
   }
+}
+
+@keyframes header-item-fade-in {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
 }
