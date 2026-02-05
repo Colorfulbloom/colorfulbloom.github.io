@@ -2,7 +2,6 @@ import React from 'react';
 import { Header } from '../layout/Header';
 import { Jumbotron } from '../components/Jumbotron';
 import { BlogPostGrid } from '../components/BlogPostGrid';
-import { DrupalIcon } from '../design-specs/DrupalIcon';
 import type { BlogPost } from '../components/BlogPostGrid';
 
 import imgStyling from '../assets/styling.png';
@@ -80,11 +79,12 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
         primaryButtonText="View Portfolio"
         secondaryButtonText="Contact Me"
         featuredCard={{
-          icon: <DrupalIcon width={28} />,
-          title: 'Publishing Options',
-          text: 'A Drupal contrib module that extends content publishing with custom promotion options, fully integrated with Views for powerful filtering and display.',
-          buttonLabel: 'View on Drupal.org',
-          buttonHref: 'https://www.drupal.org/project/pub_options',
+          imageSrc: imgStyling,
+          imageAlt: 'AI-assisted design in Storybook',
+          labels: [{ text: 'AI' }, { text: 'React' }, { text: 'Sass' }],
+          title: 'Designing with AI in Storybook',
+          text: 'How I used AI to accelerate component design — from colour tokens to layout iterations, all inside Storybook.',
+          buttonLabel: 'Read Post',
         }}
       />
 

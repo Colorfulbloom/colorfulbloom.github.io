@@ -31,7 +31,7 @@ export const Jumbotron = ({
     <section className="jumbotron bg-dark text-light">
       <div className="container">
         <div className="row align-items-start align-items-md-stretch">
-          <div className={`${leftCol} d-flex flex-column justify-content-center`}>
+          <div className={`${leftCol} d-flex flex-column justify-content-start`}>
             <h1 className="display-4 font-manrope fw-bold mb-3 jumbotron__heading">
               {heading}
             </h1>
@@ -42,7 +42,7 @@ export const Jumbotron = ({
               </p>
             )}
             {(primaryButtonText || secondaryButtonText) && (
-              <div className="d-flex flex-wrap gap-3">
+              <div className="d-flex flex-wrap gap-3 mt-auto">
                 {primaryButtonText && (
                   <Button label={primaryButtonText} />
                 )}

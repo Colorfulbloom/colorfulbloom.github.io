@@ -1,9 +1,29 @@
 @use 'variables' as *;
 
 .jumbotron {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: baseline;
   padding: 120px 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -180px;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(226, 226, 226, 0.056) 0%, rgba(226, 226, 226, 0.034) 35%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
 
   .divider {
     animation: jumbotron-divider-expand 1.2s ease-out 0.4s forwards;
