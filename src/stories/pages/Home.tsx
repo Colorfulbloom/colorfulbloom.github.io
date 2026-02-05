@@ -15,8 +15,8 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
       <Header menuItems={['Home', 'Blog', 'Portfolio', 'Contact']} activeItem={activeMenuItem} />
 
       <Jumbotron
-        heading={<><span className="jumbotron__heading-line--deep-azure">Senior Full</span><br /><span className="jumbotron__heading-line--frost">Stack Developer</span></>}
-        subheading="Software Architecture & Solution Design for Web, Mobile, Unity3D & Unreal Engine"
+        heading={<><span className="jumbotron__heading-line--deep-azure">Hi, I'm Jorge</span><br /><span className="jumbotron__heading-line--frost">I build Drupal.</span></>}
+        subheading="A developer and technical analyst by trade, with a focus on DevOps and keeping systems running smoothly. I have an eye for design but lean into AI to bridge the gap — both personally and at work. Dad to two kids, and always tinkering with the next thing."
         primaryButtonText="View Portfolio"
         secondaryButtonText="Contact Me"
         featuredCard={{
