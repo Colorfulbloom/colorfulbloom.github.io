@@ -13,7 +13,6 @@ const meta = {
       ],
     },
   },
-  tags: ['autodocs'],
   argTypes: {
     color: {
       control: 'select',

@@ -69,7 +69,7 @@ export const Card = ({
       )}
       <div className="card__title-row">
         {icon && <span className="card__icon">{icon}</span>}
-        <h3 className="card__title font-questrial">{title}</h3>
+        <h3 className="card__title font-manrope">{title}</h3>
       </div>
       {text && <p className="card__text font-noto">{text}</p>}
     </div>

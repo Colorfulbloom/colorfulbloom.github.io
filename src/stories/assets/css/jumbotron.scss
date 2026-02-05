@@ -3,12 +3,31 @@
 .jumbotron {
   display: flex;
   align-items: baseline;
-  padding: 5rem 0;
+  padding: 120px 0;
 
-  &__heading {
-    background: linear-gradient(135deg, #5aacda, #5aacda 15%, #7ec8e8 35%, #a8dff0 50%, $quicksilver, $ash, $silver, $frost);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .divider {
+    animation: jumbotron-divider-expand 1.2s ease-out 0.4s forwards;
+    width: 0;
   }
+
+  &__heading-line {
+    &--deep-azure {
+      color: $deep-azure;
+    }
+
+    &--frost {
+      color: $frost;
+    }
+  }
+}
+
+@keyframes jumbotron-divider-expand {
+  0%   { width: 0%; }
+  60%  { width: 25%; }
+  72%  { width: 27%; }
+  82%  { width: 25%; }
+  90%  { width: 25.75%; }
+  95%  { width: 25%; }
+  98%  { width: 25.25%; }
+  100% { width: 25%; }
 }

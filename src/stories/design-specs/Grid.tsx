@@ -27,7 +27,7 @@ export const Grid = ({ showNumbers = true }: GridProps) => {
 
   return (
     <div>
-      <h1 style={{ fontFamily: "'Questrial', sans-serif" }} className="mb-4">Grid System</h1>
+      <h1 style={{ fontFamily: "'Manrope', sans-serif" }} className="mb-4">Grid System</h1>
       <p className="text-muted mb-4" style={{ fontFamily: "'Noto Sans', sans-serif" }}>
         Bootstrap 5 - 12 column, mobile-first responsive grid
       </p>

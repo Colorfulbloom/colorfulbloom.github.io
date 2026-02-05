@@ -2,7 +2,6 @@ import React from 'react';
 import { Header } from '../layout/Header';
 import { Jumbotron } from '../components/Jumbotron';
 import { BlogPostGrid } from '../components/BlogPostGrid';
-import { AboutMe } from '../components/AboutMe';
 import { DrupalIcon } from '../design-specs/DrupalIcon';
 import type { BlogPost } from '../components/BlogPostGrid';
 
@@ -76,7 +75,7 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
       <Header activeItem={activeMenuItem} />
 
       <Jumbotron
-        heading="Senior Full Stack Developer"
+        heading={<><span className="jumbotron__heading-line--deep-azure">Senior Full</span><br /><span className="jumbotron__heading-line--frost">Stack Developer</span></>}
         subheading="Software Architecture & Solution Design for Web, Mobile, Unity3D & Unreal Engine"
         primaryButtonText="View Portfolio"
         secondaryButtonText="Contact Me"
@@ -87,49 +86,6 @@ export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
           buttonLabel: 'View on Drupal.org',
           buttonHref: 'https://www.drupal.org/project/pub_options',
         }}
-      />
-
-      <AboutMe
-        tagline="Architect. Builder. Tinkerer."
-        bio="I am a senior full-stack developer specialising in web, mobile, and game-engine platforms. With over a decade of hands-on experience I enjoy turning complex problems into clean, maintainable solutions — whether that means shipping a Drupal contrib module, optimising a Unity3D terrain, or containerising an entire CI/CD pipeline."
-        skills={[
-          { text: 'React' },
-          { text: 'TypeScript' },
-          { text: 'Node.js' },
-          { text: 'PHP' },
-          { text: 'Drupal' },
-          { text: 'Unity3D' },
-          { text: 'Docker' },
-          { text: 'CSS' },
-          { text: 'Sass' },
-          { text: 'AI' },
-        ]}
-        primaryButtonText="View Portfolio"
-        secondaryButtonText="Contact Me"
-        projects={[
-          {
-            id: 'pub-options',
-            title: 'Publishing Options',
-            description: 'A Drupal contrib module that extends content publishing with custom promotion options, fully integrated with Views.',
-            labels: [{ text: 'Drupal' }, { text: 'PHP' }],
-            href: 'https://www.drupal.org/project/pub_options',
-            buttonLabel: 'View on Drupal.org',
-          },
-          {
-            id: 'terrain-opt',
-            title: 'Terrain Optimizer',
-            description: 'Real-time LOD system for large open-world Unity3D terrains — keeps frame rate stable at any zoom.',
-            labels: [{ text: 'Unity3D' }, { text: 'Python' }, { text: 'AI' }],
-            href: '#',
-          },
-          {
-            id: 'docker-starter',
-            title: 'Front-End Docker Starter',
-            description: 'A zero-config Docker + CI/CD template for modern React apps with hot-reload and production optimisations baked in.',
-            labels: [{ text: 'Docker' }, { text: 'React' }, { text: 'TypeScript' }],
-            href: '#',
-          },
-        ]}
       />
 
       <BlogPostGrid heading="Blog" posts={defaultPosts} />

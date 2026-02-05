@@ -5,8 +5,8 @@ import { Card } from './Card';
 import { Divider } from './Divider';
 
 export interface JumbotronProps {
-  /** Main heading text */
-  heading: string;
+  /** Main heading content */
+  heading: React.ReactNode;
   /** Subheading/description text */
   subheading?: string;
   /** Primary button text */
@@ -28,14 +28,14 @@ export const Jumbotron = ({
   const leftCol = featuredCard ? 'col-12 col-md-7 col-lg-6' : 'col-12 col-md-8 col-lg-6';
 
   return (
-    <section className="jumbotron bg-dark text-light py-5">
+    <section className="jumbotron bg-dark text-light">
       <div className="container">
         <div className="row align-items-start align-items-md-stretch">
           <div className={`${leftCol} d-flex flex-column justify-content-center`}>
-            <h1 className="display-4 font-questrial mb-3 jumbotron__heading">
+            <h1 className="display-4 font-manrope fw-bold mb-3 jumbotron__heading">
               {heading}
             </h1>
-            <Divider className="mb-4" />
+            <Divider className="divider--blue-100 mb-4" />
             {subheading && (
               <p className="lead font-noto text-secondary mb-4">
                 {subheading}

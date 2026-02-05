@@ -7,7 +7,8 @@ import '@fontsource/noto-sans/400.css'
 import '@fontsource/noto-sans/700.css'
 import '@fontsource/jetbrains-mono/400.css'
 import '@fontsource/jetbrains-mono/700.css'
-import '@fontsource/questrial/400.css'
+import '@fontsource/manrope/400.css'
+import '@fontsource/manrope/700.css'
 import '../src/stories/assets/css/main.scss'
 
 // HTML formatter for pretty printing

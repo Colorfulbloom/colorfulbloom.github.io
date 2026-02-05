@@ -1,0 +1,223 @@
+import { Canvas, Controls, Meta, Story } from '@storybook/addon-docs/blocks';
+import * as DividerStories from './Divider.stories';
+
+<Meta of={DividerStories} />
+
+# Divider
+
+A full-width horizontal rule with a left-to-right gradient: deep-azure → azure-bolt → quicksilver → frost.
+
+<Canvas of={DividerStories.Default} />
+
+<Controls of={DividerStories.Default} />
+
+## Modifier Classes
+
+<table>
+  <thead>
+    <tr>
+      <th>Class</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><em>(none)</em></td>
+      <td>Default gradient — equivalent to <code>divider--blue-50</code></td>
+    </tr>
+    <tr>
+      <td><code>divider--reverse</code></td>
+      <td>Same gradient, right to left. Combinable with any <code>--blue-*</code> class.</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-0</code></td>
+      <td>No blue — quicksilver → frost</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-5</code></td>
+      <td>Barely perceptible blue</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-10</code></td>
+      <td>Very subtle blue</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-15</code></td>
+      <td>Light blue tint</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-20</code></td>
+      <td>Soft blue presence</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-25</code></td>
+      <td>Blues fade out early</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-30</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-35</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-40</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-45</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-50</code></td>
+      <td>Balanced — matches the default (no modifier)</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-55</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-60</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-65</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-70</code></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-75</code></td>
+      <td>Blues hold longer</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-80</code></td>
+      <td>Mostly blue</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-85</code></td>
+      <td>Heavy blue dominance</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-90</code></td>
+      <td>Almost fully blue</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-95</code></td>
+      <td>Trace of light at the end</td>
+    </tr>
+    <tr>
+      <td><code>divider--blue-100</code></td>
+      <td>All blue — deep-azure → azure-bolt</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+## Stories
+
+### Reversed
+
+<Canvas of={DividerStories.Reversed} />
+
+### Blue 0
+
+<Canvas of={DividerStories.Blue0} />
+
+### Blue 5
+
+<Canvas of={DividerStories.Blue5} />
+
+### Blue 10
+
+<Canvas of={DividerStories.Blue10} />
+
+### Blue 15
+
+<Canvas of={DividerStories.Blue15} />
+
+### Blue 20
+
+<Canvas of={DividerStories.Blue20} />
+
+### Blue 25
+
+<Canvas of={DividerStories.Blue25} />
+
+### Blue 30
+
+<Canvas of={DividerStories.Blue30} />
+
+### Blue 35
+
+<Canvas of={DividerStories.Blue35} />
+
+### Blue 40
+
+<Canvas of={DividerStories.Blue40} />
+
+### Blue 45
+
+<Canvas of={DividerStories.Blue45} />
+
+### Blue 50
+
+<Canvas of={DividerStories.Blue50} />
+
+### Blue 55
+
+<Canvas of={DividerStories.Blue55} />
+
+### Blue 60
+
+<Canvas of={DividerStories.Blue60} />
+
+### Blue 65
+
+<Canvas of={DividerStories.Blue65} />
+
+### Blue 70
+
+<Canvas of={DividerStories.Blue70} />
+
+### Blue 75
+
+<Canvas of={DividerStories.Blue75} />
+
+### Blue 80
+
+<Canvas of={DividerStories.Blue80} />
+
+### Blue 85
+
+<Canvas of={DividerStories.Blue85} />
+
+### Blue 90
+
+<Canvas of={DividerStories.Blue90} />
+
+### Blue 95
+
+<Canvas of={DividerStories.Blue95} />
+
+### Blue 100
+
+<Canvas of={DividerStories.Blue100} />
+
+## Reversed + Blue Scale
+
+### Reversed Blue 25
+
+<Canvas of={DividerStories.ReversedBlue25} />
+
+### Reversed Blue 75
+
+<Canvas of={DividerStories.ReversedBlue75} />
+
+### Reversed Blue 100
+
+<Canvas of={DividerStories.ReversedBlue100} />

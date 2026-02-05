@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Questrial } from './Typography';
+import { Manrope } from './Typography';
 
 const meta = {
-  title: 'Design Specs/Typography/Questrial',
-  component: Questrial,
+  title: 'Design Specs/Typography/Manrope',
+  component: Manrope,
   parameters: {
     layout: 'padded',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof Questrial>;
+} satisfies Meta<typeof Manrope>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

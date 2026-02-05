@@ -97,17 +97,17 @@ export const JetBrainsMono = ({ fontWeight = 400 }: JetBrainsMonoProps) => {
   );
 };
 
-export interface QuestrialProps {
+export interface ManropeProps {
   /** Show character set */
   showCharacterSet?: boolean;
 }
 
-export const Questrial = ({ showCharacterSet = true }: QuestrialProps) => {
-  const fontFamily = "'Questrial', sans-serif";
+export const Manrope = ({ showCharacterSet = true }: ManropeProps) => {
+  const fontFamily = "'Manrope', sans-serif";
 
   return (
     <div>
-      <h1 className="mb-4" style={{ fontFamily }}>Questrial</h1>
+      <h1 className="mb-4" style={{ fontFamily }}>Manrope</h1>
       <p className="text-muted mb-4">Header font - clean, modern, and geometric</p>
 
       <div className="mb-5">

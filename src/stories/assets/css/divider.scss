@@ -1,7 +1,27 @@
 @use 'variables' as *;
 
 .divider {
+  --divider-direction: to right;
+
   width: 100%;
-  border: none;
-  border-bottom: 5px solid $deep-azure;
+  height: 5px;
+  background: linear-gradient(var(--divider-direction), $deep-azure, $azure-bolt, $quicksilver, $frost);
+
+  &--reverse {
+    --divider-direction: to left;
+  }
+
+  // Blue intensity scale (0–100, steps of 5).
+  // Controls how much of the bar the blues occupy.
+  // --blue-50 is the default (no modifier needed).
+  // Combinable with --reverse.
+  @for $i from 0 through 20 {
+    $level: $i * 5;
+    $bolt-stop: $level * 1%;
+    $silver-stop: min($level * 1.5, 100) * 1%;
+
+    &--blue-#{$level} {
+      background: linear-gradient(var(--divider-direction), $deep-azure 0%, $azure-bolt $bolt-stop, $quicksilver $silver-stop, $frost 100%);
+    }
+  }
 }

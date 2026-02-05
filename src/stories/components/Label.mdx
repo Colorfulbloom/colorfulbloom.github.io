@@ -1,0 +1,71 @@
+import { Canvas, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as LabelStories from './Label.stories';
+
+<Meta of={LabelStories} />
+
+# Label
+
+A small inline tag / badge used to categorise content. When no explicit colour is provided the component auto-maps known tech names (React, TypeScript, Docker, etc.) to a preset colour; everything else defaults to azure-bolt.
+
+## Tech Labels
+
+All known tech tags rendered with their auto-mapped colours.
+
+<Canvas of={LabelStories.TechLabels} />
+
+## All Colour Variants
+
+Every colour variant displayed as a swatch.
+
+<Canvas of={LabelStories.AllVariants} />
+
+<Controls of={LabelStories.AzureBolt} />
+
+## Colour Map
+
+| Variant | Usage |
+|---|---|
+| `azure-bolt` | Default fallback · CSS · React · Docker |
+| `deep-azure` | TypeScript · Drupal |
+| `obsidian` | Unity3D · Git |
+| `charcoal` | PHP · Unreal Engine |
+| `quicksilver` | Bootstrap |
+| `amber` | JavaScript · Python |
+| `emerald` | AI · Node.js |
+| `rose` | HTML · Sass |
+
+---
+
+## Stories
+
+### Azure Bolt
+
+<Canvas of={LabelStories.AzureBolt} />
+
+### Deep Azure
+
+<Canvas of={LabelStories.DeepAzure} />
+
+### Obsidian
+
+<Canvas of={LabelStories.Obsidian} />
+
+### Charcoal
+
+<Canvas of={LabelStories.Charcoal} />
+
+### Quicksilver
+
+<Canvas of={LabelStories.Quicksilver} />
+
+### Amber
+
+<Canvas of={LabelStories.Amber} />
+
+### Emerald
+
+<Canvas of={LabelStories.Emerald} />
+
+### Rose
+
+<Canvas of={LabelStories.Rose} />

@@ -29,7 +29,7 @@ export const Header = ({
             <div className="col-6 col-md-4">
               <a href="" className="text-decoration-none">
                 <Logo width={120} />
-                <span className="ms-1 text-light font-questrial d-none d-md-inline">jorgecalderon.codes</span>
+                <span className="ms-1 text-light font-manrope d-none d-md-inline">jorgecalderon.codes</span>
               </a>
             </div>
 
@@ -71,7 +71,7 @@ export const Header = ({
             <div className="header__mobile-header">
               <a href="" className="text-decoration-none">
                 <Logo width={120} />
-                <span className="ms-1 text-light font-questrial d-none d-md-inline">jorgecalderon.codes</span>
+                <span className="ms-1 text-light font-manrope d-none d-md-inline">jorgecalderon.codes</span>
               </a>
               <button
                 className="header__close-button"

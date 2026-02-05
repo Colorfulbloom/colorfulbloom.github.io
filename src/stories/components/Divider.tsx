@@ -3,7 +3,7 @@ export interface DividerProps {
   className?: string;
 }
 
-/** A full-width horizontal rule with a deep-azure bottom border, matching the primary button style. */
+/** A full-width horizontal rule with a left-to-right gradient: deep-azure → azure-bolt → quicksilver → frost. */
 export const Divider = ({ className }: DividerProps) => (
   <div className={`divider${className ? ` ${className}` : ''}`} />
 );

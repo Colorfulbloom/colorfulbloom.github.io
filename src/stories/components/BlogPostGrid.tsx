@@ -32,7 +32,7 @@ export interface BlogPostGridProps {
 export const BlogPostGrid = ({ heading = 'Blog', posts }: BlogPostGridProps) => (
   <section className="blog-posts py-5">
     <div className="container">
-      <h2 className="blog-posts__heading display-5 font-questrial mb-3">
+      <h2 className="blog-posts__heading display-5 font-manrope mb-3">
         {heading}
       </h2>
       <Divider className="mb-5" />

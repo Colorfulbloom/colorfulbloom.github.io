@@ -92,13 +92,13 @@ export const AboutMe = ({
 
         {/* Right column: text */}
         <div className="col-12 col-md-7">
-          <h2 className="about-me__heading display-5 font-questrial mb-3">
+          <h2 className="about-me__heading display-5 font-manrope mb-3">
             {heading}
           </h2>
           <Divider className="mb-4" />
 
           {tagline && (
-            <p className="about-me__tagline font-questrial mb-3">
+            <p className="about-me__tagline font-manrope mb-3">
               {tagline}
             </p>
           )}
@@ -143,7 +143,7 @@ export const AboutMe = ({
       {/* ── Projects grid ── */}
       {projects.length > 0 && (
         <div className="about-me__projects mt-5">
-          <h3 className="about-me__projects-heading display-6 font-questrial mb-3">
+          <h3 className="about-me__projects-heading display-6 font-manrope mb-3">
             {projectsHeading}
           </h3>
           <Divider className="mb-5" />
