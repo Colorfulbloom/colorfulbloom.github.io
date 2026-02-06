@@ -199,15 +199,100 @@ This file tracks significant changes, design decisions, and implementation patte
   - `src/stories/assets/css/main.scss` — Added `@use 'contact-form'`
   - `src/stories/pages/Home.tsx` — Imported ContactForm, added below Skills with full sidebar content
 
+### WorkingOn Module — New Composite Section
+- **Purpose:** Editorial-style showcase of work projects with alternating image/text layout, displayed between Skills and ContactForm on the Home page
+- **Component:** `WorkingOn` in `modules/` — accepts `heading` (`React.ReactNode`) and `projects` array
+- **Layout:** Full-width rows with screenshot on one side and text on the other, alternating sides per project via Bootstrap `flex-row-reverse` on odd-indexed items
+  - Project 1 (Publishing Options): Image left, text right
+  - Project 2 (Blood Cancer United): Text left, image right
+  - Mobile: stacks vertically (image on top, text below)
+- **Heading:** Two-tone `<h2>` matching Skills/Jumbotron/ContactForm pattern
+  - "What I'm" uses `$deep-azure` (`.working-on__heading-accent`)
+  - "Working On." uses `$frost` (`.working-on__heading-light`)
+- **Project Content Per Item:**
+  - Type label — uppercase, letterspaced, `$pewter`, `0.75rem` (e.g. "Contributed Drupal Module", "Full-Time Role")
+  - Title — `$sky-blue`, Manrope, `1.35rem`, `font-weight: 600`
+  - Description — `$quicksilver`, Noto Sans, `0.95rem`, `line-height: 1.6`
+  - Button — optional `<a>` tag using `btn btn-azure-bolt` classes, opens in new tab (`target="_blank"`)
+- **Image Treatment:** `width: 100%`, `border-radius: 8px`, subtle `rgba($quicksilver, 0.1)` border
+- **Background:** `$charcoal` on the section
+- **Props:**
+  - `heading?: React.ReactNode`
+  - `projects: Project[]` — `{ title, description, type, imageSrc, imageAlt?, buttonLabel?, buttonHref? }`
+- **Project Data:**
+  - Publishing Options: Contributed Drupal module for custom publishing options, Views integration, D10/D11 compatible. Button: "View Module" → drupal.org/project/pub_options
+  - Blood Cancer United: Digital platform supporting patients through research, financial assistance, and advocacy. Button: "Visit Site" → bloodcancerunited.org
+- **Stories:** `Default` (with two-tone heading and both projects) and `NoHeading` variant
+- **Placeholder Images:** SVG placeholders created at `src/stories/assets/pub-options-screenshot.svg` and `src/stories/assets/bcu-screenshot.svg` — to be replaced with actual screenshots
+- **Files Created:**
+  - `src/stories/modules/WorkingOn.tsx`
+  - `src/stories/modules/WorkingOn.stories.tsx`
+  - `src/stories/assets/css/_working-on.scss`
+  - `src/stories/assets/pub-options-screenshot.svg`
+  - `src/stories/assets/bcu-screenshot.svg`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'working-on'`
+  - `src/stories/pages/Home.tsx` — Imported WorkingOn, placed between Skills and ContactForm
+
+### Footer — New Layout Component
+- **Purpose:** Site-wide footer with navigation links, social icons, and copyright
+- **Component:** `Footer` in `layout/` — alongside Header as a structural element
+- **Layout:**
+  - Top row: Nav links (left) + social icon circles (right) — stacks centered on mobile
+  - Divider: subtle `rgba($quicksilver, 0.08)` horizontal rule
+  - Bottom row: Copyright (left) + "Built with" text (right)
+- **Social Icons:** Circular buttons (`2.25rem`) with `$pewter` icons and subtle border, hover → Azure Bolt with tinted background
+- **Nav Links:** `$pewter` text, hover → `$azure-bolt`
+- **Copyright:** `© {year} Jorge Calderon. All rights reserved.`
+- **Built-with:** Muted `rgba($pewter, 0.6)` text
+- **Background:** `$onyx` (`#212528`) — matching the Jumbotron background, no top border
+- **Props:**
+  - `navItems?: string[]` (defaults to Home, Blog, Portfolio, Contact)
+  - `socials?: SocialLink[]` — `{ icon, href, label }`
+  - `email?: string`
+  - `name?: string` (defaults to "Jorge Calderon")
+  - `builtWith?: string`
+- **Stories:** `Default` (full footer with nav, socials, email, built-with) and `Minimal` (name only)
+- **Files Created:**
+  - `src/stories/layout/Footer.tsx`
+  - `src/stories/layout/Footer.stories.tsx`
+  - `src/stories/assets/css/_footer.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'footer'`
+  - `src/stories/pages/Home.tsx` — Imported Footer, added below ContactForm
+
+### New Color Added — Onyx
+- **Color Value:** `#212528`
+- **Variable Name:** `$onyx`
+- **Position in Palette:** Between `$obsidian` and `$charcoal` (darkest to lightest)
+- **Usage:** Footer background, matches Jumbotron background color
+- **Files Modified:**
+  - `src/stories/assets/css/_variables.scss` — Added `$onyx` variable
+
+### Section Padding Increase
+- **Changed:** Skills, Working On, and Contact Form sections from varying padding to consistent `4rem 0`
+  - Skills: `2rem 0` → `4rem 0`
+  - Working On: `3rem 0` → `4rem 0`
+  - Contact Form: `2rem 0` → `4rem 0`
+- **Unchanged:** Jumbotron (`120px 0`) and Footer (`2.5rem 0 1.5rem`) kept as-is
+- **Files Modified:**
+  - `src/stories/assets/css/_skills.scss`
+  - `src/stories/assets/css/_working-on.scss`
+  - `src/stories/assets/css/_contact-form.scss`
+
 ### Home Page — Updated Flow
-- **Page sections (top to bottom):** Header → Jumbotron → Skills → ContactForm
+- **Page sections (top to bottom):** Header → Jumbotron → Skills → WorkingOn → ContactForm → Footer
 - **ContactForm content on Home page:**
   - Intro items: lightbulb ("Need help with a project?"), rocket ("Got ideas?"), Drupal ("Want to chat Drupal?")
   - Closing: "Or just want to say hello? Drop me a message and let's get started."
   - Details: email (hello@jorgecalderon.codes), GitHub, LinkedIn, location (Florida, USA)
+- **Footer content on Home page:**
+  - Socials: GitHub, LinkedIn, Drupal.org
+  - Email: hello@jorgecalderon.codes
+  - Built with: "React, Storybook & Drupal"
 
 ### Build Verification
-- **Verified:** `npm run build-storybook` completed successfully after all form components, ContactForm module, and Home page integration
+- **Verified:** `npm run build-storybook` completed successfully after all WorkingOn module, Footer, section padding, and Home page integration changes
 
 ---
 
@@ -422,6 +507,8 @@ This file tracks significant changes, design decisions, and implementation patte
 - **Form Inputs:** `$charcoal` background, `$quicksilver` text, `$pewter` placeholders, `$azure-bolt` focus border + ring, `10px` border-radius (matching buttons)
 - **ContactForm Sidebar:** Azure Bolt left border, Deep Azure circular icon backgrounds, `$quicksilver` intro text, `$pewter` closing text, Sky Blue links
 - **Buttons:** Azure Bolt uses `color.adjust()` for lightness variations
+- **WorkingOn:** `$charcoal` background, `$sky-blue` titles, `$quicksilver` descriptions, `$pewter` type labels (uppercase), alternating image/text rows with Azure Bolt buttons
+- **Footer:** `$onyx` background, `$pewter` nav links and social icons with circular borders, hover → `$azure-bolt`, muted copyright and built-with text
 - **Page Background:** `$obsidian` for dark themes
 
 ### Animation Timing
@@ -466,6 +553,8 @@ This file tracks significant changes, design decisions, and implementation patte
 ---
 
 ## Next Session Considerations
+- Replace WorkingOn placeholder SVGs with actual screenshots of drupal.org/project/pub_options and bloodcancerunited.org
+- Add Onyx color to Design Specs ColorPalette component and stories
 - Portfolio page design/implementation
 - Blog page layout
 - Contact page with form

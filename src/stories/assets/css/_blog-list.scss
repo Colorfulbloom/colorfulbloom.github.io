@@ -1,0 +1,42 @@
+@use 'variables' as *;
+
+.blog-list {
+  padding: 4rem 0;
+  background-color: $charcoal;
+
+  &__heading {
+    font-family: $font-header;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__heading-accent {
+    color: $deep-azure;
+  }
+
+  &__heading-light {
+    color: $frost;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 0;
+  }
+
+  &__thumbnail {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba($quicksilver, 0.1);
+    flex-shrink: 0;
+  }
+
+  // Remove the default padding from plain cards when inside a blog-list item
+  &__item .card--plain {
+    padding: 0;
+  }
+}
