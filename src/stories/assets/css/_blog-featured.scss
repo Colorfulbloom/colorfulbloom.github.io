@@ -11,6 +11,11 @@
     margin-bottom: 1rem;
   }
 
+  .divider {
+    animation: blog-featured-divider-expand 1.2s ease-out 0.4s forwards;
+    width: 0;
+  }
+
   &__heading-accent {
     color: $deep-azure;
   }
@@ -69,4 +74,9 @@
     margin-top: 1.25rem;
     align-self: flex-start;
   }
+}
+
+@keyframes blog-featured-divider-expand {
+  0%   { width: 0%; }
+  100% { width: 25%; }
 }

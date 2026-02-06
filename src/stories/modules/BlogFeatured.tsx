@@ -39,7 +39,7 @@ export const BlogFeatured = ({ heading, post }: BlogFeaturedProps) => {
             {heading}
           </h2>
         )}
-        <Divider className="w-25 divider--blue-100 mb-4" />
+        <Divider className="divider--blue-100 mb-4" />
 
         <div className="blog-featured__post row align-items-center g-4">
           <div className="col-12 col-md-6">
