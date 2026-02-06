@@ -13,6 +13,8 @@ export interface BlogListPost {
   imageSrc?: string;
   /** Alt text for the thumbnail (defaults to title) */
   imageAlt?: string;
+  /** Link URL — makes the entire post block clickable */
+  href?: string;
 }
 
 export interface BlogListProps {
@@ -32,8 +34,8 @@ export const BlogList = ({ heading, posts }: BlogListProps) => {
         )}
         <Divider className="w-25 divider--blue-100 mb-4" />
         <div className="row g-0">
-          {posts.map((post) => (
-            <div key={post.title} className="col-12 col-md-6">
+          {posts.map((post) => {
+            const content = (
               <div className="blog-list__item">
                 {post.imageSrc && (
                   <img
@@ -49,8 +51,25 @@ export const BlogList = ({ heading, posts }: BlogListProps) => {
                   variant="plain"
                 />
               </div>
-            </div>
-          ))}
+            );
+
+            return (
+              <div key={post.title} className="col-12 col-md-6">
+                {post.href ? (
+                  <a
+                    className="blog-list__link"
+                    href={post.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  content
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -19,11 +19,35 @@
     color: $frost;
   }
 
+  &__link {
+    display: block;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color $transition-fast;
+
+    &:hover {
+      background-color: $obsidian;
+    }
+
+    // Preserve plain card colours inside the link wrapper
+    .card__title {
+      color: $quicksilver;
+    }
+
+    .card__text {
+      color: $pewter;
+    }
+
+    .card__icon {
+      color: $pewter;
+    }
+  }
+
   &__item {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    padding: 1.25rem 0;
+    padding: 1.25rem;
   }
 
   &__thumbnail {

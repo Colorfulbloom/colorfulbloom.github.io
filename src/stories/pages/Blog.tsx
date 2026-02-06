@@ -55,6 +55,7 @@ export const Blog = ({ activeMenuItem = 'Blog' }: BlogProps) => {
               'A walkthrough of creating the Publishing Options contributed module — custom workflows, Views integration, and D10/D11 compatibility.',
             imageSrc: imgTheming,
             imageAlt: 'Drupal publishing options',
+            href: '#',
           },
           {
             icon: 'fa-solid fa-gears',
@@ -63,6 +64,7 @@ export const Blog = ({ activeMenuItem = 'Blog' }: BlogProps) => {
               'Setting up automated CI/CD pipelines with Docker, GitHub Actions, and zero-downtime deployments for Drupal projects.',
             imageSrc: imgDocs,
             imageAlt: 'DevOps pipeline diagram',
+            href: '#',
           },
           {
             icon: 'fa-solid fa-cubes',
@@ -71,6 +73,7 @@ export const Blog = ({ activeMenuItem = 'Blog' }: BlogProps) => {
               'How a Storybook-first workflow changed the way I build front-end interfaces — faster iteration, better documentation.',
             imageSrc: imgTesting,
             imageAlt: 'Storybook component library',
+            href: '#',
           },
           {
             icon: 'fa-solid fa-arrow-up-right-dots',
@@ -79,6 +82,7 @@ export const Blog = ({ activeMenuItem = 'Blog' }: BlogProps) => {
               'Lessons learned from upgrading a large-scale Drupal 10 site to Drupal 11 — deprecated APIs, module compatibility, and testing strategies.',
             imageSrc: imgAssets,
             imageAlt: 'Drupal 11 upgrade process',
+            href: '#',
           },
         ]}
       />
