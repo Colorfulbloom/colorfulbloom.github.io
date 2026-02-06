@@ -8,7 +8,7 @@ import imgTesting from '../assets/testing.png';
 import imgAssets from '../assets/assets.png';
 
 const meta = {
-  title: 'jorgecalderon.codes/Components/BlogPostGrid',
+  title: 'jorgecalderon.codes/Modules/BlogPostGrid',
   component: BlogPostGrid,
   tags: ['autodocs'],
 } satisfies Meta<typeof BlogPostGrid>;

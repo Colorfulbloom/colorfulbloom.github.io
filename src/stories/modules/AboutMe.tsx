@@ -1,8 +1,8 @@
-import { Divider } from './Divider';
-import { Label } from './Label';
-import type { LabelColor } from './Label';
-import { Button } from './Button';
-import { Card } from './Card';
+import { Divider } from '../components/Divider';
+import { Label } from '../components/Label';
+import type { LabelColor } from '../components/Label';
+import { Button } from '../components/Button';
+import { Card } from '../components/Card';
 
 export interface AboutMeSkill {
   /** Skill / tech name — auto-colours if it matches a known tech */
@@ -85,7 +85,7 @@ export const AboutMe = ({
             />
           ) : (
             <div className="about-me__placeholder">
-              <i className="bi bi-person-circle about-me__placeholder-icon" />
+              <i className="fa-solid fa-circle-user about-me__placeholder-icon" />
             </div>
           )}
         </div>

@@ -1,0 +1,110 @@
+@use 'variables' as *;
+
+.footer {
+  background-color: $charcoal;
+  border-top: 1px solid rgba($quicksilver, 0.08);
+  padding: 2.5rem 0 1.5rem;
+
+  &__top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  &__nav-link {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $pewter;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid rgba($quicksilver, 0.15);
+    color: $pewter;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color $transition-fast, border-color $transition-fast, background-color $transition-fast;
+
+    &:hover {
+      color: $azure-bolt;
+      border-color: $azure-bolt;
+      background-color: rgba($azure-bolt, 0.08);
+    }
+  }
+
+  &__divider {
+    border: none;
+    border-top: 1px solid rgba($quicksilver, 0.08);
+    margin: 0 0 1.25rem;
+  }
+
+  &__bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__copyright {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    color: $pewter;
+    margin: 0;
+  }
+
+  &__built-with {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    color: rgba($pewter, 0.6);
+    margin: 0;
+
+    a {
+      color: rgba($pewter, 0.6);
+      text-decoration: none;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $azure-bolt;
+      }
+    }
+  }
+}

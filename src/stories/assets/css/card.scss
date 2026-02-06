@@ -89,6 +89,78 @@
     align-items: center;
     justify-content: flex-end;
   }
+
+  // ── Charcoal Variant ──────────────────────────
+  &--charcoal {
+    background: $charcoal;
+    border: 1px solid rgba(226, 226, 226, 0.15);
+    border-bottom: 4px solid $azure-bolt;
+
+    .card__title {
+      // background: linear-gradient(135deg, $azure-bolt 0%, $azure-bolt 40%, $sky-blue 100%);
+      // -webkit-background-clip: text;
+      // -webkit-text-fill-color: transparent;
+      // background-clip: text;
+      color: $sky-blue;
+    }
+
+    .card__text {
+      color: $ash;
+    }
+
+    .card__footer {
+      border-top: 1px solid rgba(226, 226, 226, 0.15);
+    }
+
+    &:hover {
+      box-shadow: 0 6px 20px rgba(0, 112, 189, 0.4);
+    }
+  }
+
+  // ── Plain Variant ───────────────────────────
+  &--plain {
+    background: transparent;
+    border: none;
+    border-bottom: none;
+    border-radius: 0;
+    box-shadow: none;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 0;
+
+    .card__icon {
+      font-size: 1.25rem;
+      color: $pewter;
+      padding-top: 0.15rem;
+    }
+
+    .card__body {
+      padding: 0;
+    }
+
+    .card__title-row {
+      margin-bottom: 0.5rem;
+    }
+
+    .card__title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $quicksilver;
+    }
+
+    .card__text {
+      font-size: 0.9rem;
+      color: $pewter;
+      margin-bottom: 0;
+    }
+
+    &:hover {
+      transform: none;
+      box-shadow: none;
+      animation: none;
+    }
+  }
 }
 
 // Sheen holds for 0.4s then sweeps across over 1s

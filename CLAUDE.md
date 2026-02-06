@@ -2,13 +2,15 @@
 
 Storybook-driven front-end for the jorgecalderon.codes personal website. Components and pages are built in React/TypeScript, styled with Bootstrap 5.3 + custom Sass, and developed exclusively through Storybook stories — there is no separate app entry point for day-to-day work.
 
+> **Session History:** `SESSION_HISTORY.md` tracks design decisions, implementation patterns, and changes across development sessions. Read this at the start of new sessions for context continuity.
+
 > Detailed reference material (color palette, font tokens, full file tree, story title map, Storybook internals, Docker) lives in `agent_docs/reference.md`. Pull it in only when you need it.
 
 ---
 
 ## Tech Stack
 
-TypeScript · React 19 · Vite 7 · Storybook 10 (`@storybook/react-vite`) · Bootstrap 5.3 (pre-built CSS, not compiled from Sass) · Bootstrap Icons · Dart Sass · Fontsource (Questrial, Noto Sans, JetBrains Mono) · Vitest 4 + Playwright · ESLint 9
+TypeScript · React 19 · Vite 7 · Storybook 10 (`@storybook/react-vite`) · Bootstrap 5.3 (pre-built CSS, not compiled from Sass) · Font Awesome 6 Free · Dart Sass · Fontsource (Questrial, Noto Sans, JetBrains Mono) · Vitest 4 + Playwright · ESLint 9
 
 ---
 
@@ -31,15 +33,16 @@ After making changes, verify with `npm run build-storybook`. If the Storybook pr
 .storybook/              # Storybook config (main.ts, preview.ts, vitest.setup.ts)
 src/stories/
 ├── assets/css/          # All Sass: _variables.scss, main.scss (entry), one partial per feature
-├── components/          # Reusable UI components (Button, Jumbotron, …) + their .stories files
+├── components/          # Reusable UI components (Button, Card, Label, Divider, …) + their .stories files
 ├── design-specs/        # Design-system reference stories (Logo, ColorPalette, Typography, Grid)
 ├── layout/              # Structural components (Header, Layout, Container, Row) + stories
+├── modules/             # Larger, composite sections (Jumbotron, BlogPostGrid, AboutMe) + stories
 └── pages/               # Full-page compositions (Home) + stories
 ```
 
 Key entry points:
 - **Styles:** `src/stories/assets/css/main.scss` — `@use`s every partial. This is the only file that needs to know about other partials.
-- **Global imports:** `.storybook/preview.ts` — Bootstrap CSS, Bootstrap Icons CSS, Fontsource fonts. Available in every story automatically.
+- **Global imports:** `.storybook/preview.ts` — Bootstrap CSS, Font Awesome 6 Free CSS, Fontsource fonts. Available in every story automatically.
 - **Variables:** `src/stories/assets/css/_variables.scss` — palette tokens and font variables.
 
 ---

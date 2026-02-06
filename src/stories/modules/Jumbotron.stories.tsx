@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { Jumbotron } from '../components/Jumbotron';
+import { Jumbotron } from './Jumbotron';
 import imgStyling from '../assets/styling.png';
 
 const meta = {
-  title: 'jorgecalderon.codes/Components/Jumbotron',
+  title: 'jorgecalderon.codes/Modules/Jumbotron',
   component: Jumbotron,
   parameters: {
     layout: 'fullscreen',

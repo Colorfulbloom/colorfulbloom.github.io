@@ -1,0 +1,143 @@
+@use 'variables' as *;
+
+.content-elements {
+  max-width: 48rem;
+  color: $charcoal;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: $obsidian;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  ul, ol {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+
+    li {
+      margin-bottom: 0.35rem;
+    }
+
+    ul, ol {
+      margin-top: 0.35rem;
+      margin-bottom: 0.35rem;
+    }
+  }
+
+  code {
+    background-color: rgba($pewter, 0.2);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+    color: $deep-azure;
+  }
+
+  // Section spacing
+  &__section {
+    margin-bottom: 2.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Section label
+  &__label {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: $pewter;
+    border-bottom: 2px solid $azure-bolt;
+    padding-bottom: 0.375rem;
+    margin-bottom: 1.25rem;
+  }
+
+  // Links
+  &__link {
+    color: $azure-bolt;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $deep-azure;
+    }
+  }
+
+  // Blockquote
+  &__blockquote {
+    border-left: 4px solid $azure-bolt;
+    margin: 0 0 1.25rem 0;
+    padding: 0.75rem 1.25rem;
+    background-color: rgba($azure-bolt, 0.04);
+
+    p {
+      margin-bottom: 0.25rem;
+      font-style: italic;
+    }
+  }
+
+  &__blockquote-footer {
+    font-size: 0.875rem;
+    color: $pewter;
+    margin-top: 0.5rem;
+  }
+
+  // Code block
+  &__code-block {
+    background-color: $obsidian;
+    color: $quicksilver;
+    padding: 1.25rem;
+    border-radius: 0.375rem;
+    font-family: $font-code;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    border-left: 4px solid $azure-bolt;
+  }
+
+  // Dark variant
+  &--dark {
+    background-color: $charcoal;
+    padding: 2rem;
+    border-radius: 0.375rem;
+    color: $ash;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: $quicksilver;
+    }
+
+    code {
+      background-color: rgba($quicksilver, 0.1);
+      color: $sky-blue;
+    }
+
+    .content-elements__link {
+      color: $sky-blue;
+
+      &:hover {
+        color: $azure-bolt;
+      }
+    }
+
+    .content-elements__blockquote {
+      background-color: rgba($quicksilver, 0.04);
+    }
+
+    .content-elements__blockquote-footer {
+      color: $pewter;
+    }
+
+    .content-elements__code-block {
+      background-color: $charcoal;
+    }
+  }
+}

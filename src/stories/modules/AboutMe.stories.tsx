@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AboutMe } from './AboutMe';
 
 const meta = {
-  title: 'jorgecalderon.codes/Components/AboutMe',
+  title: 'jorgecalderon.codes/Modules/AboutMe',
   component: AboutMe,
   tags: ['autodocs'],
   parameters: {

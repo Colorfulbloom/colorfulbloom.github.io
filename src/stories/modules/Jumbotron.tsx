@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from './Button';
-import type { CardProps } from './Card';
-import { Card } from './Card';
-import { Divider } from './Divider';
+import { Button } from '../components/Button';
+import type { CardProps } from '../components/Card';
+import { Card } from '../components/Card';
+import { Divider } from '../components/Divider';
 
 export interface JumbotronProps {
   /** Main heading content */

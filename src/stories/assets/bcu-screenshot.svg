@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#E30613"/>
+  <rect x="0" y="0" width="800" height="55" fill="#fff"/>
+  <text x="40" y="36" font-family="sans-serif" font-size="16" font-weight="bold" fill="#E30613">Blood Cancer United</text>
+  <text x="80" y="200" font-family="sans-serif" font-size="36" font-weight="bold" fill="#fff">We're all about</text>
+  <text x="80" y="250" font-family="sans-serif" font-size="36" font-weight="bold" fill="#fff">blood cancer.</text>
+  <text x="80" y="290" font-family="sans-serif" font-size="14" fill="rgba(255,255,255,0.85)">So people with blood cancer can be about everything else.</text>
+  <rect x="520" y="70" width="230" height="330" rx="8" fill="rgba(255,255,255,0.15)"/>
+</svg>

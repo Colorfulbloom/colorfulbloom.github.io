@@ -40,6 +40,7 @@ const quicksilverColors: ColorSwatchProps[] = [
   { name: 'Pewter', hex: '#8E8E8E', description: 'Mid neutral' },
   { name: 'Azure Bolt', hex: '#0070BD', description: 'Primary accent' },
   { name: 'Deep Azure', hex: '#005A9E', description: 'Secondary accent' },
+  { name: 'Sky Blue', hex: '#75B8E6', description: 'Light accent' },
 ];
 
 export const ColorPalette = ({ paletteName = 'Quicksilver' }: ColorPaletteProps) => (

@@ -1,0 +1,115 @@
+@use 'variables' as *;
+
+.contact-form {
+  padding: 4rem 0;
+  background-color: $obsidian;
+
+  &__heading {
+    font-family: $font-header;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__heading-accent {
+    color: $deep-azure;
+  }
+
+  &__heading-light {
+    color: $frost;
+  }
+
+  &__body {
+    max-width: 640px;
+  }
+
+  &__sidebar {
+    padding: 1.5rem 0;
+
+    @media (min-width: 992px) {
+      padding: 0 0 0 2rem;
+    }
+  }
+
+  &__sidebar-content {
+    border-left: 3px solid $azure-bolt;
+    padding-left: 1.25rem;
+  }
+
+  // Intro list — icon + question items
+  &__intro-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__intro-item {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    font-family: $font-body;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: $quicksilver;
+  }
+
+  &__intro-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: $deep-azure;
+
+    i {
+      color: $quicksilver;
+      font-size: 0.85rem;
+    }
+  }
+
+  // Closing paragraph
+  &__intro-closing {
+    color: $pewter;
+    font-family: $font-body;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+
+  // Simple contact details — icon + text inline
+  &__details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  &__contact-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: $pewter;
+    font-family: $font-body;
+    font-size: 0.9rem;
+
+    i {
+      color: $azure-bolt;
+      width: 1rem;
+      text-align: center;
+    }
+
+    a {
+      color: $sky-blue;
+      text-decoration: none;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $azure-bolt;
+      }
+    }
+  }
+}

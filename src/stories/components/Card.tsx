@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import type { ButtonProps } from './Button';
 import { Button } from './Button';
 import { Label } from './Label';
@@ -11,9 +10,11 @@ export interface CardLabel {
   color?: LabelColor;
 }
 
+export type CardVariant = 'default' | 'charcoal' | 'plain';
+
 export interface CardProps {
-  /** Optional icon rendered to the left of the title */
-  icon?: ReactNode;
+  /** Optional Font Awesome icon class (e.g. 'fa-solid fa-code', 'fa-brands fa-drupal') */
+  icon?: string;
   /** Card title */
   title: string;
   /** Body text shown below the title */
@@ -34,6 +35,8 @@ export interface CardProps {
   onButtonClick?: () => void;
   /** Additional CSS classes merged onto the card root */
   className?: string;
+  /** Visual variant of the card (default: light metallic, charcoal: dark, plain: minimal icon+text) */
+  variant?: CardVariant;
 }
 
 /** A content card styled to match the Quicksilver dark theme. */
@@ -49,8 +52,13 @@ export const Card = ({
   buttonHref,
   onButtonClick,
   className,
-}: CardProps) => (
-  <div className={`card${className ? ` ${className}` : ''}`}>
+  variant = 'default',
+}: CardProps) => {
+  const variantClass = variant !== 'default' ? `card--${variant}` : '';
+  const classes = ['card', variantClass, className].filter(Boolean).join(' ');
+
+  return (
+  <div className={classes}>
     {imageSrc && (
       <img
         className="card__image"
@@ -68,7 +76,7 @@ export const Card = ({
         </div>
       )}
       <div className="card__title-row">
-        {icon && <span className="card__icon">{icon}</span>}
+        {icon && <span className="card__icon"><i className={icon} /></span>}
         <h3 className="card__title font-manrope">{title}</h3>
       </div>
       {text && <p className="card__text font-noto">{text}</p>}
@@ -86,4 +94,5 @@ export const Card = ({
       </div>
     )}
   </div>
-);
+  );
+};

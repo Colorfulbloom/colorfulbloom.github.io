@@ -56,7 +56,7 @@ export const Header = ({
                   aria-expanded={isOpen}
                   aria-label="Open navigation"
                 >
-                  <i className="bi bi-list"></i>
+                  <i className="fa-solid fa-bars"></i>
                 </button>
               </div>
             </div>
@@ -78,7 +78,7 @@ export const Header = ({
                 onClick={() => setIsOpen(false)}
                 aria-label="Close navigation"
               >
-                <i className="bi bi-x-lg"></i>
+                <i className="fa-solid fa-xmark"></i>
               </button>
             </div>
             <nav className="header__mobile-menu">

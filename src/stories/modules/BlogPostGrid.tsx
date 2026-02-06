@@ -1,6 +1,6 @@
-import { Card } from './Card';
-import type { CardLabel } from './Card';
-import { Divider } from './Divider';
+import { Card } from '../components/Card';
+import type { CardLabel } from '../components/Card';
+import { Divider } from '../components/Divider';
 
 export interface BlogPost {
   /** Unique identifier */

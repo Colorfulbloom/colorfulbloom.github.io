@@ -39,3 +39,7 @@ export const AzureBolt: StoryObj<typeof ColorSwatch> = {
 export const DeepAzure: StoryObj<typeof ColorSwatch> = {
   render: () => <ColorSwatch name="Deep Azure" hex="#005A9E" description="Secondary accent" />,
 };
+
+export const SkyBlue: StoryObj<typeof ColorSwatch> = {
+  render: () => <ColorSwatch name="Sky Blue" hex="#75B8E6" description="Light accent" />,
+};
