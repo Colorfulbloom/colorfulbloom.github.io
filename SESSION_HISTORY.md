@@ -552,12 +552,147 @@ This file tracks significant changes, design decisions, and implementation patte
 
 ---
 
+## Session: 2026-02-06 (Part 2)
+
+### BlogPostGrid Module — Removed
+- **Reason:** Replaced by the new BlogList module which uses the Skills-style plain card layout
+- **Files Deleted:**
+  - `src/stories/modules/BlogPostGrid.tsx`
+  - `src/stories/modules/BlogPostGrid.stories.tsx`
+  - `src/stories/assets/css/blog-posts.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Removed `@use 'blog-posts'`
+
+### BlogFeatured Module — New Composite Section
+- **Purpose:** Hero-style featured blog post with image/text side-by-side layout, used at the top of the Blog page
+- **Component:** `BlogFeatured` in `modules/` — accepts `heading` (`React.ReactNode`) and `post` (`FeaturedPost`)
+- **Layout:** Single row — image left (`col-12 col-md-6`), content right (`col-12 col-md-6`), matching the WorkingOn layout pattern
+- **FeaturedPost interface:** `title`, `excerpt`, `date`, `imageSrc`, `imageAlt?`, `labels?: CardLabel[]`, `buttonLabel?`, `buttonHref?`
+- **Content Per Item:**
+  - Date — uppercase, letterspaced, `$pewter`, `0.75rem` (same style as WorkingOn's type label)
+  - Title — `$sky-blue`, Manrope, `1.35rem`, `font-weight: 600`
+  - Labels — rendered using Label component with auto-mapped tech colours
+  - Excerpt — `$quicksilver`, Noto Sans, `0.95rem`, `line-height: 1.6`
+  - Button — optional `<a>` using `btn btn-azure-bolt` classes
+- **Heading:** Two-tone `<h2>` — "Latest" (`$deep-azure`) + "Post." (`$frost`)
+- **Divider Animation:** Animated expand from 0% to 25% width (`blog-featured-divider-expand` keyframes, 1.2s ease-out, 0.4s delay). Bootstrap `w-25` class removed to avoid `!important` conflict blocking the animation.
+- **Background:** `$obsidian`
+- **Stories:** `Default` (with two-tone heading) and `NoHeading`
+- **Files Created:**
+  - `src/stories/modules/BlogFeatured.tsx`
+  - `src/stories/modules/BlogFeatured.stories.tsx`
+  - `src/stories/assets/css/_blog-featured.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'blog-featured'`
+
+### BlogList Module — New Composite Section
+- **Purpose:** 2-column grid of blog post listings below the featured post on the Blog page
+- **Component:** `BlogList` in `modules/` — accepts `heading` (`React.ReactNode`) and `posts` array
+- **Layout:** Skills-style 2-column grid (`row g-0`, `col-12 col-md-6`) using plain Card variant
+- **BlogListPost interface:** `icon`, `title`, `description`, `imageSrc?`, `imageAlt?`, `href?`
+- **Thumbnail Support:** Each post has an optional 80×80px rounded thumbnail image to the left of the plain card
+- **Clickable Posts:** When `href` is provided, the entire post block (thumbnail + card) is wrapped in an `<a>` tag (`.blog-list__link`)
+- **Hover Effect:** Background transitions to `$obsidian` on hover (section background is `$charcoal`)
+- **Text Colour Preservation:** Inside the link wrapper, explicit colours set on `.card__title` (`$quicksilver`), `.card__text` (`$pewter`), `.card__icon` (`$pewter`) to prevent `<a>` tag colour inheritance
+- **Heading:** Two-tone `<h2>` — "More" (`$deep-azure`) + "Posts." (`$frost`)
+- **Background:** `$charcoal`
+- **Design Iterations:**
+  - Started using BlogPostGrid (3-column card grid with images) — user rejected
+  - Switched to Skills-style plain cards (no images) — user wanted images
+  - Added thumbnail images alongside plain cards — user wanted button links
+  - Added button links in a separate row — user wanted whole block clickable instead
+  - Removed buttons, made entire post block an `<a>` tag with obsidian hover background
+- **Stories:** `Default` (with two-tone heading) and `NoHeading`
+- **Files Created:**
+  - `src/stories/modules/BlogList.tsx`
+  - `src/stories/modules/BlogList.stories.tsx`
+  - `src/stories/assets/css/_blog-list.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'blog-list'`
+
+### Blog Page — New Page Composition
+- **Purpose:** Blog landing page with featured post hero and post listing grid
+- **Component:** `Blog` in `pages/` — accepts `activeMenuItem` (default `'Blog'`)
+- **Page sections (top to bottom):** Header → BlogFeatured → BlogList → Footer
+- **BlogFeatured content:** "Designing with AI in Storybook" (February 2026), labels: AI, React, Sass
+- **BlogList content:** 4 posts with thumbnails and links — Drupal Publishing Options, DevOps Pipelines, Component-Driven Design, Migrating to Drupal 11
+- **Footer:** Same configuration as Home page (GitHub, LinkedIn, Drupal.org socials)
+- **Stories:** `Default` at `jorgecalderon.codes/Pages/Blog`
+- **Files Created:**
+  - `src/stories/pages/Blog.tsx`
+  - `src/stories/pages/Blog.stories.tsx`
+- **Files Modified:**
+  - `src/stories/assets/css/pages.scss` — Added `.page-blog` class (`$obsidian` background, `min-height: 100vh`)
+
+### PortfolioFeatured Module — New Composite Section
+- **Purpose:** Hero-style featured project with image/text side-by-side layout, used at the top of the Portfolio page
+- **Component:** `PortfolioFeatured` in `modules/` — accepts `heading` (`React.ReactNode`) and `project` (`FeaturedProject`)
+- **Layout:** Mirrors BlogFeatured — single row, image left, content right
+- **FeaturedProject interface:** `title`, `description`, `type`, `imageSrc`, `imageAlt?`, `labels?: CardLabel[]`, `buttonLabel?`, `buttonHref?`
+- **Content Per Item:**
+  - Type label — uppercase, letterspaced, `$pewter` (e.g. "Contributed Drupal Module")
+  - Title — `$sky-blue`, Manrope, `1.35rem`, `font-weight: 600`
+  - Labels — rendered using Label component
+  - Description — `$quicksilver`, Noto Sans, `0.95rem`
+  - Button — optional `<a>` using `btn btn-azure-bolt`
+- **Heading:** Two-tone `<h2>` — "Featured" (`$deep-azure`) + "Project." (`$frost`)
+- **Divider Animation:** Same expand pattern as BlogFeatured (`portfolio-featured-divider-expand`, 0→25%, 1.2s ease-out, 0.4s delay)
+- **Background:** `$obsidian`
+- **Stories:** `Default` and `NoHeading`
+- **Files Created:**
+  - `src/stories/modules/PortfolioFeatured.tsx`
+  - `src/stories/modules/PortfolioFeatured.stories.tsx`
+  - `src/stories/assets/css/_portfolio-featured.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'portfolio-featured'`
+
+### PortfolioList Module — New Composite Section
+- **Purpose:** Alternating image/text rows showcasing portfolio projects, used below the featured project on the Portfolio page
+- **Component:** `PortfolioList` in `modules/` — accepts `heading` (`React.ReactNode`) and `projects` array
+- **Layout:** Mirrors WorkingOn module — full-width rows with screenshot on one side and text on the other, alternating sides via `flex-row-reverse` on odd-indexed items
+- **PortfolioProject interface:** `title`, `description`, `type`, `imageSrc`, `imageAlt?`, `buttonLabel?`, `buttonHref?`
+- **Content:** Same typography and spacing as WorkingOn (type label, sky-blue title, quicksilver description, optional azure-bolt button)
+- **Heading:** Two-tone `<h2>` — "More" (`$deep-azure`) + "Projects." (`$frost`)
+- **Background:** `$charcoal`
+- **Stories:** `Default` and `NoHeading`
+- **Sample Data:** Blood Cancer United (full-time role), jorgecalderon.codes (personal project), Enterprise CMS Platform (client project) — using project placeholder SVGs
+- **Files Created:**
+  - `src/stories/modules/PortfolioList.tsx`
+  - `src/stories/modules/PortfolioList.stories.tsx`
+  - `src/stories/assets/css/_portfolio-list.scss`
+- **Files Modified:**
+  - `src/stories/assets/css/main.scss` — Added `@use 'portfolio-list'`
+
+### Portfolio Page — New Page Composition
+- **Purpose:** Portfolio landing page with featured project hero and project listing
+- **Component:** `Portfolio` in `pages/` — accepts `activeMenuItem` (default `'Portfolio'`)
+- **Page sections (top to bottom):** Header → PortfolioFeatured → PortfolioList → Footer
+- **PortfolioFeatured content:** Publishing Options (Contributed Drupal Module), labels: Drupal, PHP, button: "View Module" → drupal.org
+- **PortfolioList content:** 3 projects with alternating layout — BCU, jorgecalderon.codes, Enterprise CMS
+- **Footer:** Same configuration as Home and Blog pages
+- **Stories:** `Default` at `jorgecalderon.codes/Pages/Portfolio`
+- **Files Created:**
+  - `src/stories/pages/Portfolio.tsx`
+  - `src/stories/pages/Portfolio.stories.tsx`
+- **Files Modified:**
+  - `src/stories/assets/css/pages.scss` — Added `.page-portfolio` class (`$obsidian` background, `min-height: 100vh`)
+
+### Divider Animation Gotcha — Bootstrap `w-25` Conflict
+- **Issue:** Divider expand animation did not play on the BlogFeatured section
+- **Root Cause:** Bootstrap's `w-25` utility class sets `width: 25% !important`, overriding the `@keyframes` animation starting at `width: 0`
+- **Fix:** Removed `w-25` class from the Divider in BlogFeatured (and PortfolioFeatured), letting the `@keyframes` animation control width from 0% to 25%
+- **Pattern:** Any section that needs an animated divider must NOT use Bootstrap width utilities — use `@keyframes` directly
+
+### Build Verification
+- **Verified:** `npm run build-storybook` completed successfully after all Blog page, Portfolio page, and module changes
+
+---
+
 ## Next Session Considerations
 - Replace WorkingOn placeholder SVGs with actual screenshots of drupal.org/project/pub_options and bloodcancerunited.org
 - Add Onyx color to Design Specs ColorPalette component and stories
-- Portfolio page design/implementation
-- Blog page layout
-- Contact page with form
+- Contact page with form (reuse ContactForm module)
 - Responsive behavior verification across breakpoints
 - Accessibility audit (ARIA labels, keyboard nav, color contrast)
 - Performance: consider reducing animation complexity on mobile
+- Update CLAUDE.md project layout to include new modules and pages

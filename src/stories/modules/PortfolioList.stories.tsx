@@ -3,8 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { PortfolioList } from './PortfolioList';
 
 import bcuImg from '../assets/bcu-screenshot.svg';
-import imgStyling from '../assets/styling.png';
-import imgTheming from '../assets/theming.png';
+import pubOptionsImg from '../assets/pub-options-screenshot.svg';
 
 const meta = {
   title: 'jorgecalderon.codes/Modules/Portfolio List',
@@ -38,7 +37,7 @@ const sampleProjects = [
     type: 'Personal Project',
     description:
       'A component-driven personal website built with React, TypeScript, and Storybook. Every component is designed, documented, and tested inside Storybook before integration.',
-    imageSrc: imgStyling,
+    imageSrc: pubOptionsImg,
     imageAlt: 'jorgecalderon.codes in Storybook',
     buttonLabel: 'View Source',
     buttonHref: 'https://github.com/jorgecalderon',
@@ -48,7 +47,7 @@ const sampleProjects = [
     type: 'Client Project',
     description:
       'A headless Drupal architecture powering a multi-site content platform with custom modules, automated deployments, and performance-tuned infrastructure on AWS.',
-    imageSrc: imgTheming,
+    imageSrc: bcuImg,
     imageAlt: 'Enterprise CMS dashboard',
   },
 ];
