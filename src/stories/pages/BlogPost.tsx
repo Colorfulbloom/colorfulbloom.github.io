@@ -2,13 +2,14 @@ import { Divider } from '../components/Divider';
 import { Label } from '../components/Label';
 import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
-import { BlogList } from '../modules/BlogList';
+import { BlogList, type BlogListPost } from '../modules/BlogList';
 import { ContactForm } from '../modules/ContactForm';
 import { POST_DEMO_BODY } from './articleContent';
 import { prepareBody, readingTime, splitTitle } from './articleUtils';
 
 import imgStyling from '../assets/styling.png';
 import imgTheming from '../assets/theming.png';
+import imgDocs from '../assets/docs.png';
 
 export interface PagerPost {
   /** Post title */
@@ -27,6 +28,28 @@ export interface BlogPostProps {
   /** Next (newer) post; omit to drop that cell */
   newerPost?: PagerPost;
 }
+
+/** Demo posts for "More Posts."; the section only renders with at least two. */
+const morePosts: BlogListPost[] = [
+  {
+    icon: 'fa-solid fa-gear',
+    title: 'Building Custom Publishing Options for Drupal',
+    description:
+      'A deep dive into building a contributed Drupal module that extends the publishing workflow with Views integration.',
+    imageSrc: imgTheming,
+    imageAlt: 'Drupal publishing options',
+    href: '#',
+  },
+  {
+    icon: 'fa-solid fa-gears',
+    title: 'DevOps Pipelines for Drupal Sites',
+    description:
+      'Setting up automated CI/CD pipelines with Docker, GitHub Actions, and zero-downtime deployments for Drupal projects.',
+    imageSrc: imgDocs,
+    imageAlt: 'DevOps pipeline diagram',
+    href: '#',
+  },
+];
 
 export const BlogPost = ({
   activeMenuItem = 'Blog',
@@ -136,27 +159,19 @@ export const BlogPost = ({
           </section>
         </article>
 
-        <BlogList
-          headingId="more-posts"
-          openLinksInNewTab={false}
-          heading={
-            <>
-              <span className="blog-list__heading-accent">More</span>{' '}
-              <span className="blog-list__heading-light">Posts.</span>
-            </>
-          }
-          posts={[
-            {
-              icon: 'fa-solid fa-gear',
-              title: 'Building Custom Publishing Options for Drupal',
-              description:
-                'A deep dive into building a contributed Drupal module that extends the publishing workflow with Views integration.',
-              imageSrc: imgTheming,
-              imageAlt: 'Drupal publishing options',
-              href: '#',
-            },
-          ]}
-        />
+        {morePosts.length >= 2 && (
+          <BlogList
+            headingId="more-posts"
+            openLinksInNewTab={false}
+            heading={
+              <>
+                <span className="blog-list__heading-accent">More</span>{' '}
+                <span className="blog-list__heading-light">Posts.</span>
+              </>
+            }
+            posts={morePosts}
+          />
+        )}
 
         <ContactForm
           heading={<><span className="contact-form__heading-accent">Get in</span>{' '}<span className="contact-form__heading-light">Touch.</span></>}
