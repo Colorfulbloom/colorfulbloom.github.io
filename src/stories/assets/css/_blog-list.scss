@@ -63,4 +63,10 @@
   &__item .card--plain {
     padding: 0;
   }
+
+  // Icon at its natural width, like Font Awesome's .fa-width-auto
+  // (Font Awesome 7 fixes icons at 1.25em by default)
+  &__item .card__icon i {
+    --fa-width: auto;
+  }
 }

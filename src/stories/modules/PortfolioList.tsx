@@ -23,15 +23,23 @@ export interface PortfolioListProps {
   heading?: React.ReactNode;
   /** Projects to showcase */
   projects: PortfolioProject[];
+  /** Optional id for the h2; the section then gets aria-labelledby pointing at it */
+  headingId?: string;
 }
 
 /** Alternating image/text rows showcasing portfolio projects. */
-export const PortfolioList = ({ heading, projects }: PortfolioListProps) => {
+export const PortfolioList = ({ heading, projects, headingId }: PortfolioListProps) => {
   return (
-    <section className="portfolio-list">
+    <section
+      className="portfolio-list"
+      aria-labelledby={heading && headingId ? headingId : undefined}
+    >
       <div className="container">
         {heading && (
-          <h2 className="portfolio-list__heading font-manrope fw-bold">
+          <h2
+            id={headingId}
+            className="portfolio-list__heading font-manrope fw-bold"
+          >
             {heading}
           </h2>
         )}

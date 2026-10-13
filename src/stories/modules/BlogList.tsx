@@ -22,15 +22,27 @@ export interface BlogListProps {
   heading?: React.ReactNode;
   /** Array of blog posts to render */
   posts: BlogListPost[];
+  /** Optional id for the h2; the section then gets aria-labelledby pointing at it */
+  headingId?: string;
+  /** Open post links in a new tab (default true) */
+  openLinksInNewTab?: boolean;
 }
 
 /** A 2-column grid of plain cards with optional thumbnails. */
-export const BlogList = ({ heading, posts }: BlogListProps) => {
+export const BlogList = ({
+  heading,
+  posts,
+  headingId,
+  openLinksInNewTab = true,
+}: BlogListProps) => {
   return (
-    <section className="blog-list">
+    <section
+      className="blog-list"
+      aria-labelledby={heading && headingId ? headingId : undefined}
+    >
       <div className="container">
         {heading && (
-          <h2 className="blog-list__heading font-manrope fw-bold">{heading}</h2>
+          <h2 id={headingId} className="blog-list__heading font-manrope fw-bold">{heading}</h2>
         )}
         <Divider className="w-25 divider--blue-100 mb-4" />
         <div className="row g-0">
@@ -59,8 +71,8 @@ export const BlogList = ({ heading, posts }: BlogListProps) => {
                   <a
                     className="blog-list__link"
                     href={post.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={openLinksInNewTab ? '_blank' : undefined}
+                    rel={openLinksInNewTab ? 'noopener noreferrer' : undefined}
                   >
                     {content}
                   </a>

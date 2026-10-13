@@ -1,0 +1,310 @@
+@use 'variables' as *;
+
+// Article detail pages: the blog post page and the project page.
+// Every rule here is scoped to classes only these pages use, so shared
+// blocks (jumbotron, card, content-elements) keep their
+// behaviour everywhere else.
+
+// ── Hero (sits on .jumbotron.bg-dark) ─────────────
+.jumbotron.article-hero {
+  padding: 4rem 0;
+
+  // Static divider: no expand animation on these pages
+  .divider {
+    animation: none;
+    width: 25%;
+  }
+}
+
+.article-hero {
+  // Project hero: text left, image right
+  &__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    align-items: start;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 7fr 5fr;
+      row-gap: 0;
+      align-items: stretch;
+    }
+
+    @media (min-width: 992px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  &__media {
+    min-width: 0;
+    align-self: center;
+  }
+
+  // Eyebrow line: date and reading time, or project type
+  &__meta {
+    display: block;
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $pewter;
+    margin-bottom: 0.5rem;
+  }
+
+  &__labels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: auto;
+  }
+}
+
+// ── Back link ("All posts", "All projects") ──────
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+  font-family: $font-body;
+  font-size: 0.9rem;
+  color: $sky-blue;
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $azure-bolt;
+  }
+
+  &__icon {
+    width: 1rem;
+    font-size: 0.9rem;
+    color: $azure-bolt;
+  }
+}
+
+// ── Image (hero image and in-body lead image) ────
+.article-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid rgba($quicksilver, 0.1);
+}
+
+// ── Body section ──────────────────────────────────
+.article-section {
+  background-color: $obsidian;
+  padding: 4rem 0;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+}
+
+// Body column plus the "On this page" rail. The hero uses the same grid
+// (with an empty spacer in the rail track) so both columns line up.
+.body-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  justify-content: center;
+
+  &__main {
+    min-width: 0;
+  }
+
+  &__spacer {
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: minmax(0, 48rem) 16rem;
+
+    // No rail (fewer than two h2s in the body): one centred column
+    &--single {
+      grid-template-columns: minmax(0, 48rem);
+    }
+
+    &__rail {
+      order: 2;
+    }
+
+    &__spacer {
+      display: block;
+    }
+  }
+}
+
+// ── "On this page" rail ───────────────────────────
+.article-toc {
+  border-left: 3px solid $azure-bolt;
+  padding-left: 1.25rem;
+
+  &__heading {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $pewter;
+    margin: 0 0 1rem;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+  }
+
+  &__link {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $pewter;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+}
+
+// ── Body text ─────────────────────────────────────
+// Content Elements dark styles without the charcoal box.
+.content-elements--dark.article-body {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+.article-body {
+  // Each h2 opens a new section of the flat body HTML
+  h2:not(:first-child) {
+    margin-top: 2.5rem;
+  }
+
+  > :last-child,
+  li:last-child {
+    margin-bottom: 0;
+  }
+
+  figure {
+    margin: 0 0 1.25rem;
+  }
+
+  figcaption {
+    font-size: 0.875rem;
+    color: $pewter;
+    margin-top: 0.5rem;
+  }
+
+  // Stand-in box where a screenshot will go
+  &__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 7;
+    background-color: $charcoal;
+    border-radius: 8px;
+    border: 1px solid rgba($quicksilver, 0.1);
+    color: $pewter;
+    font-family: $font-body;
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+// ── Older / newer post pager ──────────────────────
+.post-pager {
+  border-top: 1px solid rgba($quicksilver, 0.08);
+  padding-top: 1.5rem;
+
+  &__items {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-decoration: none;
+
+    // Mirrors the older link; stays in the right-hand cell on its own
+    &--newer {
+      align-items: flex-end;
+      text-align: right;
+
+      @media (min-width: 768px) {
+        grid-column: 2;
+      }
+    }
+  }
+
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $pewter;
+  }
+
+  &__icon {
+    width: 1em;
+    color: $azure-bolt;
+  }
+
+  &__title {
+    font-family: $font-header;
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: $sky-blue;
+  }
+}
+
+// ── Author box (on .card.card--charcoal) ──────────
+.card.author-box {
+  &:hover {
+    transform: none;
+    box-shadow: none;
+    animation: none;
+  }
+
+  .card__text {
+    margin-bottom: 0;
+  }
+}
