@@ -1,6 +1,5 @@
 import { Divider } from '../components/Divider';
 import { Label } from '../components/Label';
-import { Logo } from '../design-specs/Logo';
 import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
 import { BlogList } from '../modules/BlogList';
@@ -131,22 +130,6 @@ export const BlogPost = ({
                       </div>
                     </nav>
                   )}
-                  <div className="card card--charcoal author-box">
-                    <div className="card__body">
-                      <div className="card__title-row">
-                        <span className="card__icon" aria-hidden="true">
-                          <Logo width={80} height={28} />
-                        </span>
-                        <h2 className="card__title font-manrope">Jorge Calderon</h2>
-                      </div>
-                      <p className="card__text font-noto">
-                        I build websites with Drupal and tinker with just about everything else.
-                      </p>
-                    </div>
-                    <div className="card__footer">
-                      <a className="btn btn-azure-bolt" href="/contact">Say hello</a>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

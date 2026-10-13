@@ -295,16 +295,3 @@
     color: $sky-blue;
   }
 }
-
-// ── Author box (on .card.card--charcoal) ──────────
-.card.author-box {
-  &:hover {
-    transform: none;
-    box-shadow: none;
-    animation: none;
-  }
-
-  .card__text {
-    margin-bottom: 0;
-  }
-}
