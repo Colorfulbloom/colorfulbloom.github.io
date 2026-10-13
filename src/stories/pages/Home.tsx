@@ -1,10 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import { Header } from '../layout/Header';
 import { Jumbotron } from '../modules/Jumbotron';
 import { Skills } from '../modules/Skills';
 import { ContactForm } from '../modules/ContactForm';
 import { WorkingOn } from '../modules/WorkingOn';
 import { Footer } from '../layout/Footer';
+import { Alert } from '../components/Alert';
 
 import imgStyling from '../assets/styling.png';
 import pubOptionsImg from '../assets/pub-options-screenshot.svg';
@@ -13,17 +14,37 @@ import bcuImg from '../assets/bcu-screenshot.svg';
 export interface HomeProps {
   /** Active menu item */
   activeMenuItem?: string;
+  /** Optional alert to display below header */
+  alert?: {
+    variant: 'success' | 'warning' | 'info' | 'danger';
+    title: string;
+    message: string;
+  };
 }
 
-export const Home = ({ activeMenuItem = 'Home' }: HomeProps) => {
+export const Home = ({ activeMenuItem = 'Home', alert }: HomeProps) => {
+  const [alertVisible, setAlertVisible] = useState(!!alert);
   return (
     <div className="page-home">
       <Header menuItems={['Home', 'Blog', 'Portfolio', 'Contact']} activeItem={activeMenuItem} />
 
+      {alertVisible && alert && (
+        <div className="page-home__alert">
+          <div className="container">
+            <Alert
+              variant={alert.variant}
+              title={alert.title}
+              message={alert.message}
+              onClose={() => setAlertVisible(false)}
+            />
+          </div>
+        </div>
+      )}
+
       <Jumbotron
-        heading={<><span className="jumbotron__heading-line--deep-azure">Hi, I'm Jorge</span><br /><span className="jumbotron__heading-line--frost">I build with Drupal.</span></>}
-        subheading="I am an award winning software developer and technical analyst. My work experience currently focuses on DevOps and keeping systems running smoothly. Whether it's AI workflows, design, or game engines, I am always tinkering with the next great thing. Want to collaborate?"
-        primaryButtonText="Reach out"
+        heading={<><span className="jumbotron__heading-line--deep-azure">Hi, I'm Jorge</span><br /><span className="jumbotron__heading-line--frost">Nice to meet you.</span></>}
+        subheading="I build websites with Drupal and tinker with just about everything else. Have a look around, and if something catches your eye, say hello. I'd like that."
+        primaryButtonText="Say hello"
         featuredCard={{
           imageSrc: imgStyling,
           imageAlt: 'AI-assisted design in Storybook',

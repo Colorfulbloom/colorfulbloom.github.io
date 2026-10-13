@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { NotoSans, JetBrainsMono } from './Typography';
+import { NotoSans } from './Typography';
 
 const notoSansMeta = {
   title: 'Design Specs/Typography/Noto Sans',

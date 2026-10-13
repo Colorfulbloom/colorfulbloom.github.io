@@ -1,0 +1,233 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// ─── Alert color tokens ─────────────────────────────────────────────────────────────
+$alert-success-bg: rgba(34, 197, 94, 0.15);
+$alert-success-bg-hover: rgba(34, 197, 94, 0.22);
+$alert-success-border: rgba(34, 197, 94, 0.4);
+$alert-success-text: #86efac;
+$alert-success-icon: #4ade80;
+
+$alert-warning-bg: rgba(234, 179, 8, 0.15);
+$alert-warning-bg-hover: rgba(234, 179, 8, 0.22);
+$alert-warning-border: rgba(234, 179, 8, 0.4);
+$alert-warning-text: #fde047;
+$alert-warning-icon: #facc15;
+
+$alert-info-bg: rgba(0, 112, 189, 0.12);
+$alert-info-bg-hover: rgba(0, 112, 189, 0.20);
+$alert-info-border: rgba(0, 112, 189, 0.35);
+$alert-info-text: $sky-blue;
+$alert-info-icon: $azure-bolt;
+
+$alert-danger-bg: rgba(217, 79, 79, 0.15);
+$alert-danger-bg-hover: rgba(217, 79, 79, 0.22);
+$alert-danger-border: rgba(217, 79, 79, 0.4);
+$alert-danger-text: #fca5a5;
+$alert-danger-icon: #ef4444;
+
+// ─── Base alert ─────────────────────────────────────────────────────────────────────
+.alert {
+  --bs-alert-bg: transparent;
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  border-left-width: 4px;
+  border-left-style: solid;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  position: relative;
+  animation: alert-slide-up 0.4s ease-out forwards;
+
+  // ─── Header (title row + close button) ───────────────────────────────────────
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  // ─── Title row (icon + title) ───────────────────────────────────────────────
+  &__title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  // ─── Icon ───────────────────────────────────────────────────────────────────
+  &__icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 1.25rem;
+  }
+
+  // ─── Title ──────────────────────────────────────────────────────────────────
+  &__title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    line-height: 1.3;
+  }
+
+  // ─── Message ────────────────────────────────────────────────────────────────
+  &__message {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 0;
+  }
+
+  // ─── Close button ───────────────────────────────────────────────────────────
+  &__close {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    width: 2.25rem;
+    height: 2.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    color: inherit;
+    opacity: 0.8;
+    position: relative;
+
+    i {
+      font-size: 1rem;
+      display: block;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    // Hover beacon effect - dark background pulses twice
+    &:hover {
+      opacity: 1;
+      animation: alert-close-beacon 1s ease-in-out;
+
+      i {
+        animation: alert-close-grow 1s ease-in-out;
+      }
+    }
+  }
+
+  // ─── Success variant ─────────────────────────────────────────────────────────
+  &--success {
+    background-color: $alert-success-bg;
+    border-left-color: $alert-success-border;
+    color: $alert-success-text;
+
+    .alert__icon {
+      color: $alert-success-icon;
+    }
+
+    .alert__close {
+      &:hover {
+        border-color: rgba($alert-success-icon, 0.2);
+      }
+    }
+  }
+
+  // ─── Warning variant ─────────────────────────────────────────────────────────
+  &--warning {
+    background-color: $alert-warning-bg;
+    border-left-color: $alert-warning-border;
+    color: $alert-warning-text;
+
+    .alert__icon {
+      color: $alert-warning-icon;
+    }
+
+    .alert__close {
+      &:hover {
+        border-color: rgba($alert-warning-icon, 0.2);
+      }
+    }
+  }
+
+  // ─── Info variant ────────────────────────────────────────────────────────────
+  &--info {
+    background-color: $alert-info-bg;
+    border-left-color: $alert-info-border;
+    color: $alert-info-text;
+
+    .alert__icon {
+      color: $alert-info-icon;
+    }
+
+    .alert__close {
+      &:hover {
+        border-color: rgba($alert-info-icon, 0.2);
+      }
+    }
+  }
+
+  // ─── Danger variant ───────────────────────────────────────────────────────────
+  &--danger {
+    background-color: $alert-danger-bg;
+    border-left-color: $alert-danger-border;
+    color: $alert-danger-text;
+
+    .alert__icon {
+      color: $alert-danger-icon;
+    }
+
+    .alert__close {
+      &:hover {
+        border-color: rgba($alert-danger-icon, 0.2);
+      }
+    }
+  }
+}
+
+// ─── Slide up animation - alert box slides up on mount ─────────────────────────────
+@keyframes alert-slide-up {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+// ─── Beacon animation - dark background pulses twice ───────────────────────────────
+// Each variant gets its own background-specific animation
+@keyframes alert-close-beacon {
+  // Fade to darker
+  0%, 10% {
+    background-color: transparent;
+  }
+  35% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  // Fade back to transparent
+  60% {
+    background-color: transparent;
+  }
+  // Fade to darker again
+  85% {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+// ─── Icon grow animation - synced with beacon ─────────────────────────────────────
+@keyframes alert-close-grow {
+  // Grow
+  0%, 10% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.1);
+  }
+  // Shrink back
+  60% {
+    transform: scale(1);
+  }
+  // Grow again
+  85% {
+    transform: scale(1.1);
+  }
+}

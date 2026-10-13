@@ -4,6 +4,7 @@ import { Label, LABEL_COLORS, TECH_LABELS } from './Label';
 const meta = {
   title: 'jorgecalderon.codes/Components/Label',
   component: Label,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     backgrounds: {
@@ -34,7 +35,9 @@ export const TechLabels: Story = {
       ))}
     </div>
   ),
-  args: {},
+  args: {
+    text: 'Tech Labels',
+  },
 };
 
 /** All eight colour variants displayed as swatches. */
@@ -47,7 +50,9 @@ export const AllVariants: Story = {
       ))}
     </div>
   ),
-  args: {},
+  args: {
+    text: 'Color Variants',
+  },
 };
 
 // --- individual colour stories (useful for the docs panel) ---

@@ -5,6 +5,11 @@
   background-color: $obsidian;
   min-height: 100vh;
 
+  &__alert {
+    padding: 1.5rem 0;
+    background-color: $onyx;
+  }
+
   .hero {
     min-height: calc(100vh - 70px);
     display: flex;
@@ -34,6 +39,96 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+
+  .footer {
+    margin-top: auto;
+  }
+}
+
+// Under Development Page
+.page-under-development {
+  background-color: $obsidian;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 0;
+  }
+
+  &__logo {
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  &__site-name {
+    font-family: $font-header;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: $quicksilver;
+    margin-top: 0.5rem;
+  }
+
+  &__icon-wrapper {
+    margin-bottom: 2rem;
+
+    @keyframes gear-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  &__icon {
+    font-size: 5rem;
+    color: $azure-bolt;
+    animation: gear-spin 8s linear infinite;
+    filter: drop-shadow(0 0 20px rgba($azure-bolt, 0.3));
+  }
+
+  &__heading {
+    font-family: $font-header;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  &__heading-accent {
+    color: $deep-azure;
+  }
+
+  &__heading-light {
+    color: $frost;
+  }
+
+  &__message {
+    font-family: $font-body;
+    font-size: 1.35rem;
+    color: $quicksilver;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  &__submessage {
+    font-family: $font-body;
+    font-size: 1.1rem;
+    color: $pewter;
+    margin-bottom: 2.5rem;
+  }
+
+  &__actions {
+    margin-top: 1rem;
+  }
 
   .footer {
     margin-top: auto;

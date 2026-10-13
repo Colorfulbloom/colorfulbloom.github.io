@@ -340,7 +340,9 @@ export const PlainGrid: Story = {
       </div>
     </div>
   ),
-  args: {},
+  args: {
+    title: 'Grid Example',
+  },
 };
 
 // ── Grid Showcase ─────────────────────────────────────────────────────────────
@@ -383,5 +385,7 @@ export const CardGrid: Story = {
       </div>
     </div>
   ),
-  args: {},
+  args: {
+    title: 'Grid Example',
+  },
 };

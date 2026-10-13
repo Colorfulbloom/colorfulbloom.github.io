@@ -15,6 +15,7 @@
 @use 'about-me';
 @use 'divider';
 @use 'label';
+@use 'alert';
 @use 'pages';
 @use 'content-elements';
 @use 'skills';
@@ -26,6 +27,7 @@
 @use 'portfolio-featured';
 @use 'portfolio-list';
 @use 'footer';
+@use 'under-development';
 
 // 4. Utility classes
 .font-manrope {

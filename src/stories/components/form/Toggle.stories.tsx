@@ -53,4 +53,7 @@ export const Group: Story = {
       <Toggle label="SMS alerts" name="sms" />
     </div>
   ),
+  args: {
+    label: 'Group Example',
+  },
 };

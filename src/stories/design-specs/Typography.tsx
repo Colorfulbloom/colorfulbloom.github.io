@@ -1,11 +1,10 @@
-import React from 'react';
 
 export interface NotoSansProps {
   /** Font weight */
   fontWeight?: 400 | 700;
 }
 
-export const NotoSans = ({ fontWeight = 400 }: NotoSansProps) => {
+export const NotoSans = (_props: NotoSansProps) => {
   const fontFamily = "'Noto Sans', sans-serif";
 
   return (
@@ -51,7 +50,7 @@ export interface JetBrainsMonoProps {
   fontWeight?: 400 | 700;
 }
 
-export const JetBrainsMono = ({ fontWeight = 400 }: JetBrainsMonoProps) => {
+export const JetBrainsMono = (_props: JetBrainsMonoProps) => {
   const fontFamily = "'JetBrains Mono', monospace";
   const primaryFont = "'Noto Sans', sans-serif";
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from '../layout/Header';
 import { ContactForm } from '../modules/ContactForm';
 import { Footer } from '../layout/Footer';

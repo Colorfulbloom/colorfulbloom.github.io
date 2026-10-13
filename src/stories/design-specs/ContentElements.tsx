@@ -1,4 +1,3 @@
-import React from 'react';
 
 export interface ContentElementsProps {
   /** Which variant background to display on */

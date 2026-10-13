@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from '../layout/Header';
 import { BlogFeatured } from '../modules/BlogFeatured';
 import { BlogList } from '../modules/BlogList';

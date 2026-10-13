@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from '../layout/Header';
 import { PortfolioFeatured } from '../modules/PortfolioFeatured';
 import { PortfolioList } from '../modules/PortfolioList';

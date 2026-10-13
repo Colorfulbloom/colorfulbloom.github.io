@@ -62,4 +62,7 @@ export const WithFeaturedCard: Story = {
       }}
     />
   ),
+  args: {
+    heading: 'With Featured Card',
+  },
 };

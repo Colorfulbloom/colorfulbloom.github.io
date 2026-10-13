@@ -1,0 +1,114 @@
+@use 'variables' as *;
+
+// Page container - obsidian background
+.page-under-development {
+  background-color: $obsidian;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-under-development__content {
+  text-align: center;
+}
+
+// Logo container
+.page-under-development__logo-container {
+  margin: 0 auto;
+}
+
+.page-under-development__logo {
+  overflow: visible;
+}
+
+// ===================
+// JC text - Pops into existence
+// ===================
+.page-under-development__jc {
+  opacity: 0;
+  animation: jc-pop-in 0.2s ease-out 0s forwards;
+}
+
+@keyframes jc-pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ===================
+// $ Symbol - Fade in with slight scale
+// ===================
+.page-under-development__dollar {
+  opacity: 0;
+  animation: dollar-fade-in 0.7s ease-out 0.3s forwards;
+}
+
+@keyframes dollar-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ===================
+// Brackets - Zoom in from off-screen with fade
+// ===================
+.page-under-development__bracket {
+  opacity: 0;
+}
+
+.page-under-development__bracket--left {
+  animation: bracket-zoom-left 0.6s ease-out 0.4s forwards;
+}
+
+@keyframes bracket-zoom-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-80px) scale(1.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+.page-under-development__bracket--right {
+  animation: bracket-zoom-right 0.6s ease-out 0.4s forwards;
+}
+
+@keyframes bracket-zoom-right {
+  0% {
+    opacity: 0;
+    transform: translateX(80px) scale(1.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+// ===================
+// Underline - Draws from left to right
+// ===================
+.page-under-development__underline {
+  animation: underline-draw 0.5s ease-out 0.9s forwards;
+}
+
+@keyframes underline-draw {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 30px;
+  }
+}

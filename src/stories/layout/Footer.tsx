@@ -1,4 +1,3 @@
-import React from 'react';
 
 export interface SocialLink {
   /** Font Awesome icon class */

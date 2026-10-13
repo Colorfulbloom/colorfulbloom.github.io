@@ -54,4 +54,7 @@ export const Group: Story = {
       <Checkbox label="Drupal" name="skills" />
     </div>
   ),
+  args: {
+    label: 'Group Example',
+  },
 };

@@ -19,3 +19,15 @@ export const Default: Story = {
     activeMenuItem: 'Home',
   },
 };
+
+export const WithSuccessAlert: Story = {
+  name: 'With Success Alert',
+  args: {
+    activeMenuItem: 'Home',
+    alert: {
+      variant: 'success',
+      title: 'Welcome to my portfolio!',
+      message: 'I\'m currently available for new projects. Let\'s build something great together.',
+    },
+  },
+};
