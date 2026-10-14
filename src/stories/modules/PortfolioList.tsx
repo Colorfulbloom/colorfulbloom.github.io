@@ -69,8 +69,6 @@ export const PortfolioList = ({ heading, projects, headingId }: PortfolioListPro
                   <a
                     className="btn btn-azure-bolt portfolio-list__button"
                     href={project.buttonHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     {project.buttonLabel}
                   </a>

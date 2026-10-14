@@ -18,8 +18,6 @@ export interface ProjectPageProps {
 export const ProjectPage = ({ activeMenuItem = 'Portfolio' }: ProjectPageProps) => {
   const [accent, light] = splitTitle('Publishing Options.');
   const moduleHref = 'https://www.drupal.org/project/pub_options';
-  const bcuHref = 'https://bloodcancerunited.org';
-  const sourceHref = 'https://github.com/Colorfulbloom';
 
   return (
     <div className="page-portfolio">
@@ -101,8 +99,8 @@ export const ProjectPage = ({ activeMenuItem = 'Portfolio' }: ProjectPageProps) 
                 'The digital platform for Blood Cancer United, supporting patients and families through research, financial assistance, and advocacy resources. Built on Drupal, serving millions of visitors annually.',
               imageSrc: bcuImg,
               imageAlt: 'Blood Cancer United website homepage',
-              buttonLabel: externalLinkLabel(bcuHref),
-              buttonHref: bcuHref,
+              buttonLabel: 'View Project',
+              buttonHref: '#',
             },
             {
               title: 'jorgecalderon.codes',
@@ -111,8 +109,8 @@ export const ProjectPage = ({ activeMenuItem = 'Portfolio' }: ProjectPageProps) 
                 'My personal portfolio and blog — a Drupal 11 theme optimized for Drupal Canvas, backed by a React/Storybook component library and a fully componentized design system.',
               imageSrc: pubOptionsImg,
               imageAlt: 'jorgecalderon.codes',
-              buttonLabel: externalLinkLabel(sourceHref),
-              buttonHref: sourceHref,
+              buttonLabel: 'View Project',
+              buttonHref: '#',
             },
           ]}
         />

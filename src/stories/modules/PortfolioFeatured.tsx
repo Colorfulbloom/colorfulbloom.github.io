@@ -65,8 +65,6 @@ export const PortfolioFeatured = ({ heading, project }: PortfolioFeaturedProps) 
                 <a
                   className="btn btn-azure-bolt portfolio-featured__button"
                   href={project.buttonHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {project.buttonLabel}
                 </a>

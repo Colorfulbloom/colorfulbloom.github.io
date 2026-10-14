@@ -61,8 +61,6 @@ export const WorkingOn = ({ heading, projects }: WorkingOnProps) => {
                   <a
                     className="btn btn-azure-bolt working-on__button"
                     href={project.buttonHref}
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     {project.buttonLabel}
                   </a>
