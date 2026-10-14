@@ -85,7 +85,7 @@ export const Card = ({
     {buttonLabel && (
       <div className="card__footer">
         {buttonHref ? (
-          <a href={buttonHref} target="_blank" rel="noopener noreferrer" className="text-decoration-none">
+          <a href={buttonHref} className="text-decoration-none">
             <Button label={buttonLabel} color={buttonColor} />
           </a>
         ) : (

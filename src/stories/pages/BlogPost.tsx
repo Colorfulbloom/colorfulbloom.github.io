@@ -162,7 +162,6 @@ export const BlogPost = ({
         {morePosts.length >= 2 && (
           <BlogList
             headingId="more-posts"
-            openLinksInNewTab={false}
             heading={
               <>
                 <span className="blog-list__heading-accent">More</span>{' '}

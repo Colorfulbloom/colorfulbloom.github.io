@@ -24,8 +24,6 @@ export interface BlogListProps {
   posts: BlogListPost[];
   /** Optional id for the h2; the section then gets aria-labelledby pointing at it */
   headingId?: string;
-  /** Open post links in a new tab (default true) */
-  openLinksInNewTab?: boolean;
 }
 
 /** A 2-column grid of plain cards with optional thumbnails. */
@@ -33,7 +31,6 @@ export const BlogList = ({
   heading,
   posts,
   headingId,
-  openLinksInNewTab = true,
 }: BlogListProps) => {
   return (
     <section
@@ -71,8 +68,6 @@ export const BlogList = ({
                   <a
                     className="blog-list__link"
                     href={post.href}
-                    target={openLinksInNewTab ? '_blank' : undefined}
-                    rel={openLinksInNewTab ? 'noopener noreferrer' : undefined}
                   >
                     {content}
                   </a>

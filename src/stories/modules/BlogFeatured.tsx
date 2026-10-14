@@ -65,8 +65,6 @@ export const BlogFeatured = ({ heading, post }: BlogFeaturedProps) => {
                 <a
                   className="btn btn-azure-bolt blog-featured__button"
                   href={post.buttonHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   {post.buttonLabel}
                 </a>
