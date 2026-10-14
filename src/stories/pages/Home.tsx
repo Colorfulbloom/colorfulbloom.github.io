@@ -95,8 +95,8 @@ export const Home = ({ activeMenuItem = 'Home', alert }: HomeProps) => {
               'A Drupal module that lets administrators create custom publishing options beyond the built-in defaults. Integrates with Views for field, filter, and contextual filter support. Compatible with Drupal 10 and 11.',
             imageSrc: pubOptionsImg,
             imageAlt: 'Publishing Options module on Drupal.org',
-            buttonLabel: 'View Module',
-            buttonHref: 'https://www.drupal.org/project/pub_options',
+            buttonLabel: 'View Project',
+            buttonHref: '#',
           },
           {
             title: 'Blood Cancer United',
@@ -105,8 +105,8 @@ export const Home = ({ activeMenuItem = 'Home', alert }: HomeProps) => {
               'The digital platform for Blood Cancer United, supporting patients and families through research, financial assistance, and advocacy resources. Built on Drupal, serving millions of visitors annually.',
             imageSrc: bcuImg,
             imageAlt: 'Blood Cancer United website homepage',
-            buttonLabel: 'Visit Site',
-            buttonHref: 'https://bloodcancerunited.org/',
+            buttonLabel: 'View Project',
+            buttonHref: '#',
           },
         ]}
       />

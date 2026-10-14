@@ -28,8 +28,8 @@ const sampleProject = {
   imageSrc: pubOptionsImg,
   imageAlt: 'Publishing Options module on Drupal.org',
   labels: [{ text: 'Drupal' }, { text: 'PHP' }],
-  buttonLabel: 'View Module',
-  buttonHref: 'https://www.drupal.org/project/pub_options',
+  buttonLabel: 'View Project',
+  buttonHref: '#',
 };
 
 export const Default: Story = {

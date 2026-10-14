@@ -29,8 +29,8 @@ const sampleProjects = [
       'The digital platform for Blood Cancer United, supporting patients and families through research, financial assistance, and advocacy resources. Built on Drupal, serving millions of visitors annually.',
     imageSrc: bcuImg,
     imageAlt: 'Blood Cancer United website homepage',
-    buttonLabel: 'Visit Site',
-    buttonHref: 'https://bloodcancerunited.org/',
+    buttonLabel: 'View Project',
+    buttonHref: '#',
   },
   {
     title: 'jorgecalderon.codes',
@@ -39,8 +39,8 @@ const sampleProjects = [
       'A component-driven personal website built with React, TypeScript, and Storybook. Every component is designed, documented, and tested inside Storybook before integration.',
     imageSrc: pubOptionsImg,
     imageAlt: 'jorgecalderon.codes in Storybook',
-    buttonLabel: 'View Source',
-    buttonHref: 'https://github.com/jorgecalderon',
+    buttonLabel: 'View Project',
+    buttonHref: '#',
   },
   {
     title: 'Enterprise CMS Platform',
