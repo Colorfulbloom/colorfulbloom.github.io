@@ -24,6 +24,10 @@ export const Obsidian: StoryObj<typeof ColorSwatch> = {
   render: () => <ColorSwatch name="Obsidian" hex="#1A1A1A" description="Primary dark" />,
 };
 
+export const Onyx: StoryObj<typeof ColorSwatch> = {
+  render: () => <ColorSwatch name="Onyx" hex="#212528" description="Dark surface" token="$onyx" />,
+};
+
 export const Charcoal: StoryObj<typeof ColorSwatch> = {
   render: () => <ColorSwatch name="Charcoal" hex="#2D2D2D" description="Secondary dark" />,
 };
