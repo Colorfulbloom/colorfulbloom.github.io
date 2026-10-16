@@ -154,6 +154,14 @@
   }
 }
 
+// The hero lead spans the body column and the rail column (post with a rail)
+.article-hero .body-grid:not(.body-grid--single) .article-hero__content .lead {
+  @media (min-width: 992px) {
+    width: calc(100% + 3rem + 16rem); // column + gap + rail
+    max-width: none;
+  }
+}
+
 // ── "On this page" rail ───────────────────────────
 .article-toc {
   border-left: 3px solid $azure-bolt;
