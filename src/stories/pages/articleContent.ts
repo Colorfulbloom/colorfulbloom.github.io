@@ -34,12 +34,12 @@ const postStyle = `
 <li>Import variables with <code class="font-jetbrains">@use 'variables' as *</code></li>
 <li>Register in <code class="font-jetbrains">main.scss</code></li>
 </ol>
-<pre class="content-elements__code-block font-jetbrains">function greet(name: string): string {
+<pre><code class="language-typescript">function greet(name: string): string {
   return \`Hello, \${name}! Welcome to the project.\`;
 }
 
 const message = greet('Jorge');
-console.log(message);</pre>
+console.log(message);</code></pre>
 `;
 
 const postStories = `

@@ -1,0 +1,208 @@
+// Mirror of the Drupal theme's scss/code-highlight.scss (keep the rules identical).
+// The theme wraps blocks in templates/misc/code-blocks.html.twig, Storybook in
+// src/stories/components/codeHighlight.ts.
+@use 'variables' as *;
+
+// The bottom line of the bar, as in the approved preview
+$code-block-rule: #3a3a3a;
+
+// Label colour and left border per language (the CKEditor 5 Code Block keys;
+// templates/misc/code-blocks.html.twig maps aliases to these keys). Every
+// colour reaches at least 4.5:1 on both bar colours ($onyx and $obsidian).
+$code-block-accents: (
+  plaintext: $quicksilver,
+  bash: $aqua,
+  c: $sky-blue,
+  cs: $violet,
+  cpp: $sky-blue,
+  css: $violet,
+  diff: $teal,
+  html: $amber-glow,
+  java: $ember,
+  javascript: $amber,
+  json: $sky-blue,
+  php: $lavender,
+  python: $sky-blue,
+  ruby: $burnt-orange,
+  sql: $lavender,
+  twig: $amber-glow,
+  typescript: $sky-blue,
+  xml: $amber-glow,
+  yaml: $ember,
+);
+
+.code-block {
+  --code-block-accent: #{$quicksilver};
+  margin: 0 0 1rem;
+  background-color: $charcoal;
+  border-left: 4px solid var(--code-block-accent);
+  border-radius: 0.375rem;
+  overflow: hidden;
+  font-family: $font-code;
+  // Code shows as typed: no -> or == ligatures
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+@each $language, $color in $code-block-accents {
+  .code-block--#{$language} {
+    --code-block-accent: #{$color};
+  }
+}
+
+// The header bar: label on the left, the Copy button (added by JS) on the right
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+  padding-left: 1rem;
+  background-color: $onyx;
+  border-bottom: 1px solid $code-block-rule;
+  font-size: 0.7rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+// Inside the aside box ($onyx) the bar is one step darker
+.article-aside .code-block__bar {
+  background-color: $obsidian;
+}
+
+.code-block__label {
+  color: var(--code-block-accent);
+}
+
+.code-block__copy {
+  align-self: stretch;
+  padding: 0 1rem;
+  border: 0;
+  background: none;
+  color: $quicksilver;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba($quicksilver, 0.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $sky-blue;
+    outline-offset: -2px;
+  }
+}
+
+// The editor's <pre> scrolls sideways under the bar, which stays put.
+// .article-body pre (_article.scss) gives every <pre> the border, radius and
+// background of a code block; inside the wrapper the wrapper has them.
+.code-block > pre,
+.article-body .code-block > pre {
+  margin: 0;
+  padding: 1.25rem;
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  overflow-x: auto;
+  color: $quicksilver;
+  font-family: $font-code;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.code-block > pre > code,
+.article-body .code-block > pre > code {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  color: inherit;
+  font-size: inherit;
+  white-space: pre;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+
+// Prism tokens. Prism adds alias classes (a YAML key is also an atrule, a
+// YAML boolean also important), so the variable and literal rules come after
+// the keyword rule. Comments are $pewter (4.20:1 on $charcoal, below AA;
+// accepted by the owner).
+.code-block {
+  .token.punctuation,
+  .token.operator {
+    color: $quicksilver;
+  }
+
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata,
+  .token.hashbang {
+    color: $pewter;
+  }
+
+  .token.keyword,
+  .token.atrule,
+  .token.rule,
+  .token.important,
+  .token.tag {
+    color: $lavender;
+  }
+
+  .token.string,
+  .token.char,
+  .token.attr-value,
+  .token.template-string,
+  .token.regex,
+  .token.url,
+  .token.inserted {
+    color: $aqua;
+  }
+
+  .token.function,
+  .token.function-definition,
+  .token.class-name,
+  .token.builtin,
+  .token.package,
+  .token.namespace,
+  .token.selector {
+    color: $amber-glow;
+  }
+
+  .token.variable,
+  .token.property,
+  .token.key,
+  .token.attr-name,
+  .token.parameter,
+  .token.argument-name,
+  .token.assign-left {
+    color: $sky-blue;
+  }
+
+  .token.number,
+  .token.boolean,
+  .token.constant,
+  .token.null,
+  .token.symbol,
+  .token.entity,
+  .token.deleted {
+    color: $ember;
+  }
+
+  // Last, so a comment that also has another class stays grey
+  .token.punctuation {
+    color: $quicksilver;
+  }
+
+  .token.comment {
+    color: $pewter;
+  }
+
+  // Diff lines
+  .token.inserted {
+    background-color: rgba($aqua, 0.12);
+  }
+
+  .token.deleted {
+    background-color: rgba($ember, 0.12);
+  }
+}

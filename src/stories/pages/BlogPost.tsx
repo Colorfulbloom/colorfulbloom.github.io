@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { Divider } from '../components/Divider';
 import { Label } from '../components/Label';
 import { Header } from '../layout/Header';
@@ -5,6 +6,7 @@ import { Footer } from '../layout/Footer';
 import { BlogList, type BlogListPost } from '../modules/BlogList';
 import { ContactForm } from '../modules/ContactForm';
 import { POST_DEMO_BODY } from './articleContent';
+import { enhanceCodeBlocks, wrapCodeBlocks } from '../components/codeHighlight';
 import { prepareBody, readingTime, splitTitle } from './articleUtils';
 
 import imgStyling from '../assets/styling.png';
@@ -60,6 +62,11 @@ export const BlogPost = ({
   const { html, toc } = prepareBody(body);
   const showRail = toc.length >= 2;
   const minutes = readingTime(html);
+  const bodyHtml = wrapCodeBlocks(html);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (bodyRef.current) enhanceCodeBlocks(bodyRef.current);
+  }, [bodyHtml]);
   const gridClass = showRail ? 'body-grid' : 'body-grid body-grid--single';
   const [accent, light] = splitTitle('Designing with AI in Storybook.');
 
@@ -126,8 +133,9 @@ export const BlogPost = ({
                 <div className="body-grid__main article-section__main">
                   <img className="article-image" src={imgStyling} alt="AI-assisted design in Storybook" />
                   <div
+                    ref={bodyRef}
                     className="content-elements content-elements--dark article-body font-noto"
-                    dangerouslySetInnerHTML={{ __html: html }}
+                    dangerouslySetInnerHTML={{ __html: bodyHtml }}
                   />
                   {(olderPost || newerPost) && (
                     <nav className="post-pager" aria-label="Older and newer posts">

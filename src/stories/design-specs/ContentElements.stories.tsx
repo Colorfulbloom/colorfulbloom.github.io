@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ContentElements } from './ContentElements';
+import { CodeBlock as CodeBlockView } from '../components/CodeBlock';
+import {
+  ASIDE_BASH,
+  ASIDE_INTRO,
+  ASIDE_PHP,
+  ASIDE_YAML,
+  CODE_SAMPLES,
+  LONG_LINE_PHP,
+} from './codeSamples';
 
 const meta = {
   title: 'Design Specs/Content Elements',
@@ -35,4 +44,62 @@ export const Dark: Story = {
       values: [{ name: 'charcoal', value: '#2D2D2D' }],
     },
   },
+};
+
+const obsidianBackground = {
+  backgrounds: {
+    default: 'obsidian',
+    values: [{ name: 'obsidian', value: '#1A1A1A' }],
+  },
+};
+
+const articleColumn = {
+  className: 'content-elements content-elements--dark article-body font-noto',
+  style: { maxWidth: '48rem', margin: '0 auto' },
+};
+
+export const CodeBlock: Story = {
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => (
+    // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+    <div style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+      <div {...articleColumn}>
+        {CODE_SAMPLES.map(({ language, caption, code }) => (
+          <div key={language} className="mb-4">
+            <p className="text-secondary mb-2">{caption}</p>
+            <CodeBlockView language={language} code={code} />
+          </div>
+        ))}
+        <div className="mb-4">
+          <p className="text-secondary mb-2">PHP, one very long line (scroll sideways; the bar stays put)</p>
+          <CodeBlockView language="php" code={LONG_LINE_PHP} />
+        </div>
+      </div>
+    </div>
+  ),
+};
+
+export const CodeBlockInAside: Story = {
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => (
+    // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+    <div style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+      <div {...articleColumn}>
+        {/* .article-aside is theme only (not in Storybook), so its box styles are inline here. */}
+        <section
+          className="article-aside"
+          style={{ backgroundColor: '#212528', padding: '1.5rem', borderRadius: '0.375rem' }}
+        >
+          <p>{ASIDE_INTRO}</p>
+          <h3>One service, two extended forms</h3>
+          <p>The filter does this:</p>
+          <CodeBlockView language="php" code={ASIDE_PHP} />
+          <p>And the exported config looks like this:</p>
+          <CodeBlockView language="yaml" code={ASIDE_YAML} />
+          <p>Install it with Composer:</p>
+          <CodeBlockView language="bash" code={ASIDE_BASH} />
+        </section>
+      </div>
+    </div>
+  ),
 };
