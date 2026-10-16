@@ -4,7 +4,7 @@
 // the form fields and the post hero meta line; only the layout is new.
 .comments {
   padding: 4rem 0;
-  background-color: $obsidian;
+  background-color: $charcoal;
 
   &__heading {
     font-family: $font-header;
@@ -23,7 +23,7 @@
 
   &__empty {
     margin: 0;
-    color: $pewter;
+    color: $pewter-light;
     font-size: 1rem;
   }
 
@@ -74,7 +74,7 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: $pewter;
+    color: $pewter-light;
   }
 
   &__body {
@@ -112,6 +112,11 @@
     border-top: 1px solid rgba($quicksilver, 0.08);
   }
 
+  // The confirmation is the #comment-confirmation target of the redirect; it takes focus (tabindex -1) so screen readers read it. No focus ring on a non-control.
+  &__confirmation:focus {
+    outline: none;
+  }
+
   // The last item's bottom padding already gives the list some air
   &__list + &__new,
   &__list + &__confirmation {
@@ -131,6 +136,18 @@
     max-width: 640px;
   }
 
+  // On the $charcoal band the fields and code block bodies sit on $obsidian
+  // (both are $charcoal elsewhere), and helper text uses $pewter-light.
+  .form-input,
+  .form-textarea,
+  .code-block {
+    background-color: $obsidian;
+  }
+
+  .form-helper {
+    color: $pewter-light;
+  }
+
   &__form-heading {
     font-family: $font-header;
     font-size: 1.35rem;
@@ -147,5 +164,16 @@
 
   &__privacy {
     margin-top: 0.75rem;
+  }
+}
+
+// More Posts right after the comments band: back to $obsidian, so the post
+// reads obsidian article, charcoal comments, obsidian More Posts. Scoped to
+// this sibling, so /blog keeps its $charcoal More Posts.
+.comments + .blog-list {
+  background-color: $obsidian;
+
+  .blog-list__link:hover {
+    background-color: $charcoal;
   }
 }

@@ -91,6 +91,13 @@ export const quicksilverColors: ColorSwatchProps[] = [
   { name: 'Silver', token: '$silver', hex: '#F1F1F1', description: 'Light neutral' },
   { name: 'Ash', token: '$ash', hex: '#ECEBEB', description: 'Card gradient mid' },
   { name: 'Pewter', token: '$pewter', hex: '#8E8E8E', description: 'Mid neutral' },
+  {
+    name: 'Pewter Light',
+    token: '$pewter-light',
+    hex: '#9A9A9A',
+    description: 'Meta text on charcoal',
+    usage: 'Comment dates, helper text and the empty line in the comments band',
+  },
   { name: 'Azure Bolt', token: '$azure-bolt', hex: '#0070BD', description: 'Primary accent' },
   { name: 'Deep Azure', token: '$deep-azure', hex: '#005A9E', description: 'Secondary accent' },
   { name: 'Sky Blue', token: '$sky-blue', hex: '#75B8E6', description: 'Light accent' },

@@ -133,7 +133,7 @@ const CommentForm = ({ idPrefix, heading, submitLabel, errors, onCancel, onSubmi
             )}
           </div>
           <span className="form-helper comments__privacy">
-            Comments wait for my approval before they appear. I don&rsquo;t store your IP address.
+            Comments wait for my approval before they appear. I don&rsquo;t store your IP address with your comment.
           </span>
         </div>
       </div>
@@ -240,7 +240,7 @@ export const Comments = ({
             )}
 
             {submitted ? (
-              <div className="comments__confirmation">
+              <div className="comments__confirmation" id="comment-confirmation" tabIndex={-1}>
                 <Alert
                   variant="success"
                   title=""
