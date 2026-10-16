@@ -14,6 +14,10 @@ const postIntro = `
 const postDefine = `
 <h2 class="font-manrope" id="define">Define the component interface with TypeScript</h2>
 <p>Inline links like <a class="content-elements__link" href="#">this example link</a> should be clearly distinguishable from surrounding text. They can appear in the middle of a sentence, at the <a class="content-elements__link" href="#">beginning</a>, or at the <a class="content-elements__link" href="#">end</a>.</p>
+<h3 class="font-manrope">Props for each component</h3>
+<p>Each component takes a small, typed props object. Defaults cover the common case, so a story only sets what it needs to show.</p>
+<h3 class="font-manrope">Types shared across stories</h3>
+<p>Shared types live next to the component that owns them, so a story and the page that uses it never drift apart.</p>
 <ul>
 <li>React and TypeScript for component-driven development</li>
 <li>Storybook for isolated UI building and documentation</li>

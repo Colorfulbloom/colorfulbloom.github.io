@@ -190,6 +190,50 @@
       color: $azure-bolt;
     }
   }
+
+  // h3s nested under their h2, indented, links $pewter (5.31:1 on $obsidian).
+  // The scroll spy (OnThisPage) adds .is-active on the link of the section
+  // being read and .is-active-parent on the h2 link above an active h3; those
+  // links turn $sky-blue (8.08:1).
+  &__sublist {
+    list-style: none;
+    padding: 0;
+    margin: 0.375rem 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__sublink {
+    font-family: $font-body;
+    font-size: 0.8125rem;
+    color: $pewter;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+
+  &__link.is-active,
+  &__link.is-active-parent,
+  &__sublink.is-active {
+    color: $sky-blue;
+  }
+
+  // Beside the body (992px up) the rail stays in view while the page scrolls;
+  // taller than the viewport, it scrolls on its own. The grid stretches the
+  // rail column over the full body height, which gives sticky its room.
+  @media (min-width: 992px) {
+    position: sticky;
+    // The section's top padding, so the gap above the rail stays the same
+    // while it sticks; plus Gin's admin toolbar height for a logged-in admin
+    // (unset for visitors, and in Storybook, so 0).
+    top: calc(4rem + var(--gin-toolbar-y-offset, 0px));
+    max-height: calc(100vh - 8rem - var(--gin-toolbar-y-offset, 0px));
+    overflow-y: auto;
+  }
 }
 
 // ── Body text ─────────────────────────────────────

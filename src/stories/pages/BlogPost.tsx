@@ -4,7 +4,7 @@ import { Label } from '../components/Label';
 import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
 import { BlogList, type BlogListPost } from '../modules/BlogList';
-import { ContactForm } from '../modules/ContactForm';
+import { OnThisPage } from '../modules/OnThisPage';
 import { Comments, type CommentsProps } from '../modules/Comments';
 import { POST_DEMO_BODY } from './articleContent';
 import { enhanceCodeBlocks, wrapCodeBlocks } from '../components/codeHighlight';
@@ -120,20 +120,7 @@ export const BlogPost = ({
           <section className="article-section">
             <div className="container">
               <div className={gridClass}>
-                {showRail && (
-                  <aside className="body-grid__rail" aria-labelledby="on-this-page">
-                    <div className="article-toc">
-                      <h2 id="on-this-page" className="article-toc__heading">On this page</h2>
-                      <ul className="article-toc__list">
-                        {toc.map((item) => (
-                          <li key={item.id}>
-                            <a className="article-toc__link" href={`#${item.id}`}>{item.text}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </aside>
-                )}
+                {showRail && <OnThisPage items={toc} />}
                 <div className="body-grid__main article-section__main">
                   <img className="article-image" src={imgStyling} alt="AI-assisted design in Storybook" />
                   <div
@@ -185,22 +172,6 @@ export const BlogPost = ({
             posts={morePosts}
           />
         )}
-
-        <ContactForm
-          heading={<><span className="contact-form__heading-accent">Get in</span>{' '}<span className="contact-form__heading-light">Touch.</span></>}
-          introItems={[
-            { icon: 'fa-solid fa-lightbulb', text: 'Need help with a project?' },
-            { icon: 'fa-solid fa-rocket', text: 'Got ideas?' },
-            { icon: 'fa-brands fa-drupal', text: 'Want to chat Drupal?' },
-          ]}
-          introClosing="Or just want to say hello? Drop me a message and let's get started."
-          details={[
-            { icon: 'fa-solid fa-envelope', text: 'hello@jorgecalderon.codes', href: 'mailto:hello@jorgecalderon.codes' },
-            { icon: 'fa-brands fa-github', text: 'github.com/jorgecalderon', href: 'https://github.com/jorgecalderon' },
-            { icon: 'fa-brands fa-linkedin', text: 'linkedin.com/in/jorgecalderon', href: 'https://linkedin.com/in/jorgecalderon' },
-            { icon: 'fa-solid fa-location-dot', text: 'Florida, USA' },
-          ]}
-        />
       </main>
 
       <Footer
