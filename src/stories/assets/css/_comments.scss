@@ -1,0 +1,151 @@
+@use 'variables' as *;
+
+// Blog post comments. Reuses the article body (.article-body), the Label tag,
+// the form fields and the post hero meta line; only the layout is new.
+.comments {
+  padding: 4rem 0;
+  background-color: $obsidian;
+
+  &__heading {
+    font-family: $font-header;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  &__heading-accent {
+    color: $deep-azure;
+  }
+
+  &__heading-light {
+    color: $frost;
+  }
+
+  &__empty {
+    margin: 0;
+    color: $pewter;
+    font-size: 1rem;
+  }
+
+  // ── Thread ──
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__item {
+    padding: 1.5rem 0;
+    border-top: 1px solid rgba($quicksilver, 0.08);
+
+    &:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+  }
+
+  // Replies look like any comment, indented under their parent
+  &__list--replies {
+    margin: 1.5rem 0 0 1rem;
+
+    @media (min-width: 768px) {
+      margin-left: 2rem;
+    }
+  }
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__name {
+    font-family: $font-body;
+    font-weight: 700;
+    color: $quicksilver;
+  }
+
+  // Same meta style as .article-hero__meta (post hero date line)
+  &__meta {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $pewter;
+  }
+
+  &__body {
+    max-width: none;
+    font-size: 1rem;
+
+    p {
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  &__reply,
+  &__cancel {
+    font-family: $font-body;
+    font-size: 0.9rem;
+    color: $sky-blue;
+    text-decoration: none;
+    transition: color $transition-fast;
+
+    &:hover {
+      color: $azure-bolt;
+    }
+  }
+
+  &__reply {
+    display: inline-block;
+    margin-top: 0.75rem;
+  }
+
+  // ── Forms ──
+  &__new,
+  &__confirmation {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba($quicksilver, 0.08);
+  }
+
+  // The last item's bottom padding already gives the list some air
+  &__list + &__new,
+  &__list + &__confirmation {
+    margin-top: 1.5rem;
+  }
+
+  &__empty + &__new,
+  &__empty + &__confirmation {
+    margin-top: 2rem;
+  }
+
+  &__reply-form {
+    margin-top: 1.5rem;
+  }
+
+  &__form {
+    max-width: 640px;
+  }
+
+  &__form-heading {
+    font-family: $font-header;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+
+  &__privacy {
+    margin-top: 0.75rem;
+  }
+}

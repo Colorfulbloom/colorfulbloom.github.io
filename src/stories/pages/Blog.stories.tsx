@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Blog } from './Blog';
 import { BlogPost } from './BlogPost';
 import { POST_DEMO_BODY_ONE_HEADING } from './articleContent';
+import { sampleComments } from '../modules/commentsSample';
 
 const meta = {
   title: 'jorgecalderon.codes/Pages/Blog',
@@ -41,5 +42,17 @@ export const PostWithoutContentsRail: StoryObj<typeof BlogPost> = {
     activeMenuItem: 'Blog',
     body: POST_DEMO_BODY_ONE_HEADING,
     newerPost: { title: 'Component-Driven Design with Storybook', href: '#' },
+  },
+};
+
+// Post with the Comments module between the pager and "More Posts."
+export const PostWithComments: StoryObj<typeof BlogPost> = {
+  name: 'Post with comments',
+  tags: ['!autodocs'],
+  render: (args) => <BlogPost {...args} />,
+  args: {
+    activeMenuItem: 'Blog',
+    newerPost: { title: 'Component-Driven Design with Storybook', href: '#' },
+    comments: { comments: sampleComments },
   },
 };

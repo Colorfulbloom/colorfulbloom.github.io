@@ -5,6 +5,7 @@ import { Header } from '../layout/Header';
 import { Footer } from '../layout/Footer';
 import { BlogList, type BlogListPost } from '../modules/BlogList';
 import { ContactForm } from '../modules/ContactForm';
+import { Comments, type CommentsProps } from '../modules/Comments';
 import { POST_DEMO_BODY } from './articleContent';
 import { enhanceCodeBlocks, wrapCodeBlocks } from '../components/codeHighlight';
 import { prepareBody, readingTime, splitTitle } from './articleUtils';
@@ -29,6 +30,8 @@ export interface BlogPostProps {
   olderPost?: PagerPost;
   /** Next (newer) post; omit to drop that cell */
   newerPost?: PagerPost;
+  /** Comments module props; omit to leave the comments section out */
+  comments?: CommentsProps;
 }
 
 /** Demo posts for "More Posts."; the section only renders with at least two. */
@@ -58,6 +61,7 @@ export const BlogPost = ({
   body = POST_DEMO_BODY,
   olderPost = { title: 'Building Custom Publishing Options for Drupal', href: '#' },
   newerPost,
+  comments,
 }: BlogPostProps) => {
   const { html, toc } = prepareBody(body);
   const showRail = toc.length >= 2;
@@ -166,6 +170,8 @@ export const BlogPost = ({
             </div>
           </section>
         </article>
+
+        {comments && <Comments alignWithRail={showRail} {...comments} />}
 
         {morePosts.length >= 2 && (
           <BlogList
