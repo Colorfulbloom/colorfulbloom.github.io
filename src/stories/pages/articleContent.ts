@@ -6,6 +6,29 @@
  * Options project page text as shown on the board.
  */
 
+/**
+ * Sample table as CKEditor 5 writes it (figure.table > table, optional
+ * figcaption after the table), with Label components in the Model column.
+ * tabindex="0" lets a keyboard user scroll the table sideways; CKEditor does
+ * not write it, so the theme adds it. Sample text only, not approved copy.
+ */
+export const TABLE_SAMPLE_HTML = `
+<figure class="table" tabindex="0"><table>
+<thead><tr><th>Role</th><th>Agent</th><th>Model</th><th>Effort</th><th>What it does</th><th>Why this tier</th></tr></thead>
+<tbody>
+<tr><td>Orchestrator</td><td><code class="font-jetbrains">main session</code></td><td><span class="label label--deep-azure">Fable</span></td><td>xhigh</td><td>Plans, decides, dispatches and reviews summaries. Never writes code.</td><td>Every call routes through it, so it gets the strongest judgment I have.</td></tr>
+<tr><td>Lead</td><td><code class="font-jetbrains">deep-reasoner</code></td><td><span class="label label--ember">Opus</span></td><td>xhigh</td><td>Takes one design brief, plans the feature, dispatches workers and verifies their work. Returns one summary.</td><td>Architecture and hard debugging need depth more than speed.</td></tr>
+<tr><td>Worker</td><td><code class="font-jetbrains">fast-worker</code></td><td><span class="label label--aqua">Sonnet</span></td><td>medium</td><td>Implements a well-specified brief. Edits, tests and multi-file changes that follow existing patterns.</td><td>The plan is already made, so a fast and capable model is enough.</td></tr>
+<tr><td>Judgment</td><td><code class="font-jetbrains">general-purpose</code></td><td><span class="label label--aqua">Sonnet</span></td><td></td><td>Merges sources, weighs conflicting reports and makes editorial calls.</td><td>Judgment over gathered material, without the cost of a lead.</td></tr>
+<tr><td>Scout</td><td><code class="font-jetbrains">scout</code></td><td><span class="label label--lavender">Haiku</span></td><td></td><td>Search, inventories, test runs, logs and web lookups. Returns conclusions, not file dumps.</td><td>Reading is cheap work, and the cheapest tier does it well.</td></tr>
+<tr><td>Verifier</td><td><code class="font-jetbrains">verifier</code></td><td><span class="label label--deep-azure">Fable</span></td><td>high</td><td>Checks a finished plan or milestone against the docs, the designs and the code.</td><td>It has to catch what the lead missed, so it runs on the top tier.</td></tr>
+<tr><td>Project agent</td><td><code class="font-jetbrains">tech-writer</code></td><td><span class="label label--deep-azure">Fable</span></td><td>medium</td><td>Drafts everything meant for someone else to read, in my voice.</td><td>Voice and accuracy matter more here than raw depth.</td></tr>
+<tr><td>Peer</td><td><code class="font-jetbrains">codex</code></td><td><span class="label label--off">Off</span></td><td></td><td>A second engineer for high-stakes calls. It works the same problem on its own.</td><td>Off for now. When it is on, it gets the same brief as the lead.</td></tr>
+<tr><td>Catch-all</td><td>anything unrouted</td><td><span class="label label--ember">Opus</span></td><td></td><td>Takes any task no rule routes to a specific agent.</td><td>A safe default until a rule claims the work.</td></tr>
+</tbody>
+</table><figcaption>Who does what</figcaption></figure>
+`.trim();
+
 const postIntro = `
 <p>Body text is set in Noto Sans at regular weight. It provides comfortable reading for longer passages. You can emphasize text with <strong>bold</strong> or <em>italic</em> styles, and combine them for <strong><em>bold italic</em></strong> when needed. Inline code like <code class="font-jetbrains">const x = 42</code> uses JetBrains Mono.</p>
 <p>A second paragraph demonstrates spacing between blocks. Good vertical rhythm keeps content scannable and reduces cognitive load. Text should breathe — generous line height and margins make long-form content approachable.</p>
@@ -29,6 +52,8 @@ const postDefine = `
 </li>
 <li>Vite for fast development builds and hot module replacement</li>
 </ul>
+<p>The agents behind a build, and the model each one runs on.</p>
+${TABLE_SAMPLE_HTML}
 `;
 
 const postStyle = `

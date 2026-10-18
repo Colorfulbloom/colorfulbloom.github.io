@@ -9,6 +9,9 @@ import {
   CODE_SAMPLES,
   LONG_LINE_PHP,
 } from './codeSamples';
+import { useEffect, useRef } from 'react';
+import { TABLE_SAMPLE_HTML } from '../pages/articleContent';
+import { labelTableCells } from '../components/tableRecords';
 
 const meta = {
   title: 'Design Specs/Content Elements',
@@ -103,3 +106,48 @@ export const CodeBlockInAside: Story = {
     </div>
   ),
 };
+
+// Tables: three design directions. Each renders the sample with its caption
+// bar, then without a caption, then with a long caption (it wraps on a phone),
+// plus the Model labels in prose.
+const TABLE_NO_CAPTION_HTML = TABLE_SAMPLE_HTML.replace(/<figcaption>.*?<\/figcaption>/, '');
+const TABLE_LONG_CAPTION_HTML = TABLE_SAMPLE_HTML.replace(/<figcaption>.*?<\/figcaption>/, '<figcaption>Dispatches on this project, October 12 to 17, 2026</figcaption>');
+
+/** Body HTML with the Ledger's cell labelling applied after render. */
+const TableHtml = ({ html, records }: { html: string; records: boolean }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (records && ref.current) labelTableCells(ref.current);
+  }, [html, records]);
+  return <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
+const tableStory = (style: 'panel' | 'ledger' | 'console', name: string): Story => ({
+  name,
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => (
+    // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+    <div style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+      <div {...articleColumn} data-table-style={style}>
+        <p className="text-secondary mb-2">With a caption (CKEditor 5 &ldquo;Toggle caption&rdquo;)</p>
+        <TableHtml html={TABLE_SAMPLE_HTML} records={style === 'ledger'} />
+        <p className="text-secondary mb-2 mt-5">Without a caption</p>
+        <TableHtml html={TABLE_NO_CAPTION_HTML} records={style === 'ledger'} />
+        <p className="text-secondary mb-2 mt-5">With a long caption (wraps on a phone)</p>
+        <TableHtml html={TABLE_LONG_CAPTION_HTML} records={style === 'ledger'} />
+        <p className="text-secondary mb-2 mt-5">Model labels in prose (Label component)</p>
+        <p>
+          <span className="label label--deep-azure">Fable</span>{' '}
+          <span className="label label--ember">Opus</span>{' '}
+          <span className="label label--aqua">Sonnet</span>{' '}
+          <span className="label label--lavender">Haiku</span>{' '}
+          <span className="label label--off">Off</span>
+        </p>
+      </div>
+    </div>
+  ),
+});
+
+export const TablePanel = tableStory('panel', 'Table / Panel');
+export const TableLedger = tableStory('ledger', 'Table / Ledger');
+export const TableConsole = tableStory('console', 'Table / Console');

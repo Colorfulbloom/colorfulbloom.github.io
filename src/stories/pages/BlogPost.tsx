@@ -8,6 +8,7 @@ import { OnThisPage } from '../modules/OnThisPage';
 import { Comments, type CommentsProps } from '../modules/Comments';
 import { POST_DEMO_BODY } from './articleContent';
 import { enhanceCodeBlocks, wrapCodeBlocks } from '../components/codeHighlight';
+import { labelTableCells } from '../components/tableRecords';
 import { prepareBody, readingTime, splitTitle } from './articleUtils';
 
 import imgStyling from '../assets/styling.png';
@@ -69,7 +70,10 @@ export const BlogPost = ({
   const bodyHtml = wrapCodeBlocks(html);
   const bodyRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    if (bodyRef.current) enhanceCodeBlocks(bodyRef.current);
+    if (bodyRef.current) {
+      enhanceCodeBlocks(bodyRef.current);
+      labelTableCells(bodyRef.current);
+    }
   }, [bodyHtml]);
   const gridClass = showRail ? 'body-grid' : 'body-grid body-grid--single';
   const [accent, light] = splitTitle('Designing with AI in Storybook.');

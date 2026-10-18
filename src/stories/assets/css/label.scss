@@ -76,3 +76,39 @@
   color: #FFE4E6;
   border-bottom: 3px solid color.adjust(#E11D48, $lightness: 25%);
 }
+
+// ── Bright accents (2026-10-16, for the model labels in article tables) ──
+// The Quicksilver recipe (light bg → dark text, darker bottom border) on the
+// secondary accents. $obsidian text: ember 8.24:1, aqua 9.35:1, lavender 9.43:1.
+.label--ember {
+  @extend %label-base;
+  background-color: $ember;
+  color: $obsidian;
+  border-bottom: 3px solid color.adjust($ember, $lightness: -18%);
+}
+
+.label--aqua {
+  @extend %label-base;
+  background-color: $aqua;
+  color: $obsidian;
+  border-bottom: 3px solid color.adjust($aqua, $lightness: -18%);
+}
+
+.label--lavender {
+  @extend %label-base;
+  background-color: $lavender;
+  color: $obsidian;
+  border-bottom: 3px solid color.adjust($lavender, $lightness: -18%);
+}
+
+// Off: something that is switched off. No fill, a dotted outline and a
+// dotted bottom edge in place of the solid one; $pewter-light text
+// (6.19:1 on $obsidian, 5.49:1 on $onyx, 4.89:1 on $charcoal).
+.label--off {
+  @extend %label-base;
+  background-color: transparent;
+  color: $pewter-light;
+  border: 1px dotted $pewter;
+  border-bottom: 3px dotted $pewter;
+  padding: calc(0.25rem - 1px) calc(0.75rem - 1px);
+}

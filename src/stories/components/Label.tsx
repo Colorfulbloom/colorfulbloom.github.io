@@ -7,6 +7,10 @@ export const LABEL_COLORS = [
   'amber',
   'emerald',
   'rose',
+  'ember',
+  'aqua',
+  'lavender',
+  'off',
 ] as const;
 
 export type LabelColor = typeof LABEL_COLORS[number];

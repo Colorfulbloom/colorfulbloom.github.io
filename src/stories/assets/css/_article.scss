@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'variables' as *;
 
 // Article detail pages: the blog post page and the project page.
@@ -288,6 +289,627 @@
     text-align: center;
     padding: 1rem;
   }
+}
+
+// ── Tables (CKEditor 5: figure.table > table, optional figcaption) ─────
+// Three directions, all from the code block family (_code-highlight.scss):
+// Panel, Ledger and Console. The story wraps the body in
+// [data-table-style="…"] to show each one; a body with no attribute (the
+// Post story, and later the theme) gets the recommended one, the Ledger.
+//
+// Reused, not reinvented:
+// - Code block: the $charcoal surface, 0.375rem radius, 4px accent edge,
+//   the 2rem $onyx bar with its 1px $code-block-rule line, 0.7rem
+//   JetBrains Mono labels at 0.04em, 1.25rem inner padding, 1.6 line height.
+// - Label component (label.scss): the Model column holds
+//   <span class="label label--X">; tables only shrink it a little.
+// - Inline code: the article body's dark inline code (Content Elements).
+// - Divider: its deep-azure → azure-bolt → quicksilver gradient is the
+//   Ledger header rule.
+// - Blog list cards: the 8px radius and the hover step to the next surface.
+//
+// Bootstrap's .table class lands on figure.table (CKEditor's class), and
+// Bootstrap paints every row white through --bs-table-bg; reset it first.
+
+// The bar's bottom line (the code block's $code-block-rule)
+$table-rule: #3a3a3a;
+// Row hairline on $charcoal
+$table-hairline: rgba($quicksilver, 0.07);
+// Row hover: one small step up from $charcoal (pewter-light keeps 4.6:1)
+$table-hover: color.mix($quicksilver, $charcoal, 3%);
+
+@mixin table-base {
+  --bs-table-bg: transparent;
+  --bs-table-color: #{$quicksilver};
+  --bs-table-border-color: transparent;
+  --bs-table-accent-bg: transparent;
+  --bs-table-striped-bg: transparent;
+  --bs-table-hover-bg: transparent;
+  counter-reset: table-rows;
+  width: 100%;
+  margin: 0 0 1.25rem;
+  color: $quicksilver;
+  font-family: $font-body;
+
+  > table {
+    width: 100%;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    color: $quicksilver;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  > table > * > tr {
+    background: none;
+    border: 0;
+  }
+
+  > table > * > tr > * {
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: none;
+    color: inherit;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  > table > tbody > tr {
+    counter-increment: table-rows;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $sky-blue;
+    outline-offset: 2px;
+  }
+
+  // Agent names and other inline code: the body's dark inline code, one line
+  code {
+    font-size: 0.8125rem;
+    white-space: nowrap;
+  }
+
+  // Model labels: the Label component, a step smaller inside a table
+  .label {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+
+  .label--off {
+    padding: calc(0.125rem - 1px) calc(0.5rem - 1px);
+  }
+
+  // Cells that hold only a token (inline code, a label) never wrap
+  td:has(> code:only-child),
+  td:has(> .label:only-child) {
+    white-space: nowrap;
+  }
+
+  // A row whose model is Off reads quieter: its text in $pewter-light
+  // (4.89:1 on $charcoal), with the dotted Off label and edge
+  tbody tr:has(.label--off) > td:not(:first-child) {
+    color: $pewter-light;
+  }
+
+  // An empty cell: a short dash, so a gap reads as "none", not as missing
+  td:empty::before {
+    content: '';
+    display: inline-block;
+    width: 0.75rem;
+    height: 1px;
+    vertical-align: middle;
+    background-color: $pewter;
+  }
+}
+
+// Scroll shadows: the surface colour covers the shadows at each end and
+// moves with the content (local); the shadows stay at the edges (scroll).
+// Only the end that has more to show keeps a shadow.
+@mixin scroll-shadows($surface) {
+  background:
+    linear-gradient(to right, $surface 30%, rgba($surface, 0)) left center / 2.5rem 100% no-repeat local,
+    linear-gradient(to left, $surface 30%, rgba($surface, 0)) right center / 2.5rem 100% no-repeat local,
+    linear-gradient(to right, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0)) left center / 1rem 100% no-repeat scroll,
+    linear-gradient(to left, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0)) right center / 1rem 100% no-repeat scroll,
+    $surface;
+}
+
+// The caption as the code block's bar: label left, row count right. A long
+// caption wraps inside the bar (2rem at least), so it never widens the page.
+@mixin caption-bar($accent) {
+  > figcaption {
+    order: -1;
+    position: sticky;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 2rem;
+    margin: 0;
+    padding: 0.4rem 1rem;
+    background-color: $onyx;
+    border-bottom: 1px solid $table-rule;
+    color: $accent;
+    font-family: $font-code;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+
+    // The count is decoration; the table itself tells assistive tech its size
+    &::after {
+      content: counter(table-rows) ' rows';
+      content: counter(table-rows) ' rows' / '';
+      color: $pewter-light; // 5.49:1 on $onyx
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+  }
+}
+
+// ═══ Panel ═══════════════════════════════════════════════════════════════
+// The code block's twin: one framed matte surface, the column labels as its
+// bar, hairline rows. Fits the 48rem column; on a phone it scrolls inside
+// the frame with the Role column held in place and a shadow at the edge.
+@mixin table-panel {
+  @include table-base;
+  @include caption-bar($sky-blue);
+  --table-accent: #{$sky-blue};
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid var(--table-accent);
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  @include scroll-shadows($charcoal);
+
+  > table {
+    flex: 0 0 auto;
+  }
+
+  // Column labels: the bar's type. On $onyx when they are the bar (no
+  // caption), on $charcoal under a caption bar.
+  thead th {
+    padding: 0.625rem 0.75rem;
+    border-bottom: 1px solid $table-rule;
+    color: $pewter-light; // 5.49:1 on $onyx, 4.89:1 on $charcoal
+    font-family: $font-code;
+    font-size: 0.7rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+
+  &:not(:has(> figcaption)) thead th {
+    background-color: $onyx;
+  }
+
+  tbody td,
+  tbody th {
+    padding: 0.875rem 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  // The outer cells line up with the caption bar's 1rem
+  thead th:first-child,
+  tbody tr > :first-child {
+    padding-left: 1rem;
+  }
+
+  thead th:last-child,
+  tbody tr > :last-child {
+    padding-right: 1rem;
+  }
+
+  tbody tr + tr > * {
+    border-top: 1px solid $table-hairline;
+  }
+
+  // First and last rows get the code block's 1.25rem of air
+  tbody tr:first-child > * {
+    padding-top: 1.125rem;
+  }
+
+  tbody tr:last-child > * {
+    padding-bottom: 1.125rem;
+  }
+
+  // Row header (first column, or a CKEditor header column)
+  tbody td:first-child,
+  tbody th {
+    color: $frost; // 12.41:1 on $charcoal
+    font-family: $font-header;
+    font-size: 0.875rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    transition: background-color $transition-fast;
+  }
+
+  tbody tr:hover > * {
+    background-color: $table-hover;
+  }
+
+  @media (max-width: 767.98px) {
+    // The desktop table, scrolled: the same 48rem, so prose keeps its measure
+    > table {
+      min-width: 48rem;
+    }
+
+    // Role stays in view while the rest scrolls under it
+    thead th:first-child,
+    tbody td:first-child,
+    tbody th {
+      position: sticky;
+      left: 0;
+      z-index: 1;
+      background-color: $charcoal;
+      box-shadow: inset -1px 0 0 $table-rule;
+    }
+
+    &:not(:has(> figcaption)) thead th:first-child {
+      background-color: $onyx;
+    }
+  }
+}
+
+// ═══ Ledger ══════════════════════════════════════════════════════════════
+// One record card per row, at every width. Each card is a small code block:
+// a matte $charcoal slab with a 4px edge in the colour of its model label,
+// the way a code block's edge is the colour of its language. The top line
+// holds the row's name and its short values; the long cells follow, two side
+// by side from 768px, each under its column name in the bar's mono type.
+// Needs labelTableCells() (src/stories/components/tableRecords.ts) to name
+// the cells; until it runs (or without JS) the table renders as the Panel.
+@mixin table-ledger {
+  @include table-panel;
+
+  &.is-records {
+    overflow: visible;
+    border-left: 0;
+    border-radius: 0;
+    background: none;
+
+    // The caption bar stands alone above the cards, as a code block's bar
+    > figcaption {
+      position: static;
+      margin-bottom: 0.75rem;
+      border: 0;
+      border-left: 4px solid $sky-blue;
+      border-radius: 0.375rem;
+    }
+
+    > table,
+    > table > tbody {
+      display: block;
+      min-width: 0;
+    }
+
+    > table > tbody {
+      display: grid;
+      gap: 0.625rem;
+    }
+
+    // Column names are on every value now; the header stays for screen readers
+    > table > thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    > table > tbody > tr {
+      --row-accent: #{$pewter};
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      column-gap: 0.625rem;
+      padding: 0.75rem 1.25rem 1rem;
+      background-color: $charcoal;
+      border-left: 4px solid var(--row-accent);
+      border-radius: 0.375rem;
+      transition: background-color $transition-fast;
+    }
+
+    // A zero-height break after the title line: the long values always
+    // start on a new line, however much room the title line leaves
+    > table > tbody > tr::after {
+      content: '';
+      order: 1;
+      flex: 0 0 100%;
+      height: 0;
+    }
+
+    > table > tbody > tr:hover {
+      background-color: $table-hover;
+    }
+
+    > table > tbody > tr:has(.label--deep-azure),
+    > table > tbody > tr:has(.label--azure-bolt) { --row-accent: #{$sky-blue}; }
+    > table > tbody > tr:has(.label--ember),
+    > table > tbody > tr:has(.label--rose) { --row-accent: #{$ember}; }
+    > table > tbody > tr:has(.label--amber) { --row-accent: #{$amber}; }
+    > table > tbody > tr:has(.label--aqua),
+    > table > tbody > tr:has(.label--emerald) { --row-accent: #{$aqua}; }
+    > table > tbody > tr:has(.label--lavender) { --row-accent: #{$lavender}; }
+
+    // Off: a dotted edge, like the Off label
+    > table > tbody > tr:has(.label--off) {
+      border-left-style: dotted;
+    }
+
+    > table > tbody > tr > * {
+      display: block;
+      padding: 0;
+      border: 0;
+      background: none;
+      box-shadow: none;
+      position: static;
+      white-space: normal;
+      min-width: 0;
+    }
+
+    // An empty short value still shows its column name, with the dash
+    > table > tbody > tr > td:empty {
+      flex: 0 0 auto;
+      padding: 0.25rem 0;
+      color: $pewter-light;
+      font-family: $font-code;
+      font-size: 0.75rem;
+      white-space: nowrap;
+
+      &::before {
+        content: attr(data-label) ' ';
+        display: inline;
+        width: auto;
+        height: auto;
+        background: none;
+      }
+
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 0.75rem;
+        height: 1px;
+        margin-left: 0.25em;
+        vertical-align: middle;
+        background-color: $pewter;
+      }
+    }
+
+    // The row's name: the card title
+    > table > tbody > tr > :first-child {
+      flex: 1 1 auto;
+      padding: 0.25rem 0;
+      color: $frost;
+      font-family: $font-header;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    // Short values sit on the title line, right-aligned
+    > table > tbody > tr > [data-cell='short'] {
+      flex: 0 0 auto;
+      padding: 0.25rem 0;
+      white-space: nowrap;
+    }
+
+    // A plain short value (no code, no label) carries its column name
+    > table > tbody > tr > [data-cell='short']:not(:has(code, .label)) {
+      color: $quicksilver;
+      font-family: $font-code;
+      font-size: 0.75rem;
+
+      &::before {
+        content: attr(data-label) ' ';
+        color: $pewter-light; // 4.89:1 on $charcoal
+      }
+    }
+
+    // Long values: full width on a phone, two columns from 768px. The first
+    // one draws the rule under the title line.
+    > table > tbody > tr > td:not(:first-child):not([data-cell='short']) {
+      order: 2;
+      flex: 1 1 100%;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid $table-rule;
+      font-size: 0.875rem;
+      line-height: 1.6;
+
+      &::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 0.25rem;
+        color: $pewter-light;
+        font-family: $font-code;
+        font-size: 0.7rem;
+        line-height: 1.4;
+        letter-spacing: 0.04em;
+      }
+    }
+
+    // The second and later long values continue the block, no second rule
+    > table > tbody > tr > td:not(:first-child):not([data-cell='short']) ~ td:not([data-cell='short']) {
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    @media (min-width: 768px) {
+      > table > tbody > tr {
+        column-gap: 1.5rem;
+      }
+
+      > table > tbody > tr > td:not(:first-child):not([data-cell='short']) {
+        flex-basis: calc(50% - 0.75rem);
+        align-self: stretch;
+      }
+
+      // Side by side, both start on the same rule
+      > table > tbody > tr > td:not(:first-child):not([data-cell='short']) ~ td:not([data-cell='short']) {
+        margin-top: 0.75rem;
+        border-top: 1px solid $table-rule;
+      }
+
+      // The tokens' gap is tighter than the columns' gap
+      > table > tbody > tr > [data-cell='short'] + [data-cell='short'] {
+        margin-left: -0.875rem;
+      }
+    }
+  }
+}
+
+// ═══ Console ═════════════════════════════════════════════════════════════
+// The table as a code view: one frame, the caption bar, line numbers in a
+// gutter, faint alternate rows and the active-line highlight on hover. Prose
+// keeps its measure (the table is at least 60rem wide), so a wide table
+// scrolls inside the frame (as a long code line does) with the Role column held in place.
+@mixin table-console {
+  @include table-base;
+  @include caption-bar($amber-glow);
+  display: flex;
+  flex-direction: column;
+  border-left: 4px solid $amber-glow;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  @include scroll-shadows($charcoal);
+
+  > table {
+    flex: 0 0 auto;
+    min-width: 60rem;
+  }
+
+  thead th {
+    padding: 0.75rem 1rem 0.625rem;
+    border-bottom: 1px solid $table-rule;
+    color: $pewter-light;
+    font-family: $font-code;
+    font-size: 0.7rem;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  // The gutter: line numbers, as in an editor
+  thead th:first-child,
+  tbody td:first-child,
+  tbody th {
+    padding-left: 3.25rem;
+  }
+
+  tbody td:first-child,
+  tbody th {
+    position: relative;
+    color: $frost;
+    font-family: $font-code;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    white-space: nowrap;
+
+    // Inline, so the number sits on the name's baseline
+    &::before {
+      content: counter(table-rows, decimal-leading-zero);
+      content: counter(table-rows, decimal-leading-zero) / '';
+      display: inline-block;
+      width: 2.5rem;
+      margin-left: -3.25rem;
+      margin-right: 0.75rem;
+      padding-right: 0.625rem;
+      color: $pewter-light; // 4.89:1 on $charcoal
+      font-size: 0.75rem;
+      font-weight: 400;
+      text-align: right;
+    }
+  }
+
+  // The gutter's rule, the full height of every row
+  tbody tr > :first-child {
+    background-image: linear-gradient($table-rule, $table-rule);
+    background-size: 1px 100%;
+    background-position: 2.5rem 0;
+    background-repeat: no-repeat;
+  }
+
+  tbody td,
+  tbody th {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    padding-right: 1.25rem;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+  }
+
+  tbody td:not(:first-child) {
+    padding-left: 0;
+  }
+
+  tbody tr:first-child > * {
+    padding-top: 1rem;
+  }
+
+  tbody tr:last-child > * {
+    padding-bottom: 1rem;
+  }
+
+  // Alternate rows one step down, as a diff view
+  tbody tr:nth-child(even) > * {
+    background-color: rgba($obsidian, 0.28);
+  }
+
+  // Hover is the active line: a lighter row and the accent in the gutter
+  tbody tr:hover > * {
+    background-color: $table-hover;
+  }
+
+  tbody tr:hover > td:first-child::before {
+    color: $amber-glow;
+  }
+
+  // Role holds still while the rest scrolls
+  thead th:first-child,
+  tbody td:first-child,
+  tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: $charcoal;
+  }
+
+  tbody tr:nth-child(even) > td:first-child {
+    background-color: color.mix($obsidian, $charcoal, 28%);
+  }
+
+  tbody tr:hover > td:first-child {
+    background-color: $table-hover;
+  }
+}
+
+.article-body[data-table-style='panel'] figure.table {
+  @include table-panel;
+}
+
+// The recommendation, also the default (Post story; the theme port)
+.article-body:not([data-table-style]) figure.table,
+.article-body[data-table-style='ledger'] figure.table {
+  @include table-ledger;
+}
+
+.article-body[data-table-style='console'] figure.table {
+  @include table-console;
 }
 
 // ── Older / newer post pager ──────────────────────
