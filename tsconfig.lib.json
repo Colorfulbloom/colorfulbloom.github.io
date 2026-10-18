@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": false,
+    "allowImportingTsExtensions": false,
+    "composite": false,
+    "incremental": false,
+    "tsBuildInfoFile": null,
+    "rootDir": "src/stories",
+    "outDir": "dist-lib"
+  },
+  "include": ["src/stories/**/*.ts", "src/stories/**/*.tsx"],
+  "exclude": ["src/stories/**/*.stories.ts", "src/stories/**/*.stories.tsx"]
+}

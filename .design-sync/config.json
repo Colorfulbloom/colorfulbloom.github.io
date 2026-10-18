@@ -1,0 +1,60 @@
+{
+  "projectId": "ee8ca2bb-580c-4f29-be98-d065834bb9c4",
+  "shape": "storybook",
+  "pkg": "jorgecalderon.codes",
+  "storybookConfigDir": ".storybook",
+  "storybookStatic": ".design-sync/sb-reference",
+  "entry": "dist-lib/index.js",
+  "buildCmd": "npm run build:lib",
+  "titleMap": {
+    "GridSystem": "Grid"
+  },
+  "overrides": {
+    "Input": {
+      "cardMode": "column"
+    },
+    "Select": {
+      "cardMode": "column"
+    },
+    "Textarea": {
+      "cardMode": "column"
+    },
+    "Row": {
+      "cardMode": "column"
+    },
+    "AboutMe": {
+      "cardMode": "column"
+    },
+    "BlogFeatured": {
+      "cardMode": "column"
+    },
+    "ContactForm": {
+      "cardMode": "column"
+    },
+    "PortfolioFeatured": {
+      "cardMode": "column"
+    },
+    "PortfolioList": {
+      "cardMode": "column"
+    },
+    "WorkingOn": {
+      "cardMode": "column"
+    },
+    "Blog": {
+      "cardMode": "column"
+    },
+    "Contact": {
+      "cardMode": "column"
+    },
+    "Home": {
+      "cardMode": "column"
+    },
+    "Portfolio": {
+      "cardMode": "column"
+    },
+    "Comments": {
+      "viewport": "900x1400"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}

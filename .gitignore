@@ -25,3 +25,12 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# design-sync (claude.ai/design): transient state; config, NOTES, previews and overrides are committed
+.design-sync/sb-reference/
+.design-sync/learnings/
+.design-sync/.cache/
+.design-sync/node_modules
+.ds-sync/
+ds-bundle/
+dist-lib/
