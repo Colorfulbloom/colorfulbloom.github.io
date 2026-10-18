@@ -274,6 +274,21 @@
     margin-top: 0.5rem;
   }
 
+  // Images in the body: on their own line with a gap below, so the next
+  // paragraph never touches them. No radius or border; a figure brings its
+  // own surface and spacing.
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 0 1.5rem;
+  }
+
+  figure img,
+  table img {
+    margin-bottom: 0;
+  }
+
   // Stand-in box where a screenshot will go
   &__placeholder {
     display: flex;
