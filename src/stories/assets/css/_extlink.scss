@@ -1,0 +1,92 @@
+// External link mark (2026-10-18, owner pick: direction C2 with the one-pixel
+// nudge). The behaviour (theme js/external-links.js, Storybook
+// externalLinks.ts) marks every link to another host: target="_blank",
+// rel="noopener noreferrer", an empty span.extlink__mark after the last word
+// and a visually hidden ", opens in a new tab". This file draws the mark.
+// Markup after the behaviour ran, for a text link:
+//
+//   a.extlink > "text " + span.extlink__nobreak > ("word" + span.extlink__mark)
+//             + span.visually-hidden.extlink__label
+//
+// Links laid out as flex (the Repo card bar link) get no no-break wrapper.
+// Icon-only links, the footer social links and the contact details links get
+// no mark. The glyph is Font Awesome Free 7.1.0 solid "arrow up right from
+// square" (\f08e), drawn in the box of .fa-solid (1.25em wide, line height 1).
+// Running text: 0.8em, 0.3em from the word, raised 0.04em, $pewter-light at
+// rest and $quicksilver on hover and focus. Controls and the code block family
+// keep their own colour at label scale.
+@use 'sass:string';
+@use 'variables' as *;
+
+.extlink__nobreak {
+  white-space: nowrap;
+}
+
+.extlink__mark {
+  display: inline-block;
+  width: 1.25em;
+  margin-left: 0.3em;
+  font-family: "Font Awesome 7 Free";
+  font-size: 0.8em;
+  font-style: normal;
+  font-weight: 900;
+  font-variant: normal;
+  font-feature-settings: normal;
+  font-synthesis: none;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  text-rendering: auto;
+  vertical-align: 0.04em;
+  color: $pewter-light;
+  transition: color $transition-fast;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  // The first line serves browsers without the alt text syntax (Safari before
+  // 17.4, Firefox before 128); string.unquote keeps the escape ASCII.
+  &::before {
+    content: string.unquote('"\\f08e"');
+    content: "\f08e" / "";
+  }
+}
+
+a:hover .extlink__mark,
+a:focus-visible .extlink__mark {
+  color: $quicksilver;
+}
+
+// Buttons keep their own colour on hover and focus too (this beats the rule
+// above).
+.btn .extlink__mark,
+.btn:hover .extlink__mark,
+.btn:focus-visible .extlink__mark {
+  margin-left: 0.45em;
+  font-size: 0.85em;
+  color: inherit;
+}
+
+// Repo card. The bar link is inline-flex, and its gap would sit between the
+// text and the mark too, so the brand icon carries the 0.5rem itself and the
+// mark its own margin. The selector names the bar (0,4,0) so it beats the
+// card's own gap rule (0,3,0) in css/code-highlight.css, which the theme loads
+// after style.css.
+.article-body .repo-card .code-block__bar .repo-card__link {
+  gap: 0;
+
+  &::before {
+    margin-right: 0.5rem;
+  }
+
+  .extlink__mark {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: inherit;
+  }
+}
+
+.article-body .repo-card .repo-card__clone .extlink__mark {
+  margin-left: 0.4rem;
+  font-size: 0.75rem;
+  color: inherit;
+}

@@ -120,6 +120,72 @@ const fallbackCopy = (code: Element): boolean => {
   return copied;
 };
 
+const wired = new WeakSet<Element>();
+
+/**
+ * Turns a <button> into a Copy button for the text of `code`: the "Copy" text
+ * span, a visually hidden "<label> code" suffix (or `hiddenText` as given), a role="status" live region
+ * after the button, the clipboard API with the selection fallback, and the
+ * Copied / Copy failed state that resets after RESET_DELAY. Used by
+ * enhanceCodeBlocks and by enhanceRepoCards. `text`, when given, is what gets
+ * copied; `code` stays the element the selection fallback selects.
+ */
+export const wireCopyButton = (
+  button: HTMLButtonElement,
+  code: Element,
+  label: string,
+  hiddenText?: string,
+  text?: string,
+): void => {
+  if (wired.has(button)) return;
+  wired.add(button);
+
+  const copyText = document.createElement('span');
+  copyText.className = 'code-block__copy-text';
+  copyText.textContent = 'Copy';
+
+  const hidden = document.createElement('span');
+  hidden.className = 'visually-hidden';
+  hidden.textContent = hiddenText ?? ` ${label} code`;
+
+  button.replaceChildren(copyText, hidden);
+
+  const status = document.createElement('span');
+  status.className = 'visually-hidden';
+  status.setAttribute('role', 'status');
+  button.after(status);
+
+  let timer: number | null = null;
+
+  const showState = (text: string, message: string) => {
+    copyText.textContent = text;
+    status.textContent = message;
+    if (timer) window.clearTimeout(timer);
+    timer = window.setTimeout(() => {
+      copyText.textContent = 'Copy';
+      status.textContent = '';
+      timer = null;
+    }, RESET_DELAY);
+  };
+
+  const succeed = () => showState('Copied', 'Code copied to clipboard');
+  const fail = () =>
+    showState('Copy failed', 'Copy failed. The code is selected; copy it with the keyboard.');
+  const copyWithSelection = () => {
+    if (fallbackCopy(code)) succeed();
+    else fail();
+  };
+
+  button.addEventListener('click', () => {
+    const copied = text ?? code.textContent ?? '';
+    if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(copied).then(succeed, copyWithSelection);
+    } else {
+      copyWithSelection();
+    }
+  });
+};
+
 /** Highlights each .code-block with Prism and adds the Copy button. Safe to call again. */
 export const enhanceCodeBlocks = (root: ParentNode): void => {
   root.querySelectorAll('.code-block').forEach((block) => {
@@ -136,53 +202,60 @@ export const enhanceCodeBlocks = (root: ParentNode): void => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'code-block__copy';
-
-    const copyText = document.createElement('span');
-    copyText.className = 'code-block__copy-text';
-    copyText.textContent = 'Copy';
-
-    const hidden = document.createElement('span');
-    hidden.className = 'visually-hidden';
-    hidden.textContent = ` ${label} code`;
-
-    button.appendChild(copyText);
-    button.appendChild(hidden);
-
-    const status = document.createElement('span');
-    status.className = 'visually-hidden';
-    status.setAttribute('role', 'status');
-
     bar.appendChild(button);
-    bar.appendChild(status);
+    wireCopyButton(button, code, label);
+  });
+};
 
-    let timer: number | null = null;
+const repoEnhanced = new WeakSet<Element>();
 
-    const showState = (text: string, message: string) => {
-      copyText.textContent = text;
-      status.textContent = message;
-      if (timer) window.clearTimeout(timer);
-      timer = window.setTimeout(() => {
-        copyText.textContent = 'Copy';
-        status.textContent = '';
-        timer = null;
-      }, RESET_DELAY);
-    };
+/**
+ * Wires each .repo-card: moves the bar link into div.repo-card__actions, adds the Copy button
+ * after it and copies the clone command. A TypeScript mirror of the theme's js/code-highlight.js.
+ */
+export const enhanceRepoCards = (root: ParentNode): void => {
+  root.querySelectorAll('.repo-card').forEach((card) => {
+    if (repoEnhanced.has(card)) return;
+    repoEnhanced.add(card);
+    const bar = card.querySelector(':scope > .code-block__bar');
+    const clone = card.querySelector('.repo-card__clone');
+    if (!bar || !clone) return;
 
-    const succeed = () => showState('Copied', 'Code copied to clipboard');
-    const fail = () =>
-      showState('Copy failed', 'Copy failed. The code is selected; copy it with the keyboard.');
-    const copyWithSelection = () => {
-      if (fallbackCopy(code)) succeed();
-      else fail();
-    };
+    const link = bar.querySelector('.repo-card__link');
+    const nested = link ? link.querySelector('.repo-card__actions') : null;
+    if (link && nested) {
+      while (nested.firstChild) link.insertBefore(nested.firstChild, nested);
+      link.removeChild(nested);
+    }
 
-    button.addEventListener('click', () => {
-      const text = code.textContent ?? '';
-      if (window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(succeed, copyWithSelection);
+    let actions = bar.querySelector('.repo-card__actions');
+    if (!actions) {
+      actions = document.createElement('div');
+      actions.className = 'repo-card__actions';
+      if (link && link.parentNode) {
+        link.parentNode.insertBefore(actions, link);
+        actions.appendChild(link);
       } else {
-        copyWithSelection();
+        bar.appendChild(actions);
       }
-    });
+    }
+
+    let button = actions.querySelector<HTMLButtonElement>('.code-block__copy');
+    if (!button) {
+      button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-block__copy';
+      if (link && link.parentNode === actions) actions.insertBefore(button, link.nextSibling);
+      else actions.appendChild(button);
+    }
+
+    // The fallback reads the visible text only: enhanceExternalLinks puts a
+    // visually hidden ", opens in a new tab" inside the clone link.
+    const visible = clone.cloneNode(true) as Element;
+    visible.querySelectorAll('.visually-hidden').forEach((hidden) => hidden.remove());
+    const command = (clone.getAttribute('data-clone') || visible.textContent || '')
+      .replace(/\s+/g, ' ')
+      .trim();
+    wireCopyButton(button, clone, 'Repo', ' clone command', command);
   });
 };

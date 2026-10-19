@@ -696,3 +696,47 @@ This file tracks significant changes, design decisions, and implementation patte
 - Accessibility audit (ARIA labels, keyboard nav, color contrast)
 - Performance: consider reducing animation complexity on mobile
 - Update CLAUDE.md project layout to include new modules and pages
+
+---
+
+## Session: 2026-10-18 (Repo card, 01:40 EDT)
+
+### Repo Card — Call-out for Blog Post Bodies
+- **Built:** direction A, "Repo card", from the designer's pass for the model-routing post: a modifier on the code block frame (`.code-block.repo-card`) with a "Repo" label bar holding an "Open on GitHub" link and Copy, a two-tone heading, prose and a `git clone` line whose URL is the link. Aqua accent edge (the Bash colour).
+- **Rules:** appended to `src/stories/assets/css/_code-highlight.scss` (section "Repo card"), with tokens ($aqua, $frost, $ash, $quicksilver, $sky-blue, $code-block-rule, fonts). Storybook has no `.article-body a` rule, so the link overrides (`.article-body .repo-card__link`, `.article-body .repo-card__clone a`) live in the same section, with the `.article-body` prefix kept so the theme mirror stays identical.
+- **Stories:** `Repo Card` and `Repo Card At End` under Design Specs/Content Elements (`design-specs-content-elements--repo-card`, `--repo-card-at-end`); markup constants `REPO_CARD_TOP_HTML` and `REPO_CARD_END_HTML` in `src/stories/design-specs/codeSamples.ts` (tech-writer copy verbatim). Copy in the bar copies the clone command (wired in the story).
+- **Files Modified:** `_code-highlight.scss`, `ContentElements.stories.tsx`, `codeSamples.ts`. Not committed.
+
+### Repo Card — Designer Review Fixes (01:46 EDT)
+- **Specificity:** the card's links and heading now sit under `.article-body .repo-card` in `_code-highlight.scss`, so they beat the theme's `.content-elements--dark.article-body a` (0,2,1) and its :hover (0,3,1). Bar link 0,3,0 (hover, focus 0,4,0); clone URL 0,3,1 (hover, focus 0,4,1).
+- **Copy:** `wireCopyButton(button, code, label)` exported from `src/stories/components/codeHighlight.ts`; `enhanceCodeBlocks` and the Repo Card stories both call it (no behaviour change for code blocks).
+- **Focus:** the clone URL gets the shared 2px $sky-blue outline (offset 2px).
+- **Copy name:** `wireCopyButton` takes an optional `hiddenText`; the Repo Card stories pass ` clone command`, so the card's Copy button reads "Copy clone command" (code blocks keep "Copy <Label> code").
+
+### Repo Card — Owner's Copy Pick (12:13 EDT)
+- **Changed:** the sample copy in `REPO_CARD_TOP_HTML` and `REPO_CARD_END_HTML` (`src/stories/design-specs/codeSamples.ts`). Headings are now "The multi-model agent routing repo." (top) and "The multi-model agent routing installer." (end), split three words accent and the rest light; the two body paragraphs carry the owner's new text. Markup, ids, bar, link and clone line are unchanged.
+- **Why:** the owner picked this copy for the two Repo cards of blog node 20; the stories mirror the post. Not committed.
+
+### Repo Card — Markup That Survives CKEditor 5 (13:57 EDT)
+- **Changed:** `REPO_CARD_TOP_HTML` and `REPO_CARD_END_HTML` (`src/stories/design-specs/codeSamples.ts:124-131`) now hold the markup the post body stores after a CKEditor 5 round trip, equal to the theme's reference files: the bar is `div.code-block__label` and `div.repo-card__actions > a.repo-card__link` (no icon element), the clone line is `p.repo-card__clone[data-clone]` with `git clone ` and the link, no `<code>`, and there is no Copy button in the markup. `_code-highlight.scss` (section "Repo card", lines 210-346) draws the GitHub mark as `.repo-card__link::before` (line 260) from the Font Awesome 7 Brands face, `content: "\f09b" / ""`, in the box of `.fa-brands`; the `.repo-card__clone code` rules stay for the old form. `src/stories/components/codeHighlight.ts`: `wireCopyButton` takes a fifth optional parameter `text`, what gets copied (line 133); new export `enhanceRepoCards(root)` (line 216) mirrors the theme's `js/code-highlight.js` branch. It unwraps an actions span the editor put inside the link, creates `div.repo-card__actions` when the bar has none, adds the Copy button right after the link and copies `data-clone` or the clone line's text. `ContentElements.stories.tsx` imports it (line 4) and the two Repo Card stories call it in an effect (line 120, comment 113-116). The button reads "Copy clone command" in both repos.
+- **Why:** the owner published the first card markup from the Drupal edit form, and CKEditor 5 rewrote it three ways. It dropped the empty `<i>` icon, moved the actions span inside the link (the Copy button landed inside the link) and split the `<code>` around the link (Copy copied only "git clone "). The editor keeps a span and a link as text attributes and writes the link outermost, and an empty inline element has no text to carry. The new shape was rehearsed on temporary nodes saved through the real edit form and came back byte-identical, so the stories now show the markup the body really holds.
+- **Proof:** element screenshots of "Repo Card" and "Repo Card At End" at 1440 and 375 are pixel-identical before and after the change.
+- **Files Modified:** `codeSamples.ts`, `_code-highlight.scss`, `codeHighlight.ts`, `ContentElements.stories.tsx`, `SESSION_HISTORY.md`. Not committed.
+
+### Repo Card, Fallback for Older Browsers (14:15 EDT)
+- **Changed:** `_code-highlight.scss` now has `@use 'sass:string';` (line 5), and `.repo-card__link::before` (section "Repo card", lines 211-351) has two `content` lines at 264-266. The first is `content: string.unquote('"\\f09b"');`, the second the `content: "\f09b" / "";` line from 13:57. The comment above them says why. The section is still a byte copy of the theme's `scss/code-highlight.scss:225-365`.
+- **Why:** the alternative text syntax (`content: "\f09b" / ""`) is dropped by browsers that do not know it, which would show no GitHub mark. MDN browser compat data (`css.properties.content.alt_text`) lists Safari before 17.4 and Firefox before 128 without it; Chrome has had it since 77. The plain line comes first, so a browser that knows the syntax uses the second line. `string.unquote` keeps the `\f09b` escape in compressed Dart Sass output, so the CSS stays ASCII with no byte order mark.
+- **Proof:** element screenshots of "Repo Card" and "Repo Card At End" at 1440 and 375 are pixel-identical to the set taken before the change. Compiled output `content:"\f09b";content:"\f09b"/""`; no non-ASCII byte in the theme's compiled file.
+- **Files Modified:** `_code-highlight.scss`, `SESSION_HISTORY.md`. Not committed.
+
+### External Link Mark (14:58 EDT)
+- **Changed:** new `src/stories/assets/css/_extlink.scss` (`@use 'extlink';` at `main.scss:33`) and `src/stories/components/externalLinks.ts` (`enhanceExternalLinks(root)`, a mirror of the theme's `js/external-links.js` with a WeakSet in place of Drupal's `once()`). A link to another host gets `target="_blank"`, `rel="noopener noreferrer"` merged with what it had, a visually hidden ", opens in a new tab" (appended to `aria-label` when the link has one) and, on text links, an empty `span.extlink__mark` after the last word inside a no-break span; flex links get the mark alone. No mark on `.footer__social-link`, `.contact-form__contact-detail a` or icon-only links. The glyph is Font Awesome Free 7.1.0 solid `\f08e` in the `.fa-solid` box, 0.8em, 0.3em from the word, raised 0.04em, `$pewter-light` at rest and `$quicksilver` on hover and focus; Repo card bar link 0.8rem, clone line 0.75rem, `.btn` 0.85em, all `color: inherit`. New story "External Links" in Design Specs/Content Elements (`ContentElements.stories.tsx:179`) shows prose, the Repo card, a comment, a button and the footer social links. The clone fallback in `codeHighlight.ts:252-259` now reads the visible text only, with `.visually-hidden` children removed.
+- **Why:** the owner picked the designer's direction C2 with the one-pixel nudge (`vertical-align: 0.04em`) for the external link icon; Storybook is built first and the theme ports it. The fallback fix came from the theme side, where Copy on a card without `data-clone` copied the hidden note along with the command. A known gap, not from this work, is that Storybook has no `.article-body a` colour rule, so the story's prose links are Bootstrap blue; the site paints them sky blue.
+- **Proof:** every existing story is pixel-identical before and after. The designer's review-only pass found it matches C2 step 1, with glyph geometry equal to the approved measurements. `_extlink.scss` is byte-identical to the theme's `scss/_extlink.scss`.
+- **Files Modified:** `_extlink.scss` (new), `externalLinks.ts` (new), `main.scss`, `ContentElements.stories.tsx`, `codeHighlight.ts`, `SESSION_HISTORY.md`. Not committed.
+
+### External Link Mark, Fixes After the Verifier (15:20 EDT)
+- **Changed:** `enhanceExternalLinks` in `src/stories/components/externalLinks.ts` now moves the last word into `span.extlink__nobreak` with `splitText()`, so no text node is emptied or removed and a trailing space inside a link stays after the span. Same change in the theme's `js/external-links.js`.
+- **Why:** the theme version threw a BigPipe TypeError for logged-in users on a page where a link's last text node was a single word, and it dropped a trailing space ("see more" lost its space).
+- **Proof:** the designer's C2 fixture clips render the same as before the fix at 1440 and 375, with no page errors on the site.
+- **Files Modified:** `externalLinks.ts`, `SESSION_HISTORY.md`. Not committed.

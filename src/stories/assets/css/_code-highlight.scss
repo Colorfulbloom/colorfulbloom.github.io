@@ -2,6 +2,7 @@
 // The theme wraps blocks in templates/misc/code-blocks.html.twig, Storybook in
 // src/stories/components/codeHighlight.ts.
 @use 'variables' as *;
+@use 'sass:string';
 
 // The bottom line of the bar, as in the approved preview
 $code-block-rule: #3a3a3a;
@@ -204,5 +205,147 @@ $code-block-accents: (
 
   .token.deleted {
     background-color: rgba($ember, 0.12);
+  }
+}
+
+// ── Repo card ─────────────────────────────────────
+// A call-out for blog post bodies on the code block frame (.code-block): the
+// bar carries the label "Repo", an "Open on GitHub" link and Copy; inside are a
+// two-tone heading, prose and a `git clone` line whose URL is the link.
+// Markup: <aside class="code-block repo-card">, bar div.code-block__label and
+// div.repo-card__actions > a.repo-card__link, clone line p.repo-card__clone[data-clone]
+// (Storybook: Design Specs/Content Elements, "Repo Card"). The links sit under `.article-body .repo-card` so they
+// beat the theme's body link rule `.content-elements--dark.article-body a`
+// (0,2,1) and its :hover (0,3,1): the bar link is 0,3,0 (hover and focus 0,4,0),
+// the clone URL 0,3,1 (hover 0,4,1). Storybook has no such rule; the nesting
+// keeps the theme mirror identical. The accent is $aqua, the Bash colour. All
+// text pairs are AA.
+.article-body .repo-card {
+  --code-block-accent: #{$aqua};
+  margin: 2.5rem 0;
+
+  // The actions sit flush against the bar's right edge
+  .code-block__bar {
+    padding-right: 0;
+  }
+
+  .code-block__copy {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .repo-card__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    color: $quicksilver;
+    text-decoration: none;
+    font: inherit;
+    letter-spacing: inherit;
+    border-right: 1px solid $code-block-rule;
+
+    &:hover {
+      color: $quicksilver;
+      background-color: rgba($quicksilver, 0.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $sky-blue;
+      outline-offset: -2px;
+    }
+
+    // The GitHub mark from the Font Awesome 7 Brands face (Font Awesome Free
+    // 7.1.0), drawn here because CKEditor 5 drops an empty <i>. The box
+    // matches .fa-brands: 1.25em wide, line height 1, centred. The first
+    // content line serves browsers without the alt text syntax (Safari before
+    // 17.4, Firefox before 128); string.unquote keeps the \f09b escape, so the
+    // compressed CSS stays ASCII with no byte order mark.
+    &::before {
+      content: string.unquote('"\\f09b"');
+      content: "\f09b" / "";
+      display: inline-block;
+      width: 1.25em;
+      font-family: "Font Awesome 7 Brands";
+      font-size: 0.95rem;
+      font-style: normal;
+      font-weight: 400;
+      font-variant: normal;
+      font-feature-settings: normal;
+      font-synthesis: none;
+      line-height: 1;
+      text-align: center;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  }
+
+  .repo-card__heading {
+    font-family: $font-header;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 0.75rem;
+
+    .article-heading__accent {
+      color: var(--code-block-accent);
+    }
+
+    .article-heading__light {
+      color: $frost;
+    }
+  }
+
+  .repo-card__clone {
+    margin: 0;
+    padding-top: 1rem;
+    border-top: 1px solid $code-block-rule;
+    font-family: $font-code;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: $quicksilver;
+
+    code {
+      padding: 0;
+      background: none;
+      border: 0;
+      color: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      white-space: normal;
+    }
+
+    a {
+      color: $sky-blue;
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+
+      &:hover {
+        color: $quicksilver;
+      }
+
+      &:focus-visible {
+        outline: 2px solid $sky-blue;
+        outline-offset: 2px;
+      }
+    }
+  }
+}
+
+.repo-card__actions {
+  display: flex;
+  align-self: stretch;
+}
+
+.repo-card__body {
+  padding: 1.25rem;
+
+  > p {
+    font-family: $font-body;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: $ash;
+    margin: 0 0 1rem;
   }
 }

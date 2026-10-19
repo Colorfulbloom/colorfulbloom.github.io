@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ContentElements } from './ContentElements';
 import { CodeBlock as CodeBlockView } from '../components/CodeBlock';
+import { enhanceRepoCards } from '../components/codeHighlight';
+import { enhanceExternalLinks } from '../components/externalLinks';
+import { Footer } from '../layout/Footer';
 import {
   ASIDE_BASH,
   ASIDE_INTRO,
@@ -8,6 +11,8 @@ import {
   ASIDE_YAML,
   CODE_SAMPLES,
   LONG_LINE_PHP,
+  REPO_CARD_END_HTML,
+  REPO_CARD_TOP_HTML,
 } from './codeSamples';
 import { useEffect, useRef } from 'react';
 import { TABLE_SAMPLE_HTML } from '../pages/articleContent';
@@ -105,6 +110,105 @@ export const CodeBlockInAside: Story = {
       </div>
     </div>
   ),
+};
+
+/**
+ * Repo card markup as the post body holds it. The markup has no Copy button;
+ * enhanceRepoCards adds it, as the theme JS does on the site.
+ */
+const RepoCardHtml = ({ html }: { html: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (ref.current) enhanceRepoCards(ref.current);
+  }, [html]);
+  return <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} />;
+};
+
+export const RepoCard: Story = {
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => (
+    // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+    <div style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+      <div {...articleColumn}>
+        <p>
+          A routing setup is a handful of plain files. The rules file says who does what, and each
+          agent file pins the model and the effort for its job.
+        </p>
+        <RepoCardHtml html={REPO_CARD_TOP_HTML} />
+        <p>
+          The rest of the post walks through the tiers, the rules and the hook that enforces them,
+          one piece at a time.
+        </p>
+      </div>
+    </div>
+  ),
+};
+
+export const RepoCardAtEnd: Story = {
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => (
+    // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+    <div style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+      <div {...articleColumn}>
+        <p>
+          That is the setup. It is a handful of Markdown files, one script and a few settings keys,
+          and it decides who does what before I type anything.
+        </p>
+        <RepoCardHtml html={REPO_CARD_END_HTML} />
+      </div>
+    </div>
+  ),
+};
+
+// External links: the mark on links to other sites, in the places the site
+// shows them (prose, Repo card, comment, button) and the footer social links
+// (no mark, the aria-label says it).
+const EXTLINK_PROSE_HTML = `<p>The <a href="https://code.claude.com/docs/en/sub-agents">sub-agents docs</a> say an agent's effort field overrides the session's effort level, and <a href="/blog">the blog</a> has the rest of the setup.</p>`;
+
+const EXTLINK_COMMENT_HTML = `<ol class="comments__list"><li class="comments__item" id="comment-1"><article><header class="comments__head"><span class="comments__name">Maria</span><time class="comments__meta" datetime="2026-06-12">June 12, 2026</time></header><div class="content-elements content-elements--dark article-body comments__body font-noto"><p>Nice walkthrough. Does the <code>publish_on</code> field work with the <a href="https://www.drupal.org/project/scheduler">Scheduler module</a> out of the box, or only with the <a href="/portfolio">publishing options</a> you wrote?</p></div><a class="comments__reply" href="#comment-form" rel="nofollow">Reply</a></article></li></ol>`;
+
+const EXTLINK_BUTTON_HTML = `<p class="article-hero__actions"><a href="https://github.com/Colorfulbloom/claude-code-model-routing" class="btn btn-azure-bolt">View Source</a></p>`;
+
+const EXTLINK_SOCIALS = [
+  { icon: 'fa-brands fa-github', href: 'https://github.com/Colorfulbloom', label: 'GitHub' },
+  { icon: 'fa-brands fa-linkedin', href: 'https://www.linkedin.com/in/jorgecalderon', label: 'LinkedIn' },
+];
+
+const sectionLabel = { fontFamily: 'JetBrains Mono, monospace', fontSize: '0.75rem', color: '#9A9A9A', margin: '0 0 0.75rem' };
+
+export const ExternalLinks: Story = {
+  parameters: { ...obsidianBackground, layout: 'fullscreen' },
+  render: () => {
+    const Demo = () => {
+      const ref = useRef<HTMLDivElement>(null);
+      useEffect(() => {
+        const root = ref.current;
+        if (!root) return;
+        enhanceRepoCards(root);
+        enhanceExternalLinks(root);
+      }, []);
+      return (
+        // The site's $obsidian page background; inline because the backgrounds parameter does not paint the story canvas.
+        <div ref={ref} style={{ backgroundColor: '#1A1A1A', padding: '2rem 1rem', minHeight: '100vh' }}>
+          <div {...articleColumn} data-extlink="prose" dangerouslySetInnerHTML={{ __html: EXTLINK_PROSE_HTML }} />
+          <div {...articleColumn} data-extlink="card" dangerouslySetInnerHTML={{ __html: REPO_CARD_TOP_HTML }} />
+          <section className="comments" data-extlink="comment" style={{ margin: '2rem 0' }}>
+            <div className="container">
+              <div className="body-grid body-grid--single">
+                <div className="body-grid__main" dangerouslySetInnerHTML={{ __html: EXTLINK_COMMENT_HTML }} />
+              </div>
+            </div>
+          </section>
+          <div {...articleColumn} data-extlink="button" dangerouslySetInnerHTML={{ __html: EXTLINK_BUTTON_HTML }} />
+          <div data-extlink="footer" style={{ marginTop: '2rem' }}>
+            <p style={sectionLabel}>Footer social links (no mark)</p>
+            <Footer socials={EXTLINK_SOCIALS} email="hello@example.com" />
+          </div>
+        </div>
+      );
+    };
+    return <Demo />;
+  },
 };
 
 // Tables: three design directions. Each renders the sample with its caption
